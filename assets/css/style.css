@@ -1,0 +1,53 @@
+/* Mengimpor Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+/* Aturan Dasar */
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/* =========================================
+   STYLE KHUSUS HALAMAN LOGIN (INDEX.HTML)
+   ========================================= */
+
+/* Animasi muncul dari bawah ke atas */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Background panel sebelah kiri */
+.bg-left-panel {
+  background-color: #f7fbf7;
+  /* Path ke gambar menggunakan ../ karena file ini ada di dalam folder css */
+  background-image:
+    url("../img/bg-tomat.png"),
+    linear-gradient(to bottom, #f7fbf7 60%, #e0efe0 100%);
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* Warna hijau khusus untuk centang checkbox */
+.custom-checkbox {
+  accent-color: #287930;
+  cursor: pointer;
+}
+
+/* =========================================
+   STYLE KHUSUS DASHBOARD & MONITORING
+   ========================================= */
+
+/* Bayangan halus untuk kartu metrik */
+.card-shadow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}

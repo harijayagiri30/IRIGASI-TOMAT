@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kontrol Manual - Irigasi Tomat</title>
+    <!-- CSS & JS Terpisah -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/js/tailwind-config.js"></script>
+  </head>
+  <body
+    class="bg-[#f4f7f4] flex h-screen overflow-hidden font-sans text-gray-800"
+    onload="initManualMode()"
+  >
+    <!-- ==================== SIDEBAR ==================== -->
+    <aside
+      class="w-64 bg-white border-r border-gray-200 flex flex-col justify-between hidden md:flex flex-shrink-0 relative overflow-hidden"
+    >
+      <i
+        class="fa-solid fa-seedling absolute -bottom-10 -left-10 text-9xl text-brand-light opacity-40 z-0 transform -rotate-12"
+      ></i>
+
+      <div class="relative z-10">
+        <div
+          class="py-8 px-6 flex items-center space-x-3 border-b border-gray-100 mb-6"
+        >
+          <div
+            class="w-10 h-10 border-2 border-brand-green text-brand-green rounded-full flex items-center justify-center text-xl bg-white shadow-sm"
+          >
+            <i class="fa-solid fa-droplet"></i>
+          </div>
+          <div>
+            <h1 class="text-lg font-bold text-brand-dark leading-tight">
+              Irigasi Tomat
+            </h1>
+            <p class="text-brand-green font-medium text-[10px]">
+              ESP32-C3 Mini
+            </p>
+          </div>
+        </div>
+
+        <nav class="flex flex-col space-y-1 pr-4">
+          <a
+            href="dashboard.html"
+            class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+          >
+            <i class="fa-solid fa-house w-5 text-center"></i
+            ><span>Dashboard</span>
+          </a>
+          <a
+            href="monitoring.html"
+            class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+          >
+            <i class="fa-solid fa-chart-simple w-5 text-center"></i
+            ><span>Monitoring</span>
+          </a>
+          <a
+            href="riwayat-data.html"
+            class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+          >
+            <i class="fa-solid fa-clock-rotate-left w-5 text-center"></i
+            ><span>Riwayat Data</span>
+          </a>
+          <!-- KONTROL MANUAL AKTIF -->
+          <a
+            href="kontrol-manual.html"
+            class="flex items-center space-x-4 bg-brand-green text-white py-3 pl-8 pr-4 rounded-r-full font-medium transition-all shadow-md"
+          >
+            <i class="fa-solid fa-faucet-drip w-5 text-center"></i
+            ><span>Kontrol Manual</span>
+          </a>
+          <!-- PENGATURAN DAN SISTEM SUDAH DIPERBAIKI -->
+          <a
+            href="pengaturan.html"
+            class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+          >
+            <i class="fa-solid fa-gear w-5 text-center"></i
+            ><span>Pengaturan</span>
+          </a>
+          <a
+            href="sistem.html"
+            class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+          >
+            <i class="fa-solid fa-server w-5 text-center"></i
+            ><span>Sistem</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="mb-8 pr-4 relative z-10 mt-auto">
+        <div class="h-px w-full bg-gray-100 mb-4"></div>
+        <button
+          onclick="window.location.href = 'index.html'"
+          class="w-full flex items-center space-x-4 text-gray-500 hover:bg-red-50 hover:text-red-500 py-3 pl-8 pr-4 rounded-r-full font-medium transition-all cursor-pointer"
+        >
+          <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center"></i
+          ><span>Keluar</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ==================== KONTEN UTAMA ==================== -->
+    <main class="flex-1 overflow-y-auto p-6 lg:p-8">
+      <!-- Header -->
+      <header
+        class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4"
+      >
+        <div>
+          <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+            Kontrol Manual
+            <span class="text-gray-400 font-normal text-lg mx-2">/</span>
+            <span class="text-gray-500 font-medium text-lg"
+              >Override Pompa</span
+            >
+          </h2>
+        </div>
+
+        <!-- Card User -->
+        <div
+          class="flex items-center space-x-3 bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm"
+        >
+          <div
+            class="w-9 h-9 bg-brand-green rounded-full flex items-center justify-center text-white"
+          >
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="pr-2">
+            <p class="font-bold text-gray-800 text-sm leading-tight">User</p>
+            <p class="text-[11px] text-gray-500">Pengguna Sistem</p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Mode Kontrol -->
+      <div
+        class="bg-white rounded-xl border border-gray-200 shadow-sm p-4 mb-4 flex flex-col md:flex-row justify-between items-center gap-4"
+      >
+        <h3 class="font-bold text-gray-800 ml-2">Mode Kontrol</h3>
+        <div
+          class="flex space-x-2 bg-gray-50 p-1 rounded-lg border border-gray-100 w-full md:w-auto"
+        >
+          <button
+            id="btn-mode-otomatis"
+            onclick="setMode('otomatis')"
+            class="flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm transition-all duration-300"
+          >
+            <i class="fa-solid fa-robot"></i><span>Mode Otomatis</span>
+          </button>
+          <button
+            id="btn-mode-manual"
+            onclick="setMode('manual')"
+            class="flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm transition-all duration-300"
+          >
+            <i class="fa-solid fa-hand-pointer"></i><span>Mode Manual</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Status Pompa & Eksekusi -->
+      <div
+        class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 mb-6 flex flex-col md:flex-row items-center justify-between gap-6"
+      >
+        <div class="flex items-center space-x-4">
+          <div
+            class="w-16 h-16 bg-green-50 text-brand-green rounded-full flex items-center justify-center text-3xl"
+          >
+            <i class="fa-solid fa-water"></i>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-gray-500 mb-1">
+              Status Pompa Saat Ini
+            </p>
+            <h2
+              class="text-3xl font-bold text-brand-green mb-1"
+              id="teks-status-pompa"
+            >
+              POMPA OFF
+            </h2>
+            <p class="text-xs text-gray-500" id="teks-desc-pompa">
+              Sistem dalam mode kontrol manual
+            </p>
+            <div class="flex items-center mt-2 text-[10px] text-gray-400">
+              <div class="w-1.5 h-1.5 bg-brand-green rounded-full mr-1.5"></div>
+              Terakhir berubah: 22 Mei 2026 14:15
+            </div>
+          </div>
+        </div>
+
+        <div class="flex space-x-3 w-full md:w-auto">
+          <button
+            id="btn-pompa-on"
+            class="flex-1 md:w-40 flex items-center justify-center space-x-2 py-4 rounded-xl font-bold text-white transition-all duration-300 shadow-sm"
+          >
+            <i class="fa-solid fa-play"></i><span>Pompa ON</span>
+          </button>
+          <button
+            id="btn-pompa-off"
+            class="flex-1 md:w-40 flex items-center justify-center space-x-2 py-4 rounded-xl font-bold text-white transition-all duration-300 shadow-sm"
+          >
+            <i class="fa-solid fa-stop"></i><span>Pompa OFF</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Durasi & Alasan Override -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <!-- Durasi -->
+        <div>
+          <h3 class="font-bold text-gray-800 text-sm mb-3">Durasi Override</h3>
+          <div class="flex flex-wrap gap-3">
+            <button
+              id="dur-5"
+              onclick="selectDuration('dur-5')"
+              class="duration-btn bg-white border border-gray-200 text-gray-600 px-5 py-2.5 rounded-lg text-sm transition-colors shadow-sm w-[100px]"
+            >
+              5 menit
+            </button>
+            <button
+              id="dur-10"
+              onclick="selectDuration('dur-10')"
+              class="duration-btn bg-white border border-gray-200 text-gray-600 px-5 py-2.5 rounded-lg text-sm transition-colors shadow-sm w-[100px]"
+            >
+              10 menit
+            </button>
+            <button
+              id="dur-15"
+              onclick="selectDuration('dur-15')"
+              class="duration-btn bg-white border border-gray-200 text-gray-600 px-5 py-2.5 rounded-lg text-sm transition-colors shadow-sm w-[100px]"
+            >
+              15 menit
+            </button>
+            <button
+              id="dur-30"
+              onclick="selectDuration('dur-30')"
+              class="duration-btn bg-white border border-gray-200 text-gray-600 px-5 py-2.5 rounded-lg text-sm transition-colors shadow-sm w-[100px]"
+            >
+              30 menit
+            </button>
+          </div>
+        </div>
+
+        <!-- Alasan -->
+        <div>
+          <h3 class="font-bold text-gray-800 text-sm mb-3">Alasan Override</h3>
+          <div class="flex flex-wrap gap-3">
+            <button
+              id="rsn-1"
+              onclick="selectReason('rsn-1')"
+              class="reason-btn flex items-center space-x-2 bg-white border border-gray-200 text-gray-600 px-4 py-2.5 rounded-lg text-sm transition-all shadow-sm"
+            >
+              <i class="fa-solid fa-wrench text-brand-green"></i
+              ><span>Kalibrasi Ulang Debit Air</span>
+            </button>
+            <button
+              id="rsn-2"
+              onclick="selectReason('rsn-2')"
+              class="reason-btn flex items-center space-x-2 bg-white border border-gray-200 text-gray-600 px-4 py-2.5 rounded-lg text-sm transition-all shadow-sm"
+            >
+              <i class="fa-solid fa-droplet text-blue-500"></i
+              ><span>Penyiraman Tambahan</span>
+            </button>
+            <button
+              id="rsn-3"
+              onclick="selectReason('rsn-3')"
+              class="reason-btn flex items-center space-x-2 bg-white border border-gray-200 text-gray-600 px-4 py-2.5 rounded-lg text-sm transition-all shadow-sm"
+            >
+              <i class="fa-solid fa-leaf text-brand-green"></i
+              ><span>Pemupukan</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabel Riwayat & Catatan Keselamatan -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <!-- Tabel Riwayat Override -->
+        <div
+          class="lg:col-span-2 bg-white rounded-xl border border-gray-200 shadow-sm flex flex-col"
+        >
+          <div class="p-5 border-b border-gray-100">
+            <h3 class="font-bold text-gray-800">Riwayat Override Manual</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+              <thead
+                class="bg-gray-50 border-b border-gray-200 text-gray-600 text-xs"
+              >
+                <tr>
+                  <th class="py-3 px-5 font-semibold">Waktu</th>
+                  <th class="py-3 px-5 font-semibold">Aksi</th>
+                  <th class="py-3 px-5 font-semibold">Durasi</th>
+                  <th class="py-3 px-5 font-semibold">Alasan</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-600 text-xs">
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5">22 Mei 2026 14:10:32</td>
+                  <td class="py-3 px-5 font-bold text-brand-green">Pompa ON</td>
+                  <td class="py-3 px-5">10 menit</td>
+                  <td class="py-3 px-5">Kalibrasi Ulang Debit Air</td>
+                </tr>
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5">21 Mei 2026 16:22:18</td>
+                  <td class="py-3 px-5 font-bold text-red-500">Pompa OFF</td>
+                  <td class="py-3 px-5">5 menit</td>
+                  <td class="py-3 px-5">Pemupukan</td>
+                </tr>
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5">20 Mei 2026 09:05:44</td>
+                  <td class="py-3 px-5 font-bold text-brand-green">Pompa ON</td>
+                  <td class="py-3 px-5">15 menit</td>
+                  <td class="py-3 px-5">Penyiraman Tambahan</td>
+                </tr>
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5">19 Mei 2026 17:30:11</td>
+                  <td class="py-3 px-5 font-bold text-red-500">Pompa OFF</td>
+                  <td class="py-3 px-5">10 menit</td>
+                  <td class="py-3 px-5">Kalibrasi Ulang Debit Air</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-3 px-5">18 Mei 2026 11:12:03</td>
+                  <td class="py-3 px-5 font-bold text-brand-green">Pompa ON</td>
+                  <td class="py-3 px-5">5 menit</td>
+                  <td class="py-3 px-5">Pemupukan</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Catatan Keselamatan -->
+        <div
+          class="lg:col-span-1 bg-yellow-50 rounded-xl border border-yellow-200 shadow-sm p-6 flex flex-col h-max"
+        >
+          <div class="flex items-center space-x-3 mb-4">
+            <div
+              class="w-8 h-8 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center"
+            >
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 class="font-bold text-yellow-800">Catatan Keselamatan</h3>
+          </div>
+          <p class="text-sm text-yellow-700 leading-relaxed">
+            Kontrol manual bersifat sementara dan akan otomatis kembali ke mode
+            otomatis setelah durasi berakhir.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- SCRIPT LOGIKA KONTROL MANUAL -->
+    <script>
+      let currentMode = "manual";
+
+      function initManualMode() {
+        setMode("manual");
+        selectDuration("dur-5");
+        selectReason("rsn-2");
+      }
+
+      function setMode(mode) {
+        currentMode = mode;
+        const btnAuto = document.getElementById("btn-mode-otomatis");
+        const btnManual = document.getElementById("btn-mode-manual");
+        const btnPumpOn = document.getElementById("btn-pompa-on");
+        const btnPumpOff = document.getElementById("btn-pompa-off");
+        const teksDesc = document.getElementById("teks-desc-pompa");
+        const durBtns = document.querySelectorAll(".duration-btn");
+        const rsnBtns = document.querySelectorAll(".reason-btn");
+
+        if (mode === "otomatis") {
+          btnAuto.className =
+            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-bold text-sm bg-brand-green text-white shadow-sm transition-all";
+          btnManual.className =
+            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm text-gray-500 hover:bg-gray-100 transition-all";
+          teksDesc.innerText =
+            "Sistem dikendalikan secara otomatis oleh sensor";
+          btnPumpOn.className =
+            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-4 rounded-xl font-bold text-gray-400 bg-gray-200 cursor-not-allowed transition-all";
+          btnPumpOff.className =
+            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-4 rounded-xl font-bold text-gray-400 bg-gray-200 cursor-not-allowed transition-all";
+
+          durBtns.forEach((btn) => {
+            btn.className =
+              "duration-btn bg-gray-100 border border-gray-200 text-gray-400 px-5 py-2.5 rounded-lg text-sm cursor-not-allowed w-[100px]";
+          });
+          rsnBtns.forEach((btn) => {
+            btn.classList.add(
+              "bg-gray-100",
+              "text-gray-400",
+              "cursor-not-allowed",
+              "opacity-60",
+            );
+            btn.classList.remove(
+              "bg-white",
+              "text-gray-600",
+              "hover:border-brand-green",
+              "hover:bg-brand-light",
+              "shadow-sm",
+              "cursor-pointer",
+              "border-brand-green",
+              "bg-brand-light",
+            );
+          });
+        } else {
+          btnManual.className =
+            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-bold text-sm bg-brand-green text-white shadow-sm transition-all";
+          btnAuto.className =
+            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm text-gray-500 hover:bg-gray-100 transition-all";
+          teksDesc.innerText = "Sistem dalam mode kontrol manual";
+          btnPumpOn.className =
+            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-4 rounded-xl font-bold text-white bg-brand-green hover:bg-green-800 cursor-pointer shadow-sm transition-all";
+          btnPumpOff.className =
+            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-4 rounded-xl font-bold text-white bg-red-500 hover:bg-red-600 cursor-pointer shadow-sm transition-all";
+
+          durBtns.forEach((btn) => {
+            btn.className =
+              "duration-btn bg-white border border-gray-200 text-gray-600 px-5 py-2.5 rounded-lg text-sm hover:border-brand-green hover:text-brand-green cursor-pointer shadow-sm transition-all w-[100px]";
+          });
+          rsnBtns.forEach((btn) => {
+            btn.classList.remove(
+              "bg-gray-100",
+              "text-gray-400",
+              "cursor-not-allowed",
+              "opacity-60",
+            );
+            btn.classList.add(
+              "bg-white",
+              "text-gray-600",
+              "hover:border-brand-green",
+              "hover:bg-brand-light",
+              "shadow-sm",
+              "cursor-pointer",
+            );
+          });
+
+          selectDuration("dur-5");
+          selectReason("rsn-2");
+        }
+      }
+
+      function selectDuration(id) {
+        if (currentMode === "otomatis") return;
+        document.querySelectorAll(".duration-btn").forEach((btn) => {
+          btn.classList.remove(
+            "border-brand-green",
+            "text-brand-green",
+            "font-bold",
+            "bg-brand-light",
+          );
+          btn.classList.add("border-gray-200", "text-gray-600");
+        });
+        const selected = document.getElementById(id);
+        selected.classList.remove("border-gray-200", "text-gray-600");
+        selected.classList.add(
+          "border-brand-green",
+          "text-brand-green",
+          "font-bold",
+          "bg-brand-light",
+        );
+      }
+
+      function selectReason(id) {
+        if (currentMode === "otomatis") return;
+        document.querySelectorAll(".reason-btn").forEach((btn) => {
+          btn.classList.remove("border-brand-green", "bg-brand-light");
+          btn.classList.add("border-gray-200", "bg-white");
+        });
+        const selected = document.getElementById(id);
+        selected.classList.remove("border-gray-200", "bg-white");
+        selected.classList.add("border-brand-green", "bg-brand-light");
+      }
+    </script>
+  </body>
+</html>
