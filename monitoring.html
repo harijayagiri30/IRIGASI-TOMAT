@@ -120,17 +120,10 @@
             class="text-xl md:text-2xl font-bold text-gray-800 flex items-center flex-wrap"
           >
             Monitoring Detail
-            <span class="text-gray-400 font-normal text-sm md:text-lg mx-2"
-              >/</span
-            >
-            <span class="text-gray-500 font-medium text-sm md:text-lg"
-              >Kelembapan</span
-            ><span class="text-gray-400 font-normal text-sm md:text-lg mx-2"
-              >/</span
-            >
-            <span class="text-gray-500 font-medium text-sm md:text-lg"
-              >Debit Air</span
-            >
+            <span class="text-gray-400 font-normal text-lg mx-2">/</span>
+            <span class="text-gray-500 font-medium text-lg">Kelembapan</span
+            ><span class="text-gray-400 font-normal text-lg mx-2">/</span>
+            <span class="text-gray-500 font-medium text-lg">Debit Air</span>
           </h2>
           <p
             id="fb-status"
@@ -151,7 +144,7 @@
               <i class="fa-solid fa-user text-xs"></i>
             </div>
             <div class="text-left pr-1">
-              <p class="font-bold text-gray-800 text-xs leading-tight">User</p>
+              <p class="font-bold text-gray-800 text-xs">User</p>
               <p class="text-[9px] text-gray-500 hidden sm:block">
                 Pengguna Sistem
               </p>
@@ -340,10 +333,20 @@
           >
             <div
               class="absolute w-full left-0 top-[20%] border-t border-dashed border-brand-green"
-            ></div>
+            >
+              <span
+                class="absolute right-0 -top-4 text-[8px] md:text-[9px] text-brand-green font-bold"
+                >Batas Basah 80%</span
+              >
+            </div>
             <div
               class="absolute w-full left-0 top-[55%] border-t border-dashed border-red-500"
-            ></div>
+            >
+              <span
+                class="absolute right-0 -bottom-4 text-[8px] md:text-[9px] text-red-500 font-bold"
+                >Batas Kering 45%</span
+              >
+            </div>
             <div
               class="absolute -left-5 md:-left-6 top-[-10px] text-[9px] md:text-[10px] text-gray-400"
             >
@@ -535,7 +538,7 @@
         </div>
       </div>
 
-      <!-- REVISI: Mengubah label teks K1, K2, K3, K4, K5, K6 menjadi S1, S2, S3, S4, S5, S6 -->
+      <!-- SENSOR DETAIL & SUMMARY (Kini S1 - S6) -->
       <div
         class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-3 md:gap-4 mb-4"
       >
@@ -572,7 +575,9 @@
             <i class="fa-solid fa-leaf text-orange-400 text-[9px]"></i
             ><span class="font-bold text-gray-800 text-[10px]">S3</span>
           </div>
-          <p id="val-s3" class="text-base font-bold text-gray-400 mb-1">--%</p>
+          <p id="val-s3" class="text-base font-bold text-orange-500 mb-1">
+            --%
+          </p>
           <span
             class="px-2 py-0.5 text-[8px] font-bold text-orange-500 bg-orange-50 border border-orange-200 rounded-full mb-1"
             >Cukup Kering</span
@@ -585,7 +590,9 @@
             <i class="fa-solid fa-leaf text-orange-400 text-[9px]"></i
             ><span class="font-bold text-gray-800 text-[10px]">S4</span>
           </div>
-          <p id="val-s4" class="text-base font-bold text-gray-400 mb-1">--%</p>
+          <p id="val-s4" class="text-base font-bold text-orange-500 mb-1">
+            --%
+          </p>
           <span
             class="px-2 py-0.5 text-[8px] font-bold text-red-500 bg-red-50 border border-red-200 rounded-full mb-1"
             >Kering</span
@@ -620,7 +627,7 @@
           >
         </div>
 
-        <!-- REVISI: Teks Sensor Terendah diubah menjadi S5 -->
+        <!-- RINGKASAN BAWAH (ID Diperbaiki agar tidak Crash dengan val-debit) -->
         <div
           class="bg-white p-4 md:p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-center col-span-2"
         >
@@ -635,10 +642,10 @@
                 Sensor Terendah
               </p>
               <p
-                id="val-debit"
+                id="val-terendah"
                 class="font-bold text-gray-800 text-xs md:text-sm"
               >
-                S5
+                --
               </p>
             </div>
           </div>
@@ -653,7 +660,12 @@
               <p class="text-[9px] md:text-[10px] text-gray-500">
                 Zona Paling Kering
               </p>
-              <p class="font-bold text-gray-800 text-xs md:text-sm">Zona 3</p>
+              <p
+                id="val-terkering"
+                class="font-bold text-gray-800 text-xs md:text-sm"
+              >
+                --
+              </p>
             </div>
           </div>
         </div>
@@ -665,11 +677,10 @@
     >
       <a
         href="dashboard.html"
-        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green w-1/5"
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
         ><i class="fa-solid fa-house text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Home</span></a
+        ><span class="text-[8px] font-medium">Home</span></a
       >
-      <!-- Monitoring Aktif -->
       <a
         href="monitoring.html"
         class="flex flex-col items-center text-brand-green w-1/5"
@@ -702,7 +713,7 @@
       >
     </nav>
 
-    <!-- DROPDOWN SCRIPT -->
+    <!-- SCRIPT DROPDOWN -->
     <script>
       function toggleDropdown() {
         document.getElementById("userDropdown").classList.toggle("hidden");
@@ -755,6 +766,7 @@
               "text-[10px] md:text-xs text-brand-green mt-1 font-semibold";
           }
 
+          // Update Zona Rata-rata
           if (data.zona) {
             if (data.zona.z1) {
               document.getElementById("val-z1").innerText =
@@ -776,6 +788,7 @@
             }
           }
 
+          // Update Sensor S1 - S6 & Kalkulasi Cerdas "Sensor Terendah"
           if (data.sensor) {
             document.getElementById("val-s1").innerText = data.sensor.s1 + "%";
             document.getElementById("val-s2").innerText = data.sensor.s2 + "%";
@@ -788,28 +801,45 @@
               el.classList.remove("text-gray-400");
               el.classList.add("text-brand-dark");
             });
+
+            // --- LOGIKA CERDAS: MENGHITUNG OTOMATIS SENSOR TERENDAH ---
+            const sensors = {
+              S1: data.sensor.s1,
+              S2: data.sensor.s2,
+              S3: data.sensor.s3,
+              S4: data.sensor.s4,
+              S5: data.sensor.s5,
+              S6: data.sensor.s6,
+            };
+            let lowestSensor = "S1";
+            let lowestValue = sensors["S1"];
+            for (const [key, value] of Object.entries(sensors)) {
+              if (value < lowestValue) {
+                lowestValue = value;
+                lowestSensor = key;
+              }
+            }
+            document.getElementById("val-terendah").innerText =
+              `${lowestSensor} (${lowestValue}%)`;
           }
 
-          if (data.status_sistem) {
-            // Update Pompa
-            document.getElementById("val-pompa").innerText =
-              data.status_sistem.get_pompa || data.status_sistem.pompa;
-
-            if (data.status_sistem.pompa === "ON") {
-              document
-                .getElementById("val-pompa")
-                .classList.add("text-brand-green");
-              document
-                .getElementById("val-pompa")
-                .classList.remove("text-red-500");
-            } else {
-              document
-                .getElementById("val-pompa")
-                .classList.add("text-red-500");
-              document
-                .getElementById("val-pompa")
-                .classList.remove("text-brand-green");
+          // --- LOGIKA CERDAS: MENGHITUNG OTOMATIS ZONA PALING KERING ---
+          if (data.zona) {
+            const zones = {
+              "Zona 1": data.zona.z1.rata_rata,
+              "Zona 2": data.zona.z2.rata_rata,
+              "Zona 3": data.zona.z3.rata_rata,
+            };
+            let lowestZone = "Zona 1";
+            let lowestZoneVal = zones["Zona 1"];
+            for (const [key, value] of Object.entries(zones)) {
+              if (value < lowestZoneVal) {
+                lowestZoneVal = value;
+                lowestZone = key;
+              }
             }
+            document.getElementById("val-terkering").innerText =
+              `${lowestZone} (${lowestZoneVal}%)`;
           }
         }
       });
