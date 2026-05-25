@@ -1,0 +1,21 @@
+{
+  "monitoring": {
+    "status_sistem": {
+      "pompa": "OFF",
+      "debit_air_liter": 1.8
+    },
+    "zona": {
+      "z1": { "rata_rata": 52.1, "status": "Optimal" },
+      "z2": { "rata_rata": 44.8, "status": "Cukup Kering" },
+      "z3": { "rata_rata": 38.7, "status": "Kering" }
+    },
+    "sensor": {
+      "s1": 56.3,
+      "s2": 48.9,
+      "s3": 41.2,
+      "s4": 38.6,
+      "s5": 35.1,
+      "s6": 42.3
+    }
+  }
+}
