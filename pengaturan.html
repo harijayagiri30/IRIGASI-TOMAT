@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pengaturan - Irigasi Tomat</title>
-    <!-- CSS & JS Terpisah -->
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="stylesheet"
@@ -37,14 +36,12 @@
   <body
     class="bg-[#f4f7f4] flex h-screen overflow-hidden font-sans text-gray-800"
   >
-    <!-- ==================== SIDEBAR ==================== -->
     <aside
-      class="w-64 bg-white border-r border-gray-200 flex flex-col justify-between hidden md:flex flex-shrink-0 relative overflow-hidden"
+      class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between flex-shrink-0 relative overflow-hidden"
     >
       <i
         class="fa-solid fa-seedling absolute -bottom-10 -left-10 text-9xl text-brand-light opacity-40 z-0 transform -rotate-12"
       ></i>
-
       <div class="relative z-10">
         <div
           class="py-8 px-6 flex items-center space-x-3 border-b border-gray-100 mb-6"
@@ -63,54 +60,45 @@
             </p>
           </div>
         </div>
-
         <nav class="flex flex-col space-y-1 pr-4">
           <a
             href="dashboard.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-house w-5 text-center"></i
+            ><span>Dashboard</span></a
           >
-            <i class="fa-solid fa-house w-5 text-center"></i
-            ><span>Dashboard</span>
-          </a>
           <a
             href="monitoring.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-chart-simple w-5 text-center"></i
+            ><span>Monitoring</span></a
           >
-            <i class="fa-solid fa-chart-simple w-5 text-center"></i
-            ><span>Monitoring</span>
-          </a>
           <a
             href="riwayat-data.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-clock-rotate-left w-5 text-center"></i
+            ><span>Riwayat Data</span></a
           >
-            <i class="fa-solid fa-clock-rotate-left w-5 text-center"></i
-            ><span>Riwayat Data</span>
-          </a>
           <a
             href="kontrol-manual.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-faucet-drip w-5 text-center"></i
+            ><span>Kontrol Manual</span></a
           >
-            <i class="fa-solid fa-faucet-drip w-5 text-center"></i
-            ><span>Kontrol Manual</span>
-          </a>
-          <!-- PENGATURAN AKTIF -->
           <a
             href="pengaturan.html"
             class="flex items-center space-x-4 bg-brand-green text-white py-3 pl-8 pr-4 rounded-r-full font-medium transition-all shadow-md"
+            ><i class="fa-solid fa-gear w-5 text-center"></i
+            ><span>Pengaturan</span></a
           >
-            <i class="fa-solid fa-gear w-5 text-center"></i
-            ><span>Pengaturan</span>
-          </a>
           <a
             href="sistem.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-server w-5 text-center"></i
+            ><span>Sistem</span></a
           >
-            <i class="fa-solid fa-server w-5 text-center"></i
-            ><span>Sistem</span>
-          </a>
         </nav>
       </div>
-
       <div class="mb-8 pr-4 relative z-10 mt-auto">
         <div class="h-px w-full bg-gray-100 mb-4"></div>
         <button
@@ -123,325 +111,225 @@
       </div>
     </aside>
 
-    <!-- ==================== KONTEN UTAMA ==================== -->
-    <main class="flex-1 overflow-y-auto p-6 lg:p-8">
-      <!-- Header -->
+    <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
+      <!-- HEADER DENGAN DROPDOWN -->
       <header
-        class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"
+        class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-30"
       >
         <div>
-          <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+          <h2 class="text-xl md:text-2xl font-bold text-gray-800">
             Pengaturan
-            <span class="text-gray-400 font-normal text-lg mx-2">/</span>
-            <span class="text-gray-500 font-medium text-lg"
-              >Pengaturan Sistem</span
-            >
           </h2>
         </div>
-
-        <!-- Card User -->
-        <div
-          class="flex items-center space-x-3 bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm"
-        >
-          <div
-            class="w-9 h-9 bg-brand-green rounded-full flex items-center justify-center text-white"
+        <div class="relative w-full md:w-auto flex justify-end">
+          <button
+            onclick="toggleDropdown()"
+            class="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-sm focus:outline-none hover:bg-brand-light transition-colors"
           >
-            <i class="fa-solid fa-user"></i>
-          </div>
-          <div class="pr-2">
-            <p class="font-bold text-gray-800 text-sm leading-tight">User</p>
-            <p class="text-[11px] text-gray-500">Pengguna Sistem</p>
+            <div
+              class="w-8 h-8 bg-brand-green rounded-full flex items-center justify-center text-white"
+            >
+              <i class="fa-solid fa-user text-xs"></i>
+            </div>
+            <div class="text-left pr-1">
+              <p class="font-bold text-gray-800 text-xs leading-tight">User</p>
+              <p class="text-[9px] text-gray-500 hidden sm:block">
+                Pengguna Sistem
+              </p>
+            </div>
+            <i
+              class="fa-solid fa-chevron-down text-[10px] text-gray-400 pl-1"
+            ></i>
+          </button>
+          <div
+            id="userDropdown"
+            class="hidden absolute right-0 top-full mt-2 w-64 bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden z-50"
+          >
+            <div class="p-2 border-b border-gray-100 bg-gray-50">
+              <a
+                href="index.html"
+                class="flex items-center space-x-2 text-red-500 hover:bg-red-50 px-3 py-2 rounded-lg text-sm font-bold transition-colors"
+                ><i class="fa-solid fa-arrow-right-from-bracket"></i
+                ><span>Keluar (Logout)</span></a
+              >
+            </div>
+            <div class="p-4 bg-white">
+              <p
+                class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-3 border-b border-gray-100 pb-1"
+              >
+                Contact Service
+              </p>
+              <div class="space-y-3">
+                <div class="flex items-start space-x-3">
+                  <i
+                    class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
+                  ></i>
+                  <div>
+                    <p class="text-xs font-bold text-gray-800">Hari</p>
+                    <p class="text-[11px] text-gray-500">0857-2675-0062</p>
+                    <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                  <i
+                    class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
+                  ></i>
+                  <div>
+                    <p class="text-xs font-bold text-gray-800">Rimba</p>
+                    <p class="text-[11px] text-gray-500">0896-0414-3531</p>
+                    <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </header>
 
-      <!-- Area Pengaturan Utama (Full Width tanpa sidebar kanan) -->
-      <div class="flex flex-col gap-6 mb-8">
-        <!-- Section Parameter Sistem -->
-        <div
-          class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 w-full"
-        >
-          <h3 class="font-bold text-gray-800 text-sm mb-4">Parameter Sistem</h3>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <!-- Kbawah -->
-            <div
-              id="card-kbawah"
-              class="param-card bg-white p-4 rounded-xl border border-gray-200 flex flex-col justify-between h-36"
-            >
-              <div
-                class="flex items-center space-x-2 text-gray-500 text-xs font-semibold"
-              >
-                <i class="fa-solid fa-droplet text-brand-green"></i
-                ><span>Kbawah</span>
-              </div>
-              <div class="flex items-center space-x-2 my-2">
-                <input
-                  type="number"
-                  id="kbawah"
-                  value="45"
-                  class="param-input w-20 text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"
-                />
-                <span class="text-gray-400 text-sm font-semibold">%</span>
-              </div>
-              <p class="text-[9px] text-gray-400 leading-tight">
-                Ambang bawah kelembapan untuk mulai menyiram
-              </p>
+      <div
+        class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-6 w-full"
+      >
+        <h3 class="font-bold text-gray-800 text-sm mb-4">Parameter Sistem</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          <div
+            id="card-kbawah"
+            class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col h-28 md:h-32"
+          >
+            <div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-2">
+              <i class="fa-solid fa-droplet text-brand-green mr-1"></i>Kbawah
             </div>
-
-            <!-- Katas -->
-            <div
-              id="card-katas"
-              class="param-card bg-white p-4 rounded-xl border border-gray-200 flex flex-col justify-between h-36"
-            >
-              <div
-                class="flex items-center space-x-2 text-gray-500 text-xs font-semibold"
-              >
-                <i class="fa-solid fa-droplet text-brand-green"></i
-                ><span>Katas</span>
-              </div>
-              <div class="flex items-center space-x-2 my-2">
-                <input
-                  type="number"
-                  id="katas"
-                  value="80"
-                  class="param-input w-20 text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"
-                />
-                <span class="text-gray-400 text-sm font-semibold">%</span>
-              </div>
-              <p class="text-[9px] text-gray-400 leading-tight">
-                Ambang atas kelembapan untuk berhenti menyiram
-              </p>
+            <div class="flex items-center space-x-1">
+              <input
+                type="number"
+                id="kbawah"
+                value="45"
+                class="param-input w-12 md:w-16 text-xl md:text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"
+              /><span class="text-gray-400 text-xs font-semibold">%</span>
             </div>
-
-            <!-- Kbatas -->
-            <div
-              id="card-kbatas"
-              class="param-card bg-white p-4 rounded-xl border border-gray-200 flex flex-col justify-between h-36"
-            >
-              <div
-                class="flex items-center space-x-2 text-gray-500 text-xs font-semibold"
-              >
-                <i class="fa-solid fa-droplet text-brand-green"></i
-                ><span>Kbatas</span>
-              </div>
-              <div class="flex items-center space-x-2 my-2">
-                <input
-                  type="number"
-                  id="kbatas"
-                  value="45"
-                  class="param-input w-20 text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"
-                />
-                <span class="text-gray-400 text-sm font-semibold">%</span>
-              </div>
-              <p class="text-[9px] text-gray-400 leading-tight">
-                Batas kritis kelembapan (keamanan sistem)
-              </p>
+          </div>
+          <div
+            id="card-katas"
+            class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col h-28 md:h-32"
+          >
+            <div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-2">
+              <i class="fa-solid fa-droplet text-brand-green mr-1"></i>Katas
             </div>
-
-            <!-- Nkering Minimum -->
-            <div
-              id="card-nkering"
-              class="param-card bg-white p-4 rounded-xl border border-gray-200 flex flex-col justify-between h-36"
-            >
-              <div
-                class="flex items-center space-x-2 text-gray-500 text-xs font-semibold"
-              >
-                <i class="fa-solid fa-satellite-dish text-brand-green"></i
-                ><span>Nkering Minimum</span>
-              </div>
-              <div class="flex items-center space-x-2 my-2">
-                <input
-                  type="number"
-                  id="nkering"
-                  value="2"
-                  class="param-input w-20 text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"
-                />
-                <span class="text-gray-400 text-xs font-semibold">Sensor</span>
-              </div>
-              <p class="text-[9px] text-gray-400 leading-tight">
-                Minimal sensor kering untuk trigger siram
-              </p>
+            <div class="flex items-center space-x-1">
+              <input
+                type="number"
+                id="katas"
+                value="80"
+                class="param-input w-12 md:w-16 text-xl md:text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"
+              /><span class="text-gray-400 text-xs font-semibold">%</span>
             </div>
-
-            <!-- Interval Kirim Data -->
-            <div
-              id="card-interval"
-              class="param-card bg-white p-4 rounded-xl border border-gray-200 flex flex-col justify-between h-36"
-            >
-              <div
-                class="flex items-center space-x-2 text-gray-500 text-xs font-semibold"
-              >
-                <i class="fa-regular fa-clock text-brand-green"></i
-                ><span>Interval Kirim Data</span>
-              </div>
-              <div class="my-2">
-                <select
-                  id="interval"
-                  class="param-input w-full bg-white border-b border-gray-300 text-sm font-bold text-gray-800 focus:outline-none focus:border-brand-green py-1 cursor-pointer"
-                >
-                  <option value="1 jam">1 jam</option>
-                  <option value="2 jam">2 jam</option>
-                  <option value="6 jam">6 jam</option>
-                </select>
-              </div>
-              <p class="text-[9px] text-gray-400 leading-tight">
-                Interval pengiriman data ke server
-              </p>
+          </div>
+          <div
+            id="card-kbatas"
+            class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col h-28 md:h-32"
+          >
+            <div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-2">
+              <i class="fa-solid fa-droplet text-brand-green mr-1"></i>Kbatas
             </div>
-
-            <!-- Tunda Siram Jika Hujan -->
-            <div
-              id="card-tunda"
-              class="param-card bg-white p-4 rounded-xl border border-gray-200 flex flex-col justify-between h-36"
-            >
-              <div
-                class="flex items-center space-x-2 text-gray-500 text-xs font-semibold"
-              >
-                <i class="fa-solid fa-cloud-showers-heavy text-brand-green"></i
-                ><span>Tunda Siram Jika Hujan</span>
-              </div>
-              <div class="my-2">
-                <select
-                  id="tunda"
-                  class="param-input w-full bg-white border-b border-gray-300 text-sm font-bold text-gray-800 focus:outline-none focus:border-brand-green py-1 cursor-pointer"
-                >
-                  <option value="Aktif">Aktif</option>
-                  <option value="Nonaktif">Nonaktif</option>
-                </select>
-              </div>
-              <p class="text-[9px] text-gray-400 leading-tight">
-                Menunda penyiraman saat terdeteksi hujan
-              </p>
+            <div class="flex items-center space-x-1">
+              <input
+                type="number"
+                id="kbatas"
+                value="45"
+                class="param-input w-12 md:w-16 text-xl md:text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"
+              /><span class="text-gray-400 text-xs font-semibold">%</span>
             </div>
-
-            <!-- Batas Peluang Hujan -->
+          </div>
+          <div
+            id="card-nkering"
+            class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col h-28 md:h-32"
+          >
             <div
-              id="card-peluang"
-              class="param-card bg-white p-4 rounded-xl border border-gray-200 flex flex-col justify-between h-36"
+              class="text-gray-500 text-[9px] md:text-xs font-semibold mb-2 truncate"
             >
-              <div
-                class="flex items-center space-x-2 text-gray-500 text-xs font-semibold"
-              >
-                <i class="fa-solid fa-cloud text-brand-green"></i
-                ><span>Batas Peluang Hujan</span>
-              </div>
-              <div class="flex items-center space-x-2 my-2">
-                <input
-                  type="number"
-                  id="peluang"
-                  value="60"
-                  class="param-input w-20 text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"
-                />
-                <span class="text-gray-400 text-sm font-semibold">%</span>
-              </div>
-              <p class="text-[9px] text-gray-400 leading-tight">
-                Ambang peluang hujan untuk menunda penyiraman
-              </p>
+              <i class="fa-solid fa-satellite-dish text-brand-green mr-1"></i
+              >Nkering
             </div>
-
-            <!-- Sumber Data Cuaca (API/Firebase - PERMANEN READ-ONLY) -->
-            <div
-              class="bg-[#fcfdfc] p-4 rounded-xl border border-gray-200 flex flex-col justify-between h-36 opacity-70 cursor-not-allowed select-none"
-            >
-              <div
-                class="flex justify-between items-center text-gray-400 text-xs font-semibold"
+            <div class="flex items-center space-x-1">
+              <input
+                type="number"
+                id="nkering"
+                value="2"
+                class="param-input w-12 md:w-16 text-xl md:text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"
+              /><span class="text-gray-400 text-[10px] font-semibold"
+                >Sensor</span
               >
-                <div class="flex items-center space-x-2">
-                  <i class="fa-solid fa-server"></i
-                  ><span>Sumber Data Cuaca</span>
-                </div>
-                <i class="fa-solid fa-lock text-[10px]"></i>
-              </div>
-              <div class="my-2">
-                <div
-                  class="text-sm font-bold text-gray-400 py-1 border-b border-gray-200"
-                >
-                  API/Firebase
-                </div>
-              </div>
-              <p class="text-[9px] text-gray-400 leading-tight">
-                Sumber data cuaca yang digunakan sistem
-              </p>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Section Akun Pengguna (Kini Bisa Diedit & Terpengaruh Tombol) -->
-        <div
-          class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 w-full"
-        >
-          <h3 class="font-bold text-gray-800 text-sm mb-4">Akun Pengguna</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div
-              id="card-user-name"
-              class="param-card border border-gray-200 rounded-lg p-3 flex items-center space-x-3 bg-white"
-            >
-              <div class="text-brand-green text-lg">
-                <i class="fa-regular fa-user"></i>
-              </div>
-              <div class="w-full">
-                <p class="text-[10px] text-gray-500 font-semibold mb-1">
-                  Username
-                </p>
-                <input
-                  type="text"
-                  id="user-name"
-                  value="user"
-                  class="param-input w-full text-sm font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green py-1 bg-transparent"
-                />
-              </div>
+      <div
+        class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-6 w-full"
+      >
+        <h3 class="font-bold text-gray-800 text-sm mb-4">Akun Pengguna</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div
+            id="card-user-name"
+            class="param-card border border-gray-200 rounded-lg p-3 flex items-center space-x-3"
+          >
+            <div class="text-brand-green text-lg">
+              <i class="fa-regular fa-user"></i>
             </div>
-
-            <div
-              id="card-user-email"
-              class="param-card border border-gray-200 rounded-lg p-3 flex items-center space-x-3 bg-white"
-            >
-              <div class="text-brand-green text-lg">
-                <i class="fa-regular fa-envelope"></i>
-              </div>
-              <div class="w-full">
-                <p class="text-[10px] text-gray-500 font-semibold mb-1">
-                  Email
-                </p>
-                <input
-                  type="email"
-                  id="user-email"
-                  value="user@irigasitomat.id"
-                  class="param-input w-full text-sm font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green py-1 bg-transparent"
-                />
-              </div>
+            <div class="w-full">
+              <p class="text-[10px] text-gray-500 font-semibold">Username</p>
+              <input
+                type="text"
+                id="user-name"
+                value="user"
+                class="param-input w-full text-sm font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green py-1 bg-transparent"
+              />
+            </div>
+          </div>
+          <div
+            id="card-user-email"
+            class="param-card border border-gray-200 rounded-lg p-3 flex items-center space-x-3"
+          >
+            <div class="text-brand-green text-lg">
+              <i class="fa-regular fa-envelope"></i>
+            </div>
+            <div class="w-full">
+              <p class="text-[10px] text-gray-500 font-semibold">Email</p>
+              <input
+                type="email"
+                id="user-email"
+                value="user@irigasitomat.id"
+                class="param-input w-full text-sm font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green py-1 bg-transparent"
+              />
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Tombol Aksi Bawah -->
-        <div class="flex justify-center space-x-3 mt-2">
-          <button
-            onclick="saveSettings()"
-            class="bg-brand-green hover:bg-green-800 text-white font-semibold py-3 px-6 rounded-lg text-sm shadow-sm transition-colors flex items-center space-x-2"
-          >
-            <i class="fa-solid fa-floppy-disk"></i
-            ><span>Simpan Pengaturan</span>
-          </button>
-          <button
-            onclick="showResetModal()"
-            class="bg-white border-2 border-brand-green text-brand-green hover:bg-brand-light font-semibold py-3 px-6 rounded-lg text-sm shadow-sm transition-colors flex items-center space-x-2"
-          >
-            <i class="fa-solid fa-arrow-rotate-left"></i
-            ><span>Reset Default</span>
-          </button>
-        </div>
+      <div
+        class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-3"
+      >
+        <button
+          onclick="saveSettings()"
+          class="bg-brand-green hover:bg-green-800 text-white font-semibold py-3 px-6 rounded-lg text-sm shadow-sm transition-colors flex justify-center items-center space-x-2 w-full sm:w-auto"
+        >
+          <i class="fa-solid fa-floppy-disk"></i><span>Simpan Pengaturan</span>
+        </button>
+        <button
+          onclick="showResetModal()"
+          class="bg-white border-2 border-brand-green text-brand-green hover:bg-brand-light font-semibold py-3 px-6 rounded-lg text-sm shadow-sm transition-colors flex justify-center items-center space-x-2 w-full sm:w-auto"
+        >
+          <i class="fa-solid fa-arrow-rotate-left"></i
+          ><span>Reset Default</span>
+        </button>
       </div>
     </main>
 
-    <!-- ==================== MODAL NOTIFIKASI RESET DEFAULT ==================== -->
     <div
       id="modal-reset"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4"
     >
       <div
-        class="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl text-center mx-4 animate-modal"
+        class="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl text-center animate-modal"
       >
         <div
           class="w-12 h-12 bg-orange-50 text-orange-500 rounded-full flex items-center justify-center text-2xl mx-auto mb-4"
@@ -449,21 +337,19 @@
           <i class="fa-solid fa-triangle-exclamation"></i>
         </div>
         <h3 class="text-lg font-bold text-gray-800 mb-2">Konfirmasi Reset</h3>
-        <!-- Kalimat Sesuai Permintaan -->
-        <p class="text-xs text-gray-500 leading-relaxed mb-6">
-          apakah anda yakin akan melakukan reset default? pastikan semua sudah
-          terkonfirmasi dengan administrator
+        <p class="text-xs text-gray-500 mb-6">
+          apakah anda yakin akan melakukan reset default?
         </p>
         <div class="flex space-x-3 justify-center">
           <button
             onclick="confirmReset(true)"
-            class="bg-brand-green hover:bg-green-800 text-white font-semibold py-2 px-6 rounded-lg text-sm transition-colors w-24"
+            class="bg-brand-green text-white font-semibold py-2 px-6 rounded-lg text-sm w-24"
           >
             Ya
           </button>
           <button
             onclick="confirmReset(false)"
-            class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-6 rounded-lg text-sm transition-colors w-24"
+            class="bg-gray-100 text-gray-700 font-semibold py-2 px-6 rounded-lg text-sm w-24"
           >
             Tidak
           </button>
@@ -471,73 +357,81 @@
       </div>
     </div>
 
-    <!-- ==================== SCRIPT LOGIKA INTERAKTIF ==================== -->
+    <nav
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-4 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
+    >
+      <a
+        href="dashboard.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-house text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Home</span></a
+      >
+      <a
+        href="monitoring.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-chart-simple text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Monitor</span></a
+      >
+      <a
+        href="riwayat-data.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-clock-rotate-left text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Riwayat</span></a
+      >
+      <a
+        href="kontrol-manual.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-faucet-drip text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Kontrol</span></a
+      >
+      <a
+        href="sistem.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-server text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Sistem</span></a
+      >
+    </nav>
+
     <script>
-      // Daftar ID input yang berpartisipasi dalam perubahan status (Termasuk Akun Pengguna)
       const paramIds = [
         "kbawah",
         "katas",
         "kbatas",
         "nkering",
-        "interval",
-        "tunda",
-        "peluang",
         "user-name",
         "user-email",
       ];
-
-      // Fungsi Simpan Pengaturan
       function saveSettings() {
         paramIds.forEach((id) => {
           const input = document.getElementById(id);
           input.disabled = true;
-
-          // Tambahkan warna gelap dan matikan interaksi visual pada input
           input.classList.add("text-gray-400", "cursor-not-allowed");
           input.classList.remove("text-gray-800");
-
-          // Gelapkan card pembungkusnya
           const card = document.getElementById("card-" + id);
           if (card) {
             card.classList.add("bg-gray-100", "opacity-75");
             card.classList.remove("bg-white");
           }
         });
-        alert("Pengaturan berhasil disimpan dan dikunci!");
+        alert("Tersimpan!");
       }
-
-      // Tampilkan Modal Konfirmasi Reset
       function showResetModal() {
         document.getElementById("modal-reset").classList.remove("hidden");
       }
-
-      // Logika Respon Modal Reset Default
       function confirmReset(isYes) {
-        const modal = document.getElementById("modal-reset");
-        modal.classList.add("hidden"); // Tutup modal
-
+        document.getElementById("modal-reset").classList.add("hidden");
         if (isYes) {
-          // Kembalikan nilai ke setelan default pabrik
           document.getElementById("kbawah").value = 45;
           document.getElementById("katas").value = 80;
           document.getElementById("kbatas").value = 45;
           document.getElementById("nkering").value = 2;
-          document.getElementById("interval").value = "1 jam";
-          document.getElementById("tunda").value = "Aktif";
-          document.getElementById("peluang").value = 60;
-
-          // Reset Akun
           document.getElementById("user-name").value = "user";
           document.getElementById("user-email").value = "user@irigasitomat.id";
-
-          // Nyalakan (Enable) kembali semua input dan bersihkan warna gelap
           paramIds.forEach((id) => {
             const input = document.getElementById(id);
             input.disabled = false;
-
             input.classList.remove("text-gray-400", "cursor-not-allowed");
             input.classList.add("text-gray-800");
-
             const card = document.getElementById("card-" + id);
             if (card) {
               card.classList.remove("bg-gray-100", "opacity-75");
@@ -546,6 +440,18 @@
           });
         }
       }
+      // Script Dropdown
+      function toggleDropdown() {
+        document.getElementById("userDropdown").classList.toggle("hidden");
+      }
+      window.addEventListener("click", function (e) {
+        const btn = document.querySelector(
+          'button[onclick="toggleDropdown()"]',
+        );
+        const drop = document.getElementById("userDropdown");
+        if (!btn.contains(e.target) && !drop.contains(e.target))
+          drop.classList.add("hidden");
+      });
     </script>
   </body>
 </html>

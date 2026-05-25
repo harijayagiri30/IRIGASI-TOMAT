@@ -79,25 +79,89 @@
           >
         </nav>
       </div>
+      <div class="mb-8 pr-4 relative z-10 mt-auto">
+        <div class="h-px w-full bg-gray-100 mb-4"></div>
+        <button
+          onclick="window.location.href = 'index.html'"
+          class="w-full flex items-center space-x-4 text-gray-500 hover:bg-red-50 hover:text-red-500 py-3 pl-8 pr-4 rounded-r-full font-medium transition-all cursor-pointer"
+        >
+          <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center"></i
+          ><span>Keluar</span>
+        </button>
+      </div>
     </aside>
 
     <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
-      <header class="flex justify-between items-center mb-6">
+      <!-- HEADER DENGAN DROPDOWN -->
+      <header
+        class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-30"
+      >
         <div>
           <h2 class="text-xl md:text-2xl font-bold text-gray-800">
             Kontrol Manual
           </h2>
         </div>
-        <div
-          class="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-sm"
-        >
-          <div
-            class="w-8 h-8 bg-brand-green rounded-full flex items-center justify-center text-white"
+        <div class="relative w-full md:w-auto flex justify-end">
+          <button
+            onclick="toggleDropdown()"
+            class="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-sm focus:outline-none hover:bg-brand-light transition-colors"
           >
-            <i class="fa-solid fa-user text-xs"></i>
-          </div>
-          <div class="hidden sm:block pr-2">
-            <p class="font-bold text-gray-800 text-xs">User</p>
+            <div
+              class="w-8 h-8 bg-brand-green rounded-full flex items-center justify-center text-white"
+            >
+              <i class="fa-solid fa-user text-xs"></i>
+            </div>
+            <div class="text-left pr-1">
+              <p class="font-bold text-gray-800 text-xs leading-tight">User</p>
+              <p class="text-[9px] text-gray-500 hidden sm:block">
+                Pengguna Sistem
+              </p>
+            </div>
+            <i
+              class="fa-solid fa-chevron-down text-[10px] text-gray-400 pl-1"
+            ></i>
+          </button>
+          <div
+            id="userDropdown"
+            class="hidden absolute right-0 top-full mt-2 w-64 bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden z-50"
+          >
+            <div class="p-2 border-b border-gray-100 bg-gray-50">
+              <a
+                href="index.html"
+                class="flex items-center space-x-2 text-red-500 hover:bg-red-50 px-3 py-2 rounded-lg text-sm font-bold transition-colors"
+                ><i class="fa-solid fa-arrow-right-from-bracket"></i
+                ><span>Keluar (Logout)</span></a
+              >
+            </div>
+            <div class="p-4 bg-white">
+              <p
+                class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-3 border-b border-gray-100 pb-1"
+              >
+                Contact Service
+              </p>
+              <div class="space-y-3">
+                <div class="flex items-start space-x-3">
+                  <i
+                    class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
+                  ></i>
+                  <div>
+                    <p class="text-xs font-bold text-gray-800">Hari</p>
+                    <p class="text-[11px] text-gray-500">0857-2675-0062</p>
+                    <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                  <i
+                    class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
+                  ></i>
+                  <div>
+                    <p class="text-xs font-bold text-gray-800">Rimba</p>
+                    <p class="text-[11px] text-gray-500">0896-0414-3531</p>
+                    <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </header>
@@ -125,7 +189,6 @@
         </div>
       </div>
 
-      <!-- Bagian Durasi Override dengan Kolom Input Custom -->
       <div class="mb-6">
         <h3 class="font-bold text-gray-800 text-sm mb-3">Durasi Override</h3>
         <div class="flex flex-wrap gap-2 items-center">
@@ -150,8 +213,6 @@
           >
             15 mnt
           </button>
-
-          <!-- Input Custom Waktu -->
           <div
             class="flex items-center space-x-2 bg-white border border-gray-200 rounded-lg shadow-sm px-2 py-1 duration-custom-container"
             id="dur-custom-container"
@@ -207,7 +268,7 @@
     </main>
 
     <nav
-      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-4 h-16 z-50"
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-4 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
     >
       <a
         href="dashboard.html"
@@ -248,14 +309,12 @@
         selectDuration("dur-5");
         selectReason("rsn-2");
       }
-
       function setMode(mode) {
         currentMode = mode;
         const btnAuto = document.getElementById("btn-mode-otomatis");
         const btnManual = document.getElementById("btn-mode-manual");
         const btnPumpOn = document.getElementById("btn-pompa-on");
         const btnPumpOff = document.getElementById("btn-pompa-off");
-
         const durBtns = document.querySelectorAll(".duration-btn");
         const rsnBtns = document.querySelectorAll(".reason-btn");
         const customInput = document.getElementById("custom-dur");
@@ -266,12 +325,10 @@
             "flex-1 flex items-center justify-center space-x-2 py-2 rounded-md font-bold text-sm bg-brand-green text-white shadow-sm transition-all";
           btnManual.className =
             "flex-1 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm text-gray-500 hover:bg-gray-100 transition-all";
-
           btnPumpOn.className =
             "flex-1 py-4 rounded-xl font-bold text-gray-400 bg-gray-200 cursor-not-allowed transition-all";
           btnPumpOff.className =
             "flex-1 py-4 rounded-xl font-bold text-gray-400 bg-gray-200 cursor-not-allowed transition-all";
-
           customInput.disabled = true;
           customContainer.classList.add(
             "bg-gray-100",
@@ -293,12 +350,10 @@
             "flex-1 flex items-center justify-center space-x-2 py-2 rounded-md font-bold text-sm bg-brand-green text-white shadow-sm transition-all";
           btnAuto.className =
             "flex-1 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm text-gray-500 hover:bg-gray-100 transition-all";
-
           btnPumpOn.className =
             "flex-1 py-4 rounded-xl font-bold text-white bg-brand-green hover:bg-green-800 shadow-sm transition-all";
           btnPumpOff.className =
             "flex-1 py-4 rounded-xl font-bold text-white bg-red-500 hover:bg-red-600 shadow-sm transition-all";
-
           customInput.disabled = false;
           customContainer.classList.remove(
             "bg-gray-100",
@@ -316,19 +371,16 @@
               (b.className =
                 "reason-btn flex items-center space-x-2 bg-white border border-gray-200 text-gray-600 px-3 py-2 rounded-lg text-sm hover:border-brand-green shadow-sm cursor-pointer transition-all"),
           );
-
           selectDuration("dur-5");
           selectReason("rsn-2");
         }
       }
-
       function selectDuration(id) {
         if (currentMode === "otomatis") return;
-        document.getElementById("custom-dur").value = ""; // Kosongkan input custom
+        document.getElementById("custom-dur").value = "";
         document
           .getElementById("dur-custom-container")
           .classList.remove("border-brand-green", "bg-brand-light");
-
         document.querySelectorAll(".duration-btn").forEach((btn) => {
           btn.classList.remove(
             "border-brand-green",
@@ -347,8 +399,6 @@
             "bg-brand-light",
           );
       }
-
-      // Ketika user mengetik angka manual
       function selectCustomDuration() {
         if (currentMode === "otomatis") return;
         document.querySelectorAll(".duration-btn").forEach((btn) => {
@@ -360,10 +410,10 @@
           );
           btn.classList.add("border-gray-200", "text-gray-600");
         });
-        const container = document.getElementById("dur-custom-container");
-        container.classList.add("border-brand-green", "bg-brand-light");
+        document
+          .getElementById("dur-custom-container")
+          .classList.add("border-brand-green", "bg-brand-light");
       }
-
       function selectReason(id) {
         if (currentMode === "otomatis") return;
         document
@@ -375,6 +425,18 @@
           .getElementById(id)
           .classList.add("border-brand-green", "bg-brand-light");
       }
+      // Script Dropdown
+      function toggleDropdown() {
+        document.getElementById("userDropdown").classList.toggle("hidden");
+      }
+      window.addEventListener("click", function (e) {
+        const btn = document.querySelector(
+          'button[onclick="toggleDropdown()"]',
+        );
+        const drop = document.getElementById("userDropdown");
+        if (!btn.contains(e.target) && !drop.contains(e.target))
+          drop.classList.add("hidden");
+      });
     </script>
   </body>
 </html>
