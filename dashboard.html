@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - Irigasi Tomat</title>
-    <!-- CSS & JS Terpisah -->
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="stylesheet"
@@ -33,16 +32,14 @@
   <body
     class="bg-[#f4f7f4] flex h-screen overflow-hidden font-sans text-gray-800"
   >
-    <!-- ==================== SIDEBAR (TAUTAN SUDAH FULL AKTIF) ==================== -->
+    <!-- SIDEBAR (Khusus PC/Tablet) -->
     <aside
-      class="w-64 bg-white border-r border-gray-200 flex flex-col justify-between hidden md:flex flex-shrink-0 relative overflow-hidden"
+      class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between flex-shrink-0 relative overflow-hidden"
     >
       <i
         class="fa-solid fa-seedling absolute -bottom-10 -left-10 text-9xl text-brand-light opacity-40 z-0 transform -rotate-12"
       ></i>
-
       <div class="relative z-10">
-        <!-- Logo -->
         <div
           class="py-8 px-6 flex items-center space-x-3 border-b border-gray-100 mb-6"
         >
@@ -60,54 +57,45 @@
             </p>
           </div>
         </div>
-
-        <!-- Menu Navigasi -->
         <nav class="flex flex-col space-y-1 pr-4">
           <a
             href="dashboard.html"
             class="flex items-center space-x-4 bg-brand-green text-white py-3 pl-8 pr-4 rounded-r-full font-medium transition-all shadow-md"
+            ><i class="fa-solid fa-house w-5 text-center"></i
+            ><span>Dashboard</span></a
           >
-            <i class="fa-solid fa-house w-5 text-center"></i
-            ><span>Dashboard</span>
-          </a>
           <a
             href="monitoring.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-chart-simple w-5 text-center"></i
+            ><span>Monitoring</span></a
           >
-            <i class="fa-solid fa-chart-simple w-5 text-center"></i
-            ><span>Monitoring</span>
-          </a>
           <a
             href="riwayat-data.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-clock-rotate-left w-5 text-center"></i
+            ><span>Riwayat Data</span></a
           >
-            <i class="fa-solid fa-clock-rotate-left w-5 text-center"></i
-            ><span>Riwayat Data</span>
-          </a>
           <a
             href="kontrol-manual.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-faucet-drip w-5 text-center"></i
+            ><span>Kontrol Manual</span></a
           >
-            <i class="fa-solid fa-faucet-drip w-5 text-center"></i
-            ><span>Kontrol Manual</span>
-          </a>
           <a
             href="pengaturan.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-gear w-5 text-center"></i
+            ><span>Pengaturan</span></a
           >
-            <i class="fa-solid fa-gear w-5 text-center"></i
-            ><span>Pengaturan</span>
-          </a>
           <a
             href="sistem.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-server w-5 text-center"></i
+            ><span>Sistem</span></a
           >
-            <i class="fa-solid fa-server w-5 text-center"></i
-            ><span>Sistem</span>
-          </a>
         </nav>
       </div>
-
       <div class="mb-8 pr-4 relative z-10 mt-auto">
         <div class="h-px w-full bg-gray-100 mb-4"></div>
         <button
@@ -120,424 +108,186 @@
       </div>
     </aside>
 
-    <!-- ==================== KONTEN UTAMA ==================== -->
-    <main class="flex-1 overflow-y-auto p-6 lg:p-8">
-      <!-- Header Atas (Breadcrumb & User Profile) -->
-      <header
-        class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4"
-      >
+    <!-- KONTEN TENGAH (Perhatikan pb-24 agar tidak tertutup menu HP di bawah) -->
+    <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
+      <header class="flex justify-between items-center mb-6">
         <div>
-          <h2 class="text-2xl font-bold text-gray-800 flex items-center">
-            Dashboard
-            <span class="text-gray-400 font-normal text-lg mx-2">/</span>
-            <span class="text-gray-500 font-medium text-lg"
-              >Dashboard Utama</span
-            >
+          <h2 class="text-xl md:text-2xl font-bold text-gray-800">
+            Dashboard Utama
           </h2>
+          <p class="text-xs md:text-sm text-gray-500 truncate">
+            Monitoring sistem irigasi otomatis
+          </p>
         </div>
-
         <div
-          class="flex items-center space-x-3 bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm"
+          class="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-sm"
         >
           <div
-            class="w-9 h-9 bg-brand-green rounded-full flex items-center justify-center text-white"
+            class="w-8 h-8 bg-brand-green rounded-full flex items-center justify-center text-white"
           >
-            <i class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-user text-xs"></i>
           </div>
-          <div class="pr-2">
-            <p class="font-bold text-gray-800 text-sm leading-tight">User</p>
-            <p class="text-[11px] text-gray-500">Pengguna Sistem</p>
+          <div class="hidden sm:block pr-2">
+            <p class="font-bold text-gray-800 text-xs">User</p>
+            <p class="text-[9px] text-gray-500">Pengguna</p>
           </div>
         </div>
       </header>
 
-      <!-- 7 Kartu Metrik Utama -->
-      <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-4 mb-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3 mb-6">
         <div
-          class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-3"
+          class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-2"
         >
-          <div class="text-brand-green text-3xl opacity-80">
+          <div class="text-brand-green text-2xl opacity-80">
             <i class="fa-solid fa-seedling"></i>
           </div>
-          <div>
-            <p class="text-[11px] font-semibold text-gray-500">Kbedeng</p>
-            <p class="text-lg font-bold text-brand-green">52.4%</p>
+          <div class="overflow-hidden">
+            <p class="text-[10px] font-semibold text-gray-500 truncate">
+              Kbedeng
+            </p>
+            <p class="text-base font-bold text-brand-green">52.4%</p>
           </div>
         </div>
         <div
-          class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-3"
+          class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-2"
         >
-          <div class="text-blue-500 text-3xl opacity-80">
+          <div class="text-blue-500 text-2xl opacity-80">
             <i class="fa-solid fa-droplet"></i>
           </div>
-          <div>
-            <p class="text-[11px] font-semibold text-gray-500">Kmin</p>
-            <p class="text-lg font-bold text-brand-green">43.7%</p>
+          <div class="overflow-hidden">
+            <p class="text-[10px] font-semibold text-gray-500 truncate">Kmin</p>
+            <p class="text-base font-bold text-brand-green">43.7%</p>
           </div>
         </div>
         <div
-          class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-3"
+          class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-2"
         >
-          <div class="text-gray-400 text-3xl opacity-80">
+          <div class="text-gray-400 text-2xl opacity-80">
             <i class="fa-solid fa-satellite-dish"></i>
           </div>
-          <div>
-            <p class="text-[11px] font-semibold text-gray-500">Nkering</p>
-            <p class="text-lg font-bold text-gray-800">2 Sensor</p>
+          <div class="overflow-hidden">
+            <p class="text-[10px] font-semibold text-gray-500 truncate">
+              Nkering
+            </p>
+            <p class="text-base font-bold text-gray-800">2 Sensor</p>
           </div>
         </div>
         <div
-          class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-3"
+          class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-2"
         >
-          <div class="text-gray-400 text-3xl opacity-80">
+          <div class="text-gray-400 text-2xl opacity-80">
             <i class="fa-solid fa-faucet-drip"></i>
           </div>
-          <div>
-            <p class="text-[11px] font-semibold text-gray-500">Status Pompa</p>
-            <p class="text-lg font-bold text-red-500">OFF</p>
-          </div>
-        </div>
-        <div
-          class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-3"
-        >
-          <div class="text-blue-400 text-3xl opacity-80">
-            <i class="fa-solid fa-droplet"></i>
-          </div>
-          <div>
-            <p class="text-[11px] font-semibold text-gray-500">
-              Debit Air (L/m)
+          <div class="overflow-hidden">
+            <p class="text-[10px] font-semibold text-gray-500 truncate">
+              Status Pompa
             </p>
-            <p class="text-lg font-bold text-brand-green">1.8 L/m</p>
+            <p class="text-base font-bold text-red-500">OFF</p>
           </div>
         </div>
         <div
-          class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-3"
+          class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-2"
         >
-          <div class="text-gray-400 text-3xl opacity-80">
+          <div class="text-blue-400 text-2xl opacity-80">
+            <i class="fa-solid fa-water"></i>
+          </div>
+          <div class="overflow-hidden">
+            <p class="text-[10px] font-semibold text-gray-500 truncate">
+              Debit Air
+            </p>
+            <p class="text-base font-bold text-brand-green">1.8 L/m</p>
+          </div>
+        </div>
+        <div
+          class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-2"
+        >
+          <div class="text-gray-400 text-2xl opacity-80">
             <i class="fa-solid fa-cloud"></i>
           </div>
-          <div>
-            <p class="text-[11px] font-semibold text-gray-500">Cuaca</p>
-            <p class="text-lg font-bold text-brand-green">Berawan</p>
+          <div class="overflow-hidden">
+            <p class="text-[10px] font-semibold text-gray-500 truncate">
+              Cuaca
+            </p>
+            <p
+              class="text-base font-bold text-brand-green truncate w-full"
+              title="Berawan"
+            >
+              Berawan
+            </p>
           </div>
         </div>
         <div
-          class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-3"
+          class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-2"
         >
-          <div class="text-blue-400 text-3xl opacity-80">
+          <div class="text-blue-400 text-2xl opacity-80">
             <i class="fa-solid fa-cloud-rain"></i>
           </div>
-          <div>
-            <p class="text-[11px] font-semibold text-gray-500">Peluang Hujan</p>
-            <p class="text-lg font-bold text-brand-green">35%</p>
+          <div class="overflow-hidden">
+            <p class="text-[10px] font-semibold text-gray-500 truncate">
+              Peluang Hujan
+            </p>
+            <p class="text-base font-bold text-brand-green">35%</p>
           </div>
         </div>
       </div>
 
-      <!-- Area Tengah (Grafik Besar & Kecil) -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        <div
-          class="lg:col-span-2 bg-white rounded-xl border border-gray-200 shadow-sm p-6 flex flex-col"
-        >
-          <div class="flex justify-between items-center mb-6">
-            <h3 class="font-bold text-gray-800">Grafik Kbedeng 24 Jam</h3>
-            <div class="flex space-x-4 text-[10px] font-medium text-gray-500">
-              <span class="flex items-center"
-                ><span class="w-3 h-0.5 bg-blue-500 mr-1"></span> Kbedeng
-                (%)</span
-              >
-              <span class="flex items-center"
-                ><span
-                  class="w-3 h-0.5 border-t border-dashed border-red-500 mr-1"
-                ></span>
-                Batas Siram (45%)</span
-              >
-              <span class="flex items-center"
-                ><span
-                  class="w-3 h-0.5 border-t border-dashed border-brand-green mr-1"
-                ></span>
-                Batas Stop (80%)</span
-              >
-            </div>
-          </div>
-          <div
-            class="flex-1 bg-white relative w-full min-h-[250px] border-l border-b border-gray-300"
+      <div
+        class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-6"
+      >
+        <h3 class="font-bold text-gray-800 text-sm mb-2">Keputusan Terakhir</h3>
+        <p class="text-xs md:text-sm text-gray-600 mb-4">
+          Pompa OFF karena Kbedeng masih di atas batas siram 45%.
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <a
+            href="monitoring.html"
+            class="inline-flex items-center space-x-2 bg-brand-green hover:bg-green-800 text-white text-xs md:text-sm font-medium py-2 px-4 rounded-lg transition-colors"
+            ><i class="fa-solid fa-chart-line"></i><span>Monitoring</span></a
           >
-            <div
-              class="absolute w-full left-0 top-[20%] border-t border-dashed border-brand-green"
-            ></div>
-            <div
-              class="absolute w-full left-0 top-[65%] border-t border-dashed border-red-500"
-            ></div>
-            <svg
-              class="absolute w-full h-full"
-              preserveAspectRatio="none"
-              viewBox="0 0 100 100"
-            >
-              <polyline
-                fill="none"
-                stroke="#3b82f6"
-                stroke-width="1.5"
-                points="0,50 10,45 20,60 30,65 40,55 50,60 60,45 70,50 80,45 90,30 100,10"
-              />
-            </svg>
-            <div class="absolute -left-6 top-0 text-[10px] text-gray-400">
-              100
-            </div>
-            <div class="absolute -left-5 top-[45%] text-[10px] text-gray-400">
-              50
-            </div>
-            <div class="absolute -left-3 bottom-0 text-[10px] text-gray-400">
-              0
-            </div>
-            <div
-              class="absolute left-0 -bottom-5 w-full flex justify-between text-[10px] text-gray-400"
-            >
-              <span>12:00</span><span>15:00</span><span>18:00</span
-              ><span>21:00</span><span>00:00</span><span>03:00</span
-              ><span>06:00</span><span>09:00</span><span>12:00</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="lg:col-span-1 flex flex-col gap-6">
-          <div
-            class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 flex-1"
+          <a
+            href="riwayat-data.html"
+            class="inline-flex items-center space-x-2 bg-white border-2 border-brand-green text-brand-green hover:bg-brand-light text-xs md:text-sm font-medium py-1.5 px-4 rounded-lg transition-colors"
+            ><i class="fa-regular fa-file-lines"></i
+            ><span>Riwayat Data</span></a
           >
-            <div class="flex justify-between items-center mb-4">
-              <h3 class="font-bold text-gray-800 text-sm">
-                Status Pompa ON/OFF
-              </h3>
-              <div class="flex space-x-2 text-[10px] font-medium text-gray-500">
-                <span class="flex items-center"
-                  ><span class="w-2 h-2 bg-brand-green rounded-sm mr-1"></span>
-                  ON</span
-                >
-                <span class="flex items-center"
-                  ><span class="w-2 h-2 bg-red-400 rounded-sm mr-1"></span>
-                  OFF</span
-                >
-              </div>
-            </div>
-            <div
-              class="relative w-full h-[120px] border-l border-b border-gray-300 mt-4"
-            >
-              <div class="absolute -left-5 top-0 text-[10px] text-gray-400">
-                ON
-              </div>
-              <div class="absolute -left-6 bottom-0 text-[10px] text-gray-400">
-                OFF
-              </div>
-              <svg
-                class="absolute w-full h-full"
-                preserveAspectRatio="none"
-                viewBox="0 0 100 100"
-              >
-                <polyline
-                  fill="none"
-                  stroke="#287930"
-                  stroke-width="1.5"
-                  points="0,95 20,95 20,5 35,5 35,95 50,95 50,5 65,5 65,95 70,95"
-                />
-                <polyline
-                  fill="none"
-                  stroke="#f87171"
-                  stroke-width="1.5"
-                  points="70,95 75,95 75,50 80,50 80,95 100,95"
-                />
-              </svg>
-              <div
-                class="absolute left-0 -bottom-5 w-full flex justify-between text-[10px] text-gray-400"
-              >
-                <span>12:00</span><span>18:00</span><span>00:00</span
-                ><span>06:00</span><span>12:00</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-            <h3 class="font-bold text-gray-800 text-sm mb-4">
-              Kelembapan per Zona
-            </h3>
-            <div class="flex justify-between items-center">
-              <div class="flex flex-col items-center">
-                <div
-                  class="relative w-14 h-14 circle-progress"
-                  style="--progress: 51%"
-                >
-                  <div
-                    class="absolute z-10 flex items-center justify-center font-bold text-gray-700 text-sm"
-                  >
-                    51%
-                  </div>
-                </div>
-                <p class="text-[10px] text-gray-500 mt-2">Zona 1</p>
-              </div>
-              <div class="flex flex-col items-center">
-                <div
-                  class="relative w-14 h-14 circle-progress"
-                  style="--progress: 48%"
-                >
-                  <div
-                    class="absolute z-10 flex items-center justify-center font-bold text-gray-700 text-sm"
-                  >
-                    48%
-                  </div>
-                </div>
-                <p class="text-[10px] text-gray-500 mt-2">Zona 2</p>
-              </div>
-              <div class="flex flex-col items-center">
-                <div
-                  class="relative w-14 h-14 circle-progress"
-                  style="--progress: 56%"
-                >
-                  <div
-                    class="absolute z-10 flex items-center justify-center font-bold text-gray-700 text-sm"
-                  >
-                    56%
-                  </div>
-                </div>
-                <p class="text-[10px] text-gray-500 mt-2">Zona 3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Area Bawah (Aktivitas & Status Sistem) -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-4">
-        <div
-          class="lg:col-span-2 bg-white rounded-xl border border-gray-200 shadow-sm p-6"
-        >
-          <h3 class="font-bold text-gray-800 mb-4">Aktivitas Terbaru</h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left">
-              <thead>
-                <tr class="text-gray-800 border-b border-gray-200">
-                  <th class="pb-3 font-semibold">Waktu</th>
-                  <th class="pb-3 font-semibold">Status</th>
-                  <th class="pb-3 font-semibold">Keterangan</th>
-                </tr>
-              </thead>
-              <tbody class="text-gray-600">
-                <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 text-xs">22 Mei 2026 11:45:10</td>
-                  <td class="py-3">
-                    <span
-                      class="bg-green-100 text-brand-green px-2 py-0.5 rounded text-[10px] font-bold tracking-wider"
-                      >INFO</span
-                    >
-                  </td>
-                  <td class="py-3 text-xs">
-                    Pompa dimatikan otomatis (Kbedeng ≥ Batas Stop 80%)
-                  </td>
-                </tr>
-                <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 text-xs">22 Mei 2026 09:12:33</td>
-                  <td class="py-3">
-                    <span
-                      class="bg-blue-100 text-blue-600 px-2 py-0.5 rounded text-[10px] font-bold tracking-wider"
-                      >DATA</span
-                    >
-                  </td>
-                  <td class="py-3 text-xs">Data sensor diterima dari Node 2</td>
-                </tr>
-                <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 text-xs">22 Mei 2026 06:05:21</td>
-                  <td class="py-3">
-                    <span
-                      class="bg-green-100 text-brand-green px-2 py-0.5 rounded text-[10px] font-bold tracking-wider"
-                      >INFO</span
-                    >
-                  </td>
-                  <td class="py-3 text-xs">
-                    Pompa dinyalakan otomatis (Kbedeng ≤ Batas Siram 45%)
-                  </td>
-                </tr>
-                <tr class="hover:bg-gray-50">
-                  <td class="py-3 text-xs">22 Mei 2026 05:59:02</td>
-                  <td class="py-3">
-                    <span
-                      class="bg-blue-100 text-blue-600 px-2 py-0.5 rounded text-[10px] font-bold tracking-wider"
-                      >DATA</span
-                    >
-                  </td>
-                  <td class="py-3 text-xs">Data sensor diterima dari Node 1</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div
-          class="lg:col-span-1 bg-white rounded-xl border border-gray-200 shadow-sm p-6"
-        >
-          <h3 class="font-bold text-gray-800 mb-5">Status Sistem</h3>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="flex flex-col space-y-1">
-              <div
-                class="flex items-center text-sm font-semibold text-gray-700 mb-1"
-              >
-                <i class="fa-solid fa-satellite-dish text-brand-green mr-2"></i>
-                Node 1
-              </div>
-              <div class="flex items-center text-xs text-gray-500">
-                <div class="w-2 h-2 bg-brand-green rounded-full mr-2"></div>
-                Online
-              </div>
-            </div>
-            <div class="flex flex-col space-y-1">
-              <div
-                class="flex items-center text-sm font-semibold text-gray-700 mb-1"
-              >
-                <i class="fa-solid fa-satellite-dish text-brand-green mr-2"></i>
-                Node 2
-              </div>
-              <div class="flex items-center text-xs text-gray-500">
-                <div class="w-2 h-2 bg-brand-green rounded-full mr-2"></div>
-                Online
-              </div>
-            </div>
-            <div class="flex flex-col space-y-1 mt-2">
-              <div
-                class="flex items-center text-sm font-semibold text-gray-700 mb-1"
-              >
-                <i class="fa-solid fa-satellite-dish text-brand-green mr-2"></i>
-                Node 3
-              </div>
-              <div class="flex items-center text-xs text-gray-500">
-                <div class="w-2 h-2 bg-brand-green rounded-full mr-2"></div>
-                Online
-              </div>
-            </div>
-            <div class="flex flex-col space-y-1 mt-2">
-              <div
-                class="flex items-center text-sm font-semibold text-gray-700 mb-1"
-              >
-                <i class="fa-solid fa-wifi text-brand-green mr-2"></i> Gateway
-              </div>
-              <div class="flex items-center text-xs text-gray-500">
-                <div class="w-2 h-2 bg-brand-green rounded-full mr-2"></div>
-                Online
-              </div>
-            </div>
-            <div
-              class="flex flex-col space-y-1 mt-2 col-span-2 border-t border-gray-100 pt-3"
-            >
-              <div
-                class="flex items-center text-sm font-semibold text-gray-700 mb-1"
-              >
-                <i class="fa-solid fa-database text-yellow-500 mr-2"></i>
-                Firebase
-              </div>
-              <div class="flex items-center text-xs text-gray-500">
-                <div class="w-2 h-2 bg-brand-green rounded-full mr-2"></div>
-                Online
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </main>
+
+    <!-- BOTTOM NAVIGATION (Khusus Mobile/HP) -->
+    <nav
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-4 h-16 z-50"
+    >
+      <a
+        href="dashboard.html"
+        class="flex flex-col items-center text-brand-green w-1/5"
+        ><i class="fa-solid fa-house text-xl mb-1"></i
+        ><span class="text-[9px] font-semibold">Home</span></a
+      >
+      <a
+        href="monitoring.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-chart-simple text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Monitor</span></a
+      >
+      <a
+        href="riwayat-data.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-clock-rotate-left text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Riwayat</span></a
+      >
+      <a
+        href="kontrol-manual.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-faucet-drip text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Kontrol</span></a
+      >
+      <a
+        href="sistem.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-server text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Sistem</span></a
+      >
+    </nav>
   </body>
 </html>
