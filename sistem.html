@@ -15,6 +15,7 @@
   <body
     class="bg-[#f4f7f4] flex h-screen overflow-hidden font-sans text-gray-800"
   >
+    <!-- ==================== SIDEBAR ==================== -->
     <aside
       class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between flex-shrink-0 relative overflow-hidden"
     >
@@ -90,8 +91,9 @@
       </div>
     </aside>
 
+    <!-- ==================== KONTEN UTAMA ==================== -->
     <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
-      <!-- HEADER DENGAN DROPDOWN -->
+      <!-- HEADER DENGAN DROPDOWN USER -->
       <header
         class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-30"
       >
@@ -164,6 +166,7 @@
         </div>
       </header>
 
+      <!-- 7 KARTU PERANGKAT -->
       <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3 mb-6">
         <div
           class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex flex-col items-center text-center relative"
@@ -264,8 +267,174 @@
           <p class="text-[10px] text-red-500">Mati</p>
         </div>
       </div>
+
+      <!-- AREA TENGAH: WAKTU, JARINGAN, PERANGKAT YANG TERHAPUS -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <!-- Waktu Data Terakhir -->
+        <div
+          class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-center"
+        >
+          <div class="flex items-center space-x-3 mb-3">
+            <i class="fa-regular fa-clock text-xl text-gray-400"></i>
+            <h3 class="font-bold text-gray-800 text-sm">Waktu Data Terakhir</h3>
+          </div>
+          <p class="text-xl font-bold text-gray-800">22 Mei 2026 05:59:02</p>
+          <p class="text-xs text-gray-400 mt-1">(WIB)</p>
+        </div>
+
+        <!-- Informasi Jaringan -->
+        <div
+          class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-center"
+        >
+          <div class="flex items-center space-x-3 mb-4">
+            <i class="fa-solid fa-wifi text-xl text-gray-400"></i>
+            <h3 class="font-bold text-gray-800 text-sm">Informasi Jaringan</h3>
+          </div>
+          <div class="space-y-1 text-sm">
+            <p class="text-gray-500 flex justify-between">
+              <span>SSID</span>
+              <span class="font-bold text-gray-800">: IRIGASI_TOMAT</span>
+            </p>
+            <p class="text-gray-500 flex justify-between">
+              <span>IP</span>
+              <span class="font-bold text-gray-800">: 192.168.4.1</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Informasi Perangkat -->
+        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+          <div class="flex items-center space-x-3 mb-4">
+            <i class="fa-solid fa-microchip text-xl text-gray-400"></i>
+            <h3 class="font-bold text-gray-800 text-sm">Informasi Perangkat</h3>
+          </div>
+          <div class="space-y-2 text-xs text-gray-600">
+            <p class="flex justify-between">
+              <span>Perangkat</span>
+              <span class="font-bold text-gray-800">: ESP32-C3 Mini</span>
+            </p>
+            <p class="flex justify-between">
+              <span>Node</span>
+              <span class="font-bold text-gray-800">: 3 Node</span>
+            </p>
+            <p class="flex justify-between">
+              <span>Sensor</span>
+              <span class="font-bold text-gray-800">: 6 Sensor</span>
+            </p>
+            <p class="flex justify-between">
+              <span>Relay</span>
+              <span class="font-bold text-gray-800">: 1 Channel</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- AREA BAWAH: TABEL GPIO & INFO YANG TERHAPUS -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <!-- Tabel Konfigurasi GPIO -->
+        <div
+          class="lg:col-span-2 bg-white rounded-xl border border-gray-200 shadow-sm flex flex-col"
+        >
+          <div class="p-5 border-b border-gray-100">
+            <h3 class="font-bold text-gray-800">
+              Konfigurasi Pin GPIO
+              <span class="text-xs font-normal text-gray-400">(Read-Only)</span>
+            </h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left border-collapse">
+              <thead
+                class="bg-gray-50 border-b border-gray-200 text-gray-600 text-xs"
+              >
+                <tr>
+                  <th class="py-3 px-5 font-semibold">Perangkat</th>
+                  <th class="py-3 px-5 font-semibold">Komponen</th>
+                  <th class="py-3 px-5 font-semibold">Pin GPIO</th>
+                  <th class="py-3 px-5 font-semibold">Keterangan</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-600 text-xs">
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5 font-medium">Node 1</td>
+                  <td class="py-3 px-5">Sensor S1</td>
+                  <td class="py-3 px-5 font-semibold">GPIO0</td>
+                  <td class="py-3 px-5">Input ADC</td>
+                </tr>
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5 font-medium">Node 1</td>
+                  <td class="py-3 px-5">Sensor S2</td>
+                  <td class="py-3 px-5 font-semibold">GPIO1</td>
+                  <td class="py-3 px-5">Input ADC</td>
+                </tr>
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5 font-medium">Node 2</td>
+                  <td class="py-3 px-5">Sensor S3</td>
+                  <td class="py-3 px-5 font-semibold">GPIO0</td>
+                  <td class="py-3 px-5">Input ADC</td>
+                </tr>
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5 font-medium">Node 2</td>
+                  <td class="py-3 px-5">Sensor S4</td>
+                  <td class="py-3 px-5 font-semibold">GPIO1</td>
+                  <td class="py-3 px-5">Input ADC</td>
+                </tr>
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5 font-medium">Node 3</td>
+                  <td class="py-3 px-5">Sensor S5</td>
+                  <td class="py-3 px-5 font-semibold">GPIO0</td>
+                  <td class="py-3 px-5">Input ADC</td>
+                </tr>
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5 font-medium">Node 3</td>
+                  <td class="py-3 px-5">Sensor S6</td>
+                  <td class="py-3 px-5 font-semibold">GPIO1</td>
+                  <td class="py-3 px-5">Input ADC</td>
+                </tr>
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5 font-medium">Gateway</td>
+                  <td class="py-3 px-5">Relay 1 Channel</td>
+                  <td class="py-3 px-5 font-semibold">GPIO2</td>
+                  <td class="py-3 px-5">Output kontrol relay</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-3 px-5 font-medium">Gateway</td>
+                  <td class="py-3 px-5">WiFi Internal ESP32-C3</td>
+                  <td class="py-3 px-5 font-semibold">-</td>
+                  <td class="py-3 px-5">Komunikasi data</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Informasi Read-Only -->
+        <div
+          class="lg:col-span-1 bg-[#ebf3fc] rounded-xl border border-blue-100 p-6 flex flex-col justify-between relative overflow-hidden h-max"
+        >
+          <i
+            class="fa-solid fa-lock absolute -bottom-6 -right-6 text-8xl text-blue-200 opacity-30"
+          ></i>
+          <div class="relative z-10">
+            <div class="flex items-center space-x-3 mb-4">
+              <div
+                class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-lg"
+              >
+                <i class="fa-solid fa-info"></i>
+              </div>
+              <h3 class="font-bold text-blue-800">
+                Konfigurasi pin bersifat read-only.
+              </h3>
+            </div>
+            <p class="text-xs text-blue-700 leading-relaxed">
+              Perubahan pin hanya dapat dilakukan melalui firmware, bukan dari
+              dashboard.
+            </p>
+          </div>
+        </div>
+      </div>
     </main>
 
+    <!-- NAVIGASI BAWAH (MOBILE) -->
     <nav
       class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-2 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
     >
