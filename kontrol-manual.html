@@ -92,13 +92,19 @@
     </aside>
 
     <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
-      <!-- HEADER DENGAN DROPDOWN -->
+      <!-- HEADER -->
       <header
         class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-30"
       >
         <div>
           <h2 class="text-xl md:text-2xl font-bold text-gray-800">
             Kontrol Manual
+            <span class="text-gray-400 font-normal text-sm md:text-lg mx-2"
+              >/</span
+            >
+            <span class="text-gray-500 font-medium text-sm md:text-lg"
+              >Override Pompa</span
+            >
           </h2>
         </div>
         <div class="relative w-full md:w-auto flex justify-end">
@@ -167,103 +173,258 @@
       </header>
 
       <div
-        class="bg-white rounded-xl border border-gray-200 shadow-sm p-4 mb-4 flex justify-between items-center"
+        class="bg-white rounded-xl border border-gray-200 shadow-sm p-4 mb-4 flex flex-col md:flex-row justify-between items-center gap-4"
       >
+        <h3 class="font-bold text-gray-800 ml-2 hidden md:block">
+          Mode Kontrol
+        </h3>
         <div
-          class="flex space-x-2 bg-gray-50 p-1 rounded-lg border border-gray-100 w-full"
+          class="flex space-x-2 bg-gray-50 p-1 rounded-lg border border-gray-100 w-full md:w-auto"
         >
           <button
             id="btn-mode-otomatis"
             onclick="setMode('otomatis')"
-            class="flex-1 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm transition-all duration-300"
+            class="flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm transition-all duration-300"
           >
             <i class="fa-solid fa-robot"></i><span>Otomatis</span>
           </button>
           <button
             id="btn-mode-manual"
             onclick="setMode('manual')"
-            class="flex-1 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm transition-all duration-300"
+            class="flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm transition-all duration-300"
           >
             <i class="fa-solid fa-hand-pointer"></i><span>Manual</span>
           </button>
         </div>
       </div>
 
-      <div class="mb-6">
-        <h3 class="font-bold text-gray-800 text-sm mb-3">Durasi Override</h3>
-        <div class="flex flex-wrap gap-2 items-center">
-          <button
-            id="dur-5"
-            onclick="selectDuration('dur-5')"
-            class="duration-btn bg-white border border-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm transition-colors shadow-sm"
-          >
-            5 mnt
-          </button>
-          <button
-            id="dur-10"
-            onclick="selectDuration('dur-10')"
-            class="duration-btn bg-white border border-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm transition-colors shadow-sm"
-          >
-            10 mnt
-          </button>
-          <button
-            id="dur-15"
-            onclick="selectDuration('dur-15')"
-            class="duration-btn bg-white border border-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm transition-colors shadow-sm"
-          >
-            15 mnt
-          </button>
+      <div
+        class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 mb-6 flex flex-col md:flex-row items-center justify-between gap-6"
+      >
+        <div class="flex items-center space-x-4 w-full md:w-auto">
           <div
-            class="flex items-center space-x-2 bg-white border border-gray-200 rounded-lg shadow-sm px-2 py-1 duration-custom-container"
-            id="dur-custom-container"
+            class="w-16 h-16 bg-green-50 text-brand-green rounded-full flex items-center justify-center text-3xl"
           >
-            <input
-              type="number"
-              id="custom-dur"
-              placeholder="0"
-              class="w-12 text-center text-sm font-bold text-gray-800 outline-none"
-              oninput="selectCustomDuration()"
-            />
-            <span class="text-xs text-gray-500 font-medium pr-1">mnt</span>
+            <i class="fa-solid fa-water"></i>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-gray-500 mb-1">Status Pompa</p>
+            <h2
+              class="text-3xl font-bold text-brand-green mb-1"
+              id="teks-status-pompa"
+            >
+              POMPA OFF
+            </h2>
+            <p class="text-xs text-gray-500" id="teks-desc-pompa">
+              Sistem dalam mode manual
+            </p>
+          </div>
+        </div>
+        <div class="flex space-x-3 w-full md:w-auto">
+          <button
+            id="btn-pompa-on"
+            class="flex-1 md:w-40 flex items-center justify-center space-x-2 py-4 rounded-xl font-bold text-white transition-all duration-300 shadow-sm"
+          >
+            <i class="fa-solid fa-play"></i><span>Pompa ON</span>
+          </button>
+          <button
+            id="btn-pompa-off"
+            class="flex-1 md:w-40 flex items-center justify-center space-x-2 py-4 rounded-xl font-bold text-white transition-all duration-300 shadow-sm"
+          >
+            <i class="fa-solid fa-stop"></i><span>Pompa OFF</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div>
+          <h3 class="font-bold text-gray-800 text-sm mb-3">Durasi Override</h3>
+          <div class="flex flex-wrap gap-2 items-center">
+            <button
+              id="dur-5"
+              onclick="selectDuration('dur-5')"
+              class="duration-btn bg-white border border-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm transition-colors shadow-sm"
+            >
+              5 mnt
+            </button>
+            <button
+              id="dur-10"
+              onclick="selectDuration('dur-10')"
+              class="duration-btn bg-white border border-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm transition-colors shadow-sm"
+            >
+              10 mnt
+            </button>
+            <button
+              id="dur-15"
+              onclick="selectDuration('dur-15')"
+              class="duration-btn bg-white border border-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm transition-colors shadow-sm"
+            >
+              15 mnt
+            </button>
+            <div
+              class="flex items-center space-x-2 bg-white border border-gray-200 rounded-lg shadow-sm px-2 py-1 duration-custom-container"
+              id="dur-custom-container"
+            >
+              <input
+                type="number"
+                id="custom-dur"
+                placeholder="0"
+                class="w-12 text-center text-sm font-bold text-gray-800 outline-none bg-transparent"
+                oninput="selectCustomDuration()"
+              />
+              <span class="text-xs text-gray-500 font-medium pr-1">mnt</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-bold text-gray-800 text-sm mb-3">Alasan Override</h3>
+          <div class="flex flex-wrap gap-2">
+            <button
+              id="rsn-1"
+              onclick="selectReason('rsn-1')"
+              class="reason-btn flex items-center space-x-2 bg-white border border-gray-200 text-gray-600 px-3 py-2 rounded-lg text-sm transition-all shadow-sm"
+            >
+              <i class="fa-solid fa-wrench text-brand-green"></i
+              ><span class="truncate">Kalibrasi Debit</span>
+            </button>
+            <button
+              id="rsn-2"
+              onclick="selectReason('rsn-2')"
+              class="reason-btn flex items-center space-x-2 bg-white border border-gray-200 text-gray-600 px-3 py-2 rounded-lg text-sm transition-all shadow-sm"
+            >
+              <i class="fa-solid fa-droplet text-blue-500"></i
+              ><span class="truncate">Siram Ekstra</span>
+            </button>
           </div>
         </div>
       </div>
 
-      <div class="mb-6">
-        <h3 class="font-bold text-gray-800 text-sm mb-3">Alasan Override</h3>
-        <div class="flex flex-wrap gap-2">
-          <button
-            id="rsn-1"
-            onclick="selectReason('rsn-1')"
-            class="reason-btn flex items-center space-x-2 bg-white border border-gray-200 text-gray-600 px-3 py-2 rounded-lg text-sm transition-all shadow-sm"
-          >
-            <i class="fa-solid fa-wrench text-brand-green"></i
-            ><span class="truncate">Kalibrasi Debit</span>
-          </button>
-          <button
-            id="rsn-2"
-            onclick="selectReason('rsn-2')"
-            class="reason-btn flex items-center space-x-2 bg-white border border-gray-200 text-gray-600 px-3 py-2 rounded-lg text-sm transition-all shadow-sm"
-          >
-            <i class="fa-solid fa-droplet text-blue-500"></i
-            ><span class="truncate">Siram Ekstra</span>
-          </button>
-        </div>
-      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <div
+          class="lg:col-span-2 bg-white rounded-xl border border-gray-200 shadow-sm flex flex-col"
+        >
+          <div class="p-5 border-b border-gray-100">
+            <h3 class="font-bold text-gray-800">Riwayat Override Manual</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+              <thead
+                class="bg-gray-50 border-b border-gray-200 text-gray-600 text-xs"
+              >
+                <tr>
+                  <th class="py-3 px-5 font-semibold whitespace-nowrap">
+                    Waktu
+                  </th>
+                  <th class="py-3 px-5 font-semibold whitespace-nowrap">
+                    Aksi
+                  </th>
+                  <th class="py-3 px-5 font-semibold whitespace-nowrap">
+                    Durasi
+                  </th>
+                  <th class="py-3 px-5 font-semibold whitespace-nowrap">
+                    Alasan
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-600 text-xs">
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5 whitespace-nowrap">
+                    22 Mei 2026 14:10:32
+                  </td>
+                  <td class="py-3 px-5 font-bold text-brand-green">Pompa ON</td>
+                  <td class="py-3 px-5">10 menit</td>
+                  <td class="py-3 px-5">Kalibrasi Debit Air</td>
+                </tr>
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5 whitespace-nowrap">
+                    21 Mei 2026 16:22:18
+                  </td>
+                  <td class="py-3 px-5 font-bold text-red-500">Pompa OFF</td>
+                  <td class="py-3 px-5">5 menit</td>
+                  <td class="py-3 px-5">Pemupukan</td>
+                </tr>
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5 whitespace-nowrap">
+                    20 Mei 2026 09:05:44
+                  </td>
+                  <td class="py-3 px-5 font-bold text-brand-green">Pompa ON</td>
+                  <td class="py-3 px-5">15 menit</td>
+                  <td class="py-3 px-5">Siram Ekstra</td>
+                </tr>
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-5 whitespace-nowrap">
+                    19 Mei 2026 17:30:11
+                  </td>
+                  <td class="py-3 px-5 font-bold text-red-500">Pompa OFF</td>
+                  <td class="py-3 px-5">10 menit</td>
+                  <td class="py-3 px-5">Kalibrasi Debit Air</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-3 px-5 whitespace-nowrap">
+                    18 Mei 2026 11:12:03
+                  </td>
+                  <td class="py-3 px-5 font-bold text-brand-green">Pompa ON</td>
+                  <td class="py-3 px-5">5 menit</td>
+                  <td class="py-3 px-5">Pemupukan</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-      <div class="flex space-x-3 w-full">
-        <button
-          id="btn-pompa-on"
-          class="flex-1 py-4 rounded-xl font-bold text-white transition-all duration-300 shadow-sm"
+          <!-- PENAMBAHAN PAGINATION (Scroll Bar Halaman) -->
+          <div
+            class="px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center bg-gray-50 rounded-b-xl gap-4"
+          >
+            <span class="text-xs text-gray-500"
+              >Menampilkan 1 - 5 dari 12 data</span
+            >
+            <div class="flex items-center space-x-1">
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-500 hover:bg-white transition-colors"
+              >
+                <i class="fa-solid fa-chevron-left text-xs"></i>
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded border border-brand-green bg-brand-green text-white font-medium text-sm transition-colors"
+              >
+                1
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-600 hover:bg-white transition-colors"
+              >
+                2
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-600 hover:bg-white transition-colors"
+              >
+                3
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-500 hover:bg-white transition-colors"
+              >
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Catatan Keselamatan -->
+        <div
+          class="lg:col-span-1 bg-yellow-50 rounded-xl border border-yellow-200 shadow-sm p-6 flex flex-col h-max"
         >
-          <i class="fa-solid fa-play mr-2"></i>Pompa ON
-        </button>
-        <button
-          id="btn-pompa-off"
-          class="flex-1 py-4 rounded-xl font-bold text-white transition-all duration-300 shadow-sm"
-        >
-          <i class="fa-solid fa-stop mr-2"></i>Pompa OFF
-        </button>
+          <div class="flex items-center space-x-3 mb-4">
+            <div
+              class="w-8 h-8 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center"
+            >
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 class="font-bold text-yellow-800">Catatan Keselamatan</h3>
+          </div>
+          <p class="text-sm text-yellow-700 leading-relaxed">
+            Kontrol manual bersifat sementara dan akan otomatis kembali ke mode
+            otomatis setelah durasi berakhir.
+          </p>
+        </div>
       </div>
     </main>
 
@@ -292,7 +453,13 @@
         href="kontrol-manual.html"
         class="flex flex-col items-center text-brand-green w-1/5"
         ><i class="fa-solid fa-faucet-drip text-xl mb-1"></i
-        ><span class="text-[9px] font-semibold">Kontrol</span></a
+        ><span class="text-[9px] font-bold">Kontrol</span></a
+      >
+      <a
+        href="pengaturan.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-gear text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Atur</span></a
       >
       <a
         href="sistem.html"
@@ -315,6 +482,7 @@
         const btnManual = document.getElementById("btn-mode-manual");
         const btnPumpOn = document.getElementById("btn-pompa-on");
         const btnPumpOff = document.getElementById("btn-pompa-off");
+        const teksDesc = document.getElementById("teks-desc-pompa");
         const durBtns = document.querySelectorAll(".duration-btn");
         const rsnBtns = document.querySelectorAll(".reason-btn");
         const customInput = document.getElementById("custom-dur");
@@ -322,13 +490,14 @@
 
         if (mode === "otomatis") {
           btnAuto.className =
-            "flex-1 flex items-center justify-center space-x-2 py-2 rounded-md font-bold text-sm bg-brand-green text-white shadow-sm transition-all";
+            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-bold text-sm bg-brand-green text-white shadow-sm transition-all";
           btnManual.className =
-            "flex-1 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm text-gray-500 hover:bg-gray-100 transition-all";
+            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm text-gray-500 hover:bg-gray-100 transition-all";
+          teksDesc.innerText = "Sistem dikendalikan otomatis";
           btnPumpOn.className =
-            "flex-1 py-4 rounded-xl font-bold text-gray-400 bg-gray-200 cursor-not-allowed transition-all";
+            "flex-1 md:w-40 py-4 rounded-xl font-bold text-gray-400 bg-gray-200 cursor-not-allowed transition-all flex justify-center items-center";
           btnPumpOff.className =
-            "flex-1 py-4 rounded-xl font-bold text-gray-400 bg-gray-200 cursor-not-allowed transition-all";
+            "flex-1 md:w-40 py-4 rounded-xl font-bold text-gray-400 bg-gray-200 cursor-not-allowed transition-all flex justify-center items-center";
           customInput.disabled = true;
           customContainer.classList.add(
             "bg-gray-100",
@@ -347,13 +516,14 @@
           );
         } else {
           btnManual.className =
-            "flex-1 flex items-center justify-center space-x-2 py-2 rounded-md font-bold text-sm bg-brand-green text-white shadow-sm transition-all";
+            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-bold text-sm bg-brand-green text-white shadow-sm transition-all";
           btnAuto.className =
-            "flex-1 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm text-gray-500 hover:bg-gray-100 transition-all";
+            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm text-gray-500 hover:bg-gray-100 transition-all";
+          teksDesc.innerText = "Sistem dalam mode kontrol manual";
           btnPumpOn.className =
-            "flex-1 py-4 rounded-xl font-bold text-white bg-brand-green hover:bg-green-800 shadow-sm transition-all";
+            "flex-1 md:w-40 py-4 rounded-xl font-bold text-white bg-brand-green hover:bg-green-800 shadow-sm transition-all flex justify-center items-center";
           btnPumpOff.className =
-            "flex-1 py-4 rounded-xl font-bold text-white bg-red-500 hover:bg-red-600 shadow-sm transition-all";
+            "flex-1 md:w-40 py-4 rounded-xl font-bold text-white bg-red-500 hover:bg-red-600 shadow-sm transition-all flex justify-center items-center";
           customInput.disabled = false;
           customContainer.classList.remove(
             "bg-gray-100",
@@ -425,7 +595,6 @@
           .getElementById(id)
           .classList.add("border-brand-green", "bg-brand-light");
       }
-      // Script Dropdown
       function toggleDropdown() {
         document.getElementById("userDropdown").classList.toggle("hidden");
       }

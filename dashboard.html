@@ -108,7 +108,6 @@
     </aside>
 
     <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
-      <!-- HEADER DENGAN DROPDOWN USER -->
       <header class="flex justify-between items-center mb-6 relative z-30">
         <div>
           <h2 class="text-xl md:text-2xl font-bold text-gray-800">
@@ -120,7 +119,6 @@
         </div>
 
         <div class="relative">
-          <!-- Card User (Bisa diklik) -->
           <button
             onclick="toggleDropdown()"
             class="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-sm focus:outline-none hover:bg-brand-light transition-colors"
@@ -131,7 +129,6 @@
               <i class="fa-solid fa-user text-xs"></i>
             </div>
             <div class="text-left pr-1">
-              <!-- Tulisan 'User' dimunculkan agar tidak kosong -->
               <p class="font-bold text-gray-800 text-xs">User</p>
               <p class="text-[9px] text-gray-500 hidden sm:block">
                 Pengguna Sistem
@@ -142,7 +139,6 @@
             ></i>
           </button>
 
-          <!-- Menu Dropdown Keluar & Contact Service -->
           <div
             id="userDropdown"
             class="hidden absolute right-0 mt-2 w-64 bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden"
@@ -309,38 +305,45 @@
       </div>
     </main>
 
+    <!-- NAVIGASI BAWAH MOBILE (REVISI: Menambahkan Pengaturan/Atur dengan 6 item flex-1) -->
     <nav
-      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-4 h-16 z-50"
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-2 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
     >
       <a
         href="dashboard.html"
-        class="flex flex-col items-center text-brand-green w-1/5"
-        ><i class="fa-solid fa-house text-xl mb-1"></i
-        ><span class="text-[9px] font-semibold">Home</span></a
+        class="flex flex-col items-center flex-1 text-brand-green"
+        ><i class="fa-solid fa-house text-lg mb-1"></i
+        ><span class="text-[8px] font-bold">Home</span></a
       >
       <a
         href="monitoring.html"
-        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
-        ><i class="fa-solid fa-chart-simple text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Monitor</span></a
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-chart-simple text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Monitor</span></a
       >
       <a
         href="riwayat-data.html"
-        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
-        ><i class="fa-solid fa-clock-rotate-left text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Riwayat</span></a
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-clock-rotate-left text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Riwayat</span></a
       >
       <a
         href="kontrol-manual.html"
-        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
-        ><i class="fa-solid fa-faucet-drip text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Kontrol</span></a
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-faucet-drip text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Kontrol</span></a
+      >
+      <a
+        href="pengaturan.html"
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-gear text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Atur</span></a
       >
       <a
         href="sistem.html"
-        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
-        ><i class="fa-solid fa-server text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Sistem</span></a
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-server text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Sistem</span></a
       >
     </nav>
 
