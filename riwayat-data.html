@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Riwayat Data - Irigasi Tomat</title>
-    <!-- CSS & JS Terpisah -->
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="stylesheet"
@@ -16,14 +15,12 @@
   <body
     class="bg-[#f4f7f4] flex h-screen overflow-hidden font-sans text-gray-800"
   >
-    <!-- ==================== SIDEBAR ==================== -->
     <aside
-      class="w-64 bg-white border-r border-gray-200 flex flex-col justify-between hidden md:flex flex-shrink-0 relative overflow-hidden"
+      class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between flex-shrink-0 relative overflow-hidden"
     >
       <i
         class="fa-solid fa-seedling absolute -bottom-10 -left-10 text-9xl text-brand-light opacity-40 z-0 transform -rotate-12"
       ></i>
-
       <div class="relative z-10">
         <div
           class="py-8 px-6 flex items-center space-x-3 border-b border-gray-100 mb-6"
@@ -42,54 +39,45 @@
             </p>
           </div>
         </div>
-
-        <!-- RUTE SIDEBAR SUDAH DISINKRONKAN -->
         <nav class="flex flex-col space-y-1 pr-4">
           <a
             href="dashboard.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-house w-5 text-center"></i
+            ><span>Dashboard</span></a
           >
-            <i class="fa-solid fa-house w-5 text-center"></i
-            ><span>Dashboard</span>
-          </a>
           <a
             href="monitoring.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-chart-simple w-5 text-center"></i
+            ><span>Monitoring</span></a
           >
-            <i class="fa-solid fa-chart-simple w-5 text-center"></i
-            ><span>Monitoring</span>
-          </a>
           <a
             href="riwayat-data.html"
             class="flex items-center space-x-4 bg-brand-green text-white py-3 pl-8 pr-4 rounded-r-full font-medium transition-all shadow-md"
+            ><i class="fa-solid fa-clock-rotate-left w-5 text-center"></i
+            ><span>Riwayat Data</span></a
           >
-            <i class="fa-solid fa-clock-rotate-left w-5 text-center"></i
-            ><span>Riwayat Data</span>
-          </a>
           <a
             href="kontrol-manual.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-faucet-drip w-5 text-center"></i
+            ><span>Kontrol Manual</span></a
           >
-            <i class="fa-solid fa-faucet-drip w-5 text-center"></i
-            ><span>Kontrol Manual</span>
-          </a>
           <a
             href="pengaturan.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-gear w-5 text-center"></i
+            ><span>Pengaturan</span></a
           >
-            <i class="fa-solid fa-gear w-5 text-center"></i
-            ><span>Pengaturan</span>
-          </a>
           <a
             href="sistem.html"
             class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-server w-5 text-center"></i
+            ><span>Sistem</span></a
           >
-            <i class="fa-solid fa-server w-5 text-center"></i
-            ><span>Sistem</span>
-          </a>
         </nav>
       </div>
-
       <div class="mb-8 pr-4 relative z-10 mt-auto">
         <div class="h-px w-full bg-gray-100 mb-4"></div>
         <button
@@ -102,119 +90,95 @@
       </div>
     </aside>
 
-    <!-- KONTEN UTAMA -->
-    <main class="flex-1 overflow-y-auto p-6 lg:p-8">
+    <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
       <header
         class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4"
       >
         <div>
-          <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+          <h2 class="text-xl md:text-2xl font-bold text-gray-800">
             Riwayat Data
-            <span class="text-gray-400 font-normal text-lg mx-2">/</span>
-            <span class="text-gray-500 font-medium text-lg">Riwayat Data</span>
           </h2>
         </div>
         <div
-          class="flex items-center space-x-3 bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm"
+          class="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-sm"
         >
           <div
-            class="w-9 h-9 bg-brand-green rounded-full flex items-center justify-center text-white"
+            class="w-8 h-8 bg-brand-green rounded-full flex items-center justify-center text-white"
           >
-            <i class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-user text-xs"></i>
           </div>
-          <div class="pr-2">
-            <p class="font-bold text-gray-800 text-sm leading-tight">User</p>
-            <p class="text-[11px] text-gray-500">Pengguna Sistem</p>
+          <div class="hidden sm:block pr-2">
+            <p class="font-bold text-gray-800 text-xs">User</p>
           </div>
         </div>
       </header>
 
-      <div class="flex flex-wrap gap-4 mb-6">
+      <div class="flex flex-wrap gap-2 md:gap-4 mb-6">
         <div
-          class="bg-white border border-gray-200 px-4 py-2 rounded-lg flex items-center space-x-2 text-sm text-gray-600 shadow-sm"
+          class="bg-white border border-gray-200 px-3 md:px-4 py-2 rounded-lg flex items-center space-x-2 text-xs md:text-sm text-gray-600 shadow-sm"
         >
           <i class="fa-regular fa-calendar text-gray-400"></i
           ><span class="font-medium">24 Jam Terakhir</span>
         </div>
         <div
-          class="bg-white border border-gray-200 px-4 py-2 rounded-lg flex items-center space-x-2 text-sm text-gray-600 shadow-sm"
+          class="bg-white border border-gray-200 px-3 md:px-4 py-2 rounded-lg flex items-center space-x-2 text-xs md:text-sm text-gray-600 shadow-sm"
         >
           <i class="fa-solid fa-droplet text-brand-green"></i
           ><span class="font-medium">Semua Status</span>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-6">
         <div
-          class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-4"
+          class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-3"
         >
           <div
-            class="w-12 h-12 bg-green-50 text-brand-green rounded-full flex items-center justify-center text-xl"
+            class="w-10 h-10 bg-green-50 text-brand-green rounded-full flex items-center justify-center text-lg"
           >
             <i class="fa-regular fa-calendar-check"></i>
           </div>
           <div>
-            <p class="text-xs text-gray-500 font-medium mb-0.5">Total Data</p>
-            <p class="text-xl font-bold text-gray-800">
-              24
-              <span class="text-[11px] font-normal text-gray-400 ml-1"
-                >Data</span
-              >
-            </p>
+            <p class="text-[10px] text-gray-500 font-medium">Total Data</p>
+            <p class="text-lg font-bold text-gray-800">24</p>
           </div>
         </div>
         <div
-          class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-4"
+          class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-3"
         >
           <div
-            class="w-12 h-12 bg-green-50 text-brand-green rounded-full flex items-center justify-center text-xl"
+            class="w-10 h-10 bg-green-50 text-brand-green rounded-full flex items-center justify-center text-lg"
           >
             <i class="fa-solid fa-faucet-drip"></i>
           </div>
           <div>
-            <p class="text-xs text-gray-500 font-medium mb-0.5">Pompa ON</p>
-            <p class="text-xl font-bold text-gray-800">
-              3 Kali
-              <span class="text-[10px] font-normal text-gray-400 ml-1"
-                >Total Durasi 1j 45m</span
-              >
-            </p>
+            <p class="text-[10px] text-gray-500 font-medium">Pompa ON</p>
+            <p class="text-lg font-bold text-gray-800">3 Kali</p>
           </div>
         </div>
         <div
-          class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-4"
+          class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-3"
         >
           <div
-            class="w-12 h-12 bg-red-50 text-red-500 rounded-full flex items-center justify-center text-xl"
+            class="w-10 h-10 bg-red-50 text-red-500 rounded-full flex items-center justify-center text-lg"
           >
             <i class="fa-solid fa-faucet"></i>
           </div>
           <div>
-            <p class="text-xs text-gray-500 font-medium mb-0.5">Pompa OFF</p>
-            <p class="text-xl font-bold text-gray-800">
-              3 Kali
-              <span class="text-[10px] font-normal text-gray-400 ml-1"
-                >Total Durasi 1j 20m</span
-              >
-            </p>
+            <p class="text-[10px] text-gray-500 font-medium">Pompa OFF</p>
+            <p class="text-lg font-bold text-gray-800">3 Kali</p>
           </div>
         </div>
         <div
-          class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-4"
+          class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-3"
         >
           <div
-            class="w-12 h-12 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-xl"
+            class="w-10 h-10 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-lg"
           >
             <i class="fa-solid fa-water"></i>
           </div>
           <div>
-            <p class="text-xs text-gray-500 font-medium mb-0.5">
-              Total Debit Air
-            </p>
-            <p class="text-xl font-bold text-gray-800">
-              125.5
-              <span class="text-sm font-normal text-gray-500 ml-1">L</span>
-            </p>
+            <p class="text-[10px] text-gray-500 font-medium">Total Debit</p>
+            <p class="text-lg font-bold text-gray-800">125 L</p>
           </div>
         </div>
       </div>
@@ -229,290 +193,138 @@
                 class="bg-gray-50 border-b border-gray-200 text-gray-600 text-xs"
               >
                 <tr>
-                  <th class="py-4 px-6 font-semibold whitespace-nowrap">
+                  <th class="py-3 px-4 font-semibold whitespace-nowrap">
                     Waktu
                   </th>
-                  <th class="py-4 px-6 font-semibold whitespace-nowrap">
-                    Kbedeng (%)
+                  <th class="py-3 px-4 font-semibold whitespace-nowrap">
+                    Kbedeng
                   </th>
-                  <th class="py-4 px-6 font-semibold whitespace-nowrap">
-                    Kmin (%)
+                  <th class="py-3 px-4 font-semibold whitespace-nowrap">
+                    Kmin
                   </th>
                   <th
-                    class="py-4 px-6 font-semibold whitespace-nowrap text-blue-600"
+                    class="py-3 px-4 font-semibold text-blue-600 whitespace-nowrap"
                   >
-                    Debit Air (L)
+                    Debit (L)
                   </th>
-                  <th class="py-4 px-6 font-semibold whitespace-nowrap">
-                    Cuaca
+                  <th class="py-3 px-4 font-semibold whitespace-nowrap">
+                    Status
                   </th>
-                  <th class="py-4 px-6 font-semibold whitespace-nowrap">
-                    Status Pompa
-                  </th>
-                  <th class="py-4 px-6 font-semibold whitespace-nowrap">
-                    Alasan Keputusan
+                  <th class="py-3 px-4 font-semibold whitespace-nowrap">
+                    Alasan
                   </th>
                 </tr>
               </thead>
               <tbody class="text-gray-600 text-xs">
-                <tr
-                  class="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                >
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    22 Mei 2026 11:45:10
-                  </td>
-                  <td class="py-4 px-6 font-medium">52.4</td>
-                  <td class="py-4 px-6">43.7</td>
-                  <td class="py-4 px-6 font-semibold text-gray-800">1.2</td>
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-cloud text-gray-400 mr-2"></i>Berawan
-                  </td>
-                  <td class="py-4 px-6">
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-4 whitespace-nowrap">22 Mei 11:45</td>
+                  <td class="py-3 px-4">52.4</td>
+                  <td class="py-3 px-4">43.7</td>
+                  <td class="py-3 px-4 font-semibold">1.2</td>
+                  <td class="py-3 px-4">
                     <span
-                      class="bg-green-100 text-brand-green px-2 py-1 rounded text-[11px] font-bold"
+                      class="bg-green-100 text-brand-green px-2 py-1 rounded font-bold"
                       >ON</span
                     >
                   </td>
-                  <td class="py-4 px-6 text-xs">Kbedeng &lt; 45%</td>
+                  <td class="py-3 px-4">Kbedeng &lt; 45%</td>
                 </tr>
-                <tr
-                  class="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                >
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    22 Mei 2026 10:30:22
-                  </td>
-                  <td class="py-4 px-6 font-medium">41.2</td>
-                  <td class="py-4 px-6">42.1</td>
-                  <td class="py-4 px-6 font-semibold text-gray-800">1.5</td>
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-cloud-rain text-blue-400 mr-2"></i
-                    >Hujan Ringan
-                  </td>
-                  <td class="py-4 px-6">
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-4 whitespace-nowrap">22 Mei 09:15</td>
+                  <td class="py-3 px-4">46.8</td>
+                  <td class="py-3 px-4">45.0</td>
+                  <td class="py-3 px-4 font-semibold">0.0</td>
+                  <td class="py-3 px-4">
                     <span
-                      class="bg-green-100 text-brand-green px-2 py-1 rounded text-[11px] font-bold"
-                      >ON</span
-                    >
-                  </td>
-                  <td class="py-4 px-6 text-xs">Kbedeng &lt; 45%</td>
-                </tr>
-                <tr
-                  class="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                >
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    22 Mei 2026 09:15:05
-                  </td>
-                  <td class="py-4 px-6 font-medium">46.8</td>
-                  <td class="py-4 px-6">45.0</td>
-                  <td class="py-4 px-6 font-semibold text-gray-800">0.0</td>
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-cloud text-gray-400 mr-2"></i>Berawan
-                  </td>
-                  <td class="py-4 px-6">
-                    <span
-                      class="bg-red-50 text-red-500 px-2 py-1 rounded text-[11px] font-bold"
+                      class="bg-red-50 text-red-500 px-2 py-1 rounded font-bold"
                       >OFF</span
                     >
                   </td>
-                  <td class="py-4 px-6 text-xs">Kbedeng ≥ 45% dan &lt; 80%</td>
-                </tr>
-                <tr
-                  class="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                >
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    22 Mei 2026 08:00:12
-                  </td>
-                  <td class="py-4 px-6 font-medium">72.1</td>
-                  <td class="py-4 px-6">46.3</td>
-                  <td class="py-4 px-6 font-semibold text-gray-800">0.0</td>
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-sun text-yellow-400 mr-2"></i>Cerah
-                  </td>
-                  <td class="py-4 px-6">
-                    <span
-                      class="bg-red-50 text-red-500 px-2 py-1 rounded text-[11px] font-bold"
-                      >OFF</span
-                    >
-                  </td>
-                  <td class="py-4 px-6 text-xs">Kbedeng ≥ 45% dan &lt; 80%</td>
-                </tr>
-                <tr
-                  class="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                >
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    22 Mei 2026 06:45:08
-                  </td>
-                  <td class="py-4 px-6 font-medium">83.6</td>
-                  <td class="py-4 px-6">47.2</td>
-                  <td class="py-4 px-6 font-semibold text-gray-800">0.0</td>
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-sun text-yellow-400 mr-2"></i>Cerah
-                  </td>
-                  <td class="py-4 px-6">
-                    <span
-                      class="bg-red-50 text-red-500 px-2 py-1 rounded text-[11px] font-bold"
-                      >OFF</span
-                    >
-                  </td>
-                  <td class="py-4 px-6 text-xs">Kbedeng ≥ 80%</td>
-                </tr>
-                <tr
-                  class="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                >
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    22 Mei 2026 05:30:07
-                  </td>
-                  <td class="py-4 px-6 font-medium">38.9</td>
-                  <td class="py-4 px-6">44.0</td>
-                  <td class="py-4 px-6 font-semibold text-gray-800">1.8</td>
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-cloud-rain text-blue-400 mr-2"></i
-                    >Hujan Ringan
-                  </td>
-                  <td class="py-4 px-6">
-                    <span
-                      class="bg-green-100 text-brand-green px-2 py-1 rounded text-[11px] font-bold"
-                      >ON</span
-                    >
-                  </td>
-                  <td class="py-4 px-6 text-xs">Kbedeng &lt; 45%</td>
-                </tr>
-                <tr
-                  class="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                >
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    22 Mei 2026 04:15:03
-                  </td>
-                  <td class="py-4 px-6 font-medium">44.6</td>
-                  <td class="py-4 px-6">43.8</td>
-                  <td class="py-4 px-6 font-semibold text-gray-800">1.1</td>
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-cloud text-gray-400 mr-2"></i>Berawan
-                  </td>
-                  <td class="py-4 px-6">
-                    <span
-                      class="bg-green-100 text-brand-green px-2 py-1 rounded text-[11px] font-bold"
-                      >ON</span
-                    >
-                  </td>
-                  <td class="py-4 px-6 text-xs">Kbedeng &lt; 45%</td>
-                </tr>
-                <tr class="hover:bg-gray-50 transition-colors">
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    22 Mei 2026 03:00:01
-                  </td>
-                  <td class="py-4 px-6 font-medium">67.5</td>
-                  <td class="py-4 px-6">45.1</td>
-                  <td class="py-4 px-6 font-semibold text-gray-800">0.0</td>
-                  <td class="py-4 px-6 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-cloud text-gray-400 mr-2"></i>Berawan
-                  </td>
-                  <td class="py-4 px-6">
-                    <span
-                      class="bg-red-50 text-red-500 px-2 py-1 rounded text-[11px] font-bold"
-                      >OFF</span
-                    >
-                  </td>
-                  <td class="py-4 px-6 text-xs">Kbedeng ≥ 45% dan &lt; 80%</td>
+                  <td class="py-3 px-4">Kbedeng ≥ 45%</td>
                 </tr>
               </tbody>
             </table>
           </div>
-
-          <!-- Pagination -->
           <div
-            class="px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center bg-gray-50 rounded-b-xl gap-4"
+            class="px-4 py-3 border-t border-gray-200 bg-gray-50 rounded-b-xl text-center"
           >
-            <span class="text-xs text-gray-500"
-              >Menampilkan 1 - 8 dari 24 data</span
+            <span class="text-[10px] text-gray-500"
+              >Menampilkan 1 - 2 data dari 24</span
             >
-            <div class="flex items-center space-x-1">
-              <button
-                class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-500 hover:bg-white transition-colors"
-              >
-                <i class="fa-solid fa-chevron-left text-xs"></i>
-              </button>
-              <button
-                class="w-8 h-8 flex items-center justify-center rounded border border-brand-green bg-brand-green text-white font-medium text-sm transition-colors"
-              >
-                1
-              </button>
-              <button
-                class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-600 hover:bg-white transition-colors"
-              >
-                2
-              </button>
-              <button
-                class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-600 hover:bg-white transition-colors"
-              >
-                3
-              </button>
-              <button
-                class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-500 hover:bg-white transition-colors"
-              >
-                <i class="fa-solid fa-chevron-right text-xs"></i>
-              </button>
-            </div>
           </div>
         </div>
-
-        <!-- Ringkasan Harian -->
         <div
-          class="xl:col-span-1 bg-white rounded-xl border border-gray-200 shadow-sm p-6 flex flex-col"
+          class="xl:col-span-1 bg-white rounded-xl border border-gray-200 shadow-sm p-5 flex flex-col h-max"
         >
-          <h3 class="font-bold text-gray-800 text-lg mb-1">Ringkasan Harian</h3>
-          <p class="text-sm text-gray-500 mb-6 pb-4 border-b border-gray-100">
+          <h3 class="font-bold text-gray-800 text-sm mb-1">Ringkasan Harian</h3>
+          <p
+            class="text-[10px] text-gray-500 mb-4 pb-3 border-b border-gray-100"
+          >
             22 Mei 2026
           </p>
-
-          <div class="space-y-6">
-            <div class="flex items-start space-x-4">
+          <div class="space-y-4">
+            <div class="flex items-center space-x-3">
               <div
-                class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0 text-brand-green"
+                class="w-8 h-8 rounded-full bg-green-50 text-brand-green flex items-center justify-center"
               >
                 <i class="fa-regular fa-clock"></i>
               </div>
               <div>
-                <p class="text-xs font-medium text-gray-500 mb-0.5">
-                  Total Durasi Penyiraman
-                </p>
-                <p class="text-xl font-bold text-brand-green mb-0.5">3j 05m</p>
-                <p class="text-[11px] text-gray-400">3 Kali ON</p>
+                <p class="text-[10px] text-gray-500">Total Durasi Penyiraman</p>
+                <p class="text-sm font-bold text-brand-green">3j 05m</p>
               </div>
             </div>
-            <div class="w-full h-px bg-gray-100"></div>
-            <div class="flex items-start space-x-4">
+            <div class="flex items-center space-x-3">
               <div
-                class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center flex-shrink-0 text-gray-500"
-              >
-                <i class="fa-regular fa-clock"></i>
-              </div>
-              <div>
-                <p class="text-xs font-medium text-gray-500 mb-0.5">
-                  Total Durasi OFF
-                </p>
-                <p class="text-xl font-bold text-gray-800 mb-0.5">4j 55m</p>
-                <p class="text-[11px] text-gray-400">3 Kali OFF</p>
-              </div>
-            </div>
-            <div class="w-full h-px bg-gray-100"></div>
-            <div class="flex items-start space-x-4">
-              <div
-                class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0 text-blue-500"
+                class="w-8 h-8 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center"
               >
                 <i class="fa-solid fa-water"></i>
               </div>
               <div>
-                <p class="text-xs font-medium text-gray-500 mb-0.5">
-                  Total Debit Air
-                </p>
-                <p class="text-xl font-bold text-blue-600 mb-0.5">125.5 L</p>
-                <p class="text-[11px] text-gray-400">Akumulasi hari ini</p>
+                <p class="text-[10px] text-gray-500">Total Debit Air</p>
+                <p class="text-sm font-bold text-blue-600">125.5 L</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </main>
+
+    <!-- BOTTOM NAVIGATION (Khusus Mobile) -->
+    <nav
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-4 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
+    >
+      <a
+        href="dashboard.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-house text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Home</span></a
+      >
+      <a
+        href="monitoring.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-chart-simple text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Monitor</span></a
+      >
+      <!-- Riwayat Aktif (Warna Hijau) -->
+      <a
+        href="riwayat-data.html"
+        class="flex flex-col items-center text-brand-green w-1/5"
+        ><i class="fa-solid fa-clock-rotate-left text-xl mb-1"></i
+        ><span class="text-[9px] font-bold">Riwayat</span></a
+      >
+      <a
+        href="kontrol-manual.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-faucet-drip text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Kontrol</span></a
+      >
+      <a
+        href="sistem.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-server text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Sistem</span></a
+      >
+    </nav>
   </body>
 </html>
