@@ -117,7 +117,6 @@
             Monitoring sistem irigasi otomatis
           </p>
         </div>
-
         <div class="relative">
           <button
             onclick="toggleDropdown()"
@@ -138,7 +137,6 @@
               class="fa-solid fa-chevron-down text-[10px] text-gray-400 pl-1"
             ></i>
           </button>
-
           <div
             id="userDropdown"
             class="hidden absolute right-0 mt-2 w-64 bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden"
@@ -147,10 +145,9 @@
               <a
                 href="index.html"
                 class="flex items-center space-x-2 text-red-500 hover:bg-red-50 px-3 py-2 rounded-lg text-sm font-bold transition-colors"
+                ><i class="fa-solid fa-arrow-right-from-bracket"></i
+                ><span>Keluar (Logout)</span></a
               >
-                <i class="fa-solid fa-arrow-right-from-bracket"></i
-                ><span>Keluar (Logout)</span>
-              </a>
             </div>
             <div class="p-4 bg-white">
               <p
@@ -249,24 +246,29 @@
             <p class="text-base font-bold text-brand-green">1.8 L/m</p>
           </div>
         </div>
+
+        <!-- UPDATE: CARD CUACA DENGAN ID JS -->
         <div
           class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-2"
         >
-          <div class="text-gray-400 text-2xl opacity-80">
-            <i class="fa-solid fa-cloud"></i>
+          <div id="icon-cuaca" class="text-2xl opacity-80">
+            <i class="fa-solid fa-cloud text-gray-400"></i>
           </div>
           <div class="overflow-hidden">
             <p class="text-[10px] font-semibold text-gray-500 truncate">
               Cuaca
             </p>
             <p
+              id="teks-cuaca"
               class="text-base font-bold text-brand-green truncate w-full"
-              title="Berawan"
+              title="Memuat..."
             >
-              Berawan
+              -
             </p>
           </div>
         </div>
+
+        <!-- UPDATE: CARD PELUANG HUJAN DENGAN ID JS -->
         <div
           class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex items-center space-x-2"
         >
@@ -277,7 +279,9 @@
             <p class="text-[10px] font-semibold text-gray-500 truncate">
               Peluang Hujan
             </p>
-            <p class="text-base font-bold text-brand-green">35%</p>
+            <p id="teks-peluang" class="text-base font-bold text-brand-green">
+              -
+            </p>
           </div>
         </div>
       </div>
@@ -305,7 +309,6 @@
       </div>
     </main>
 
-    <!-- NAVIGASI BAWAH MOBILE (REVISI: Menambahkan Pengaturan/Atur dengan 6 item flex-1) -->
     <nav
       class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-2 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
     >
@@ -347,7 +350,8 @@
       >
     </nav>
 
-    <!-- SCRIPT DROPDOWN -->
+    <!-- SCRIPT WAJIB DIPANGGIL DI BAWAH -->
+    <script src="assets/js/main.js"></script>
     <script>
       function toggleDropdown() {
         document.getElementById("userDropdown").classList.toggle("hidden");
