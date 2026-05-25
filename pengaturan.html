@@ -1,321 +1,802 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pengaturan - Irigasi Tomat</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="assets/js/tailwind-config.js"></script>
-    <style>.param-card { transition: all 0.3s ease; } .param-input { transition: all 0.3s ease; } @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } } .animate-modal { animation: modalFadeIn 0.2s ease-out forwards; }</style>
-</head>
-<body class="bg-[#f4f7f4] flex h-screen overflow-hidden font-sans text-gray-800" onload="initSettings()">
-
+    <style>
+      .param-card {
+        transition: all 0.3s ease;
+      }
+      .param-input {
+        transition: all 0.3s ease;
+      }
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      .animate-modal {
+        animation: modalFadeIn 0.2s ease-out forwards;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-[#f4f7f4] flex h-screen overflow-hidden font-sans text-gray-800"
+    onload="initSettings()"
+  >
     <!-- SIDEBAR -->
-    <aside class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between flex-shrink-0 relative overflow-hidden">
-        <i class="fa-solid fa-seedling absolute -bottom-10 -left-10 text-9xl text-brand-light opacity-40 z-0 transform -rotate-12"></i>
-        <div class="relative z-10">
-            <div class="py-8 px-6 flex items-center space-x-3 border-b border-gray-100 mb-6">
-                <div class="w-10 h-10 border-2 border-brand-green text-brand-green rounded-full flex items-center justify-center text-xl bg-white shadow-sm"><i class="fa-solid fa-droplet"></i></div>
-                <div><h1 class="text-lg font-bold text-brand-dark leading-tight">Irigasi Tomat</h1><p class="text-brand-green font-medium text-[10px]">ESP32-C3 Mini</p></div>
-            </div>
-            <nav class="flex flex-col space-y-1 pr-4">
-                <a href="dashboard.html" class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"><i class="fa-solid fa-house w-5 text-center"></i><span>Dashboard</span></a>
-                <a href="monitoring.html" class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"><i class="fa-solid fa-chart-simple w-5 text-center"></i><span>Monitoring</span></a>
-                <a href="riwayat-data.html" class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"><i class="fa-solid fa-clock-rotate-left w-5 text-center"></i><span>Riwayat Data</span></a>
-                <a href="kontrol-manual.html" class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"><i class="fa-solid fa-faucet-drip w-5 text-center"></i><span>Kontrol Manual</span></a>
-                <a href="pengaturan.html" class="flex items-center space-x-4 bg-brand-green text-white py-3 pl-8 pr-4 rounded-r-full font-medium transition-all shadow-md"><i class="fa-solid fa-gear w-5 text-center"></i><span>Pengaturan</span></a>
-                <a href="sistem.html" class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"><i class="fa-solid fa-server w-5 text-center"></i><span>Sistem</span></a>
-            </nav>
+    <aside
+      class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between flex-shrink-0 relative overflow-hidden"
+    >
+      <i
+        class="fa-solid fa-seedling absolute -bottom-10 -left-10 text-9xl text-brand-light opacity-40 z-0 transform -rotate-12"
+      ></i>
+      <div class="relative z-10">
+        <div
+          class="py-8 px-6 flex items-center space-x-3 border-b border-gray-100 mb-6"
+        >
+          <div
+            class="w-10 h-10 border-2 border-brand-green text-brand-green rounded-full flex items-center justify-center text-xl bg-white shadow-sm"
+          >
+            <i class="fa-solid fa-droplet"></i>
+          </div>
+          <div>
+            <h1 class="text-lg font-bold text-brand-dark leading-tight">
+              Irigasi Tomat
+            </h1>
+            <p class="text-brand-green font-medium text-[10px]">
+              ESP32-C3 Mini
+            </p>
+          </div>
         </div>
-        <div class="mb-8 pr-4 relative z-10 mt-auto">
-            <div class="h-px w-full bg-gray-100 mb-4"></div>
-            <button onclick="window.location.href='index.html'" class="w-full flex items-center space-x-4 text-gray-500 hover:bg-red-50 hover:text-red-500 py-3 pl-8 pr-4 rounded-r-full font-medium transition-all cursor-pointer"><i class="fa-solid fa-arrow-right-from-bracket w-5 text-center"></i><span>Keluar</span></button>
-        </div>
+        <nav class="flex flex-col space-y-1 pr-4">
+          <a
+            href="dashboard.html"
+            class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-house w-5 text-center"></i
+            ><span>Dashboard</span></a
+          >
+          <a
+            href="monitoring.html"
+            class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-chart-simple w-5 text-center"></i
+            ><span>Monitoring</span></a
+          >
+          <a
+            href="riwayat-data.html"
+            class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-clock-rotate-left w-5 text-center"></i
+            ><span>Riwayat Data</span></a
+          >
+          <a
+            href="kontrol-manual.html"
+            class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-faucet-drip w-5 text-center"></i
+            ><span>Kontrol Manual</span></a
+          >
+          <a
+            href="pengaturan.html"
+            class="flex items-center space-x-4 bg-brand-green text-white py-3 pl-8 pr-4 rounded-r-full font-medium transition-all shadow-md"
+            ><i class="fa-solid fa-gear w-5 text-center"></i
+            ><span>Pengaturan</span></a
+          >
+          <a
+            href="sistem.html"
+            class="flex items-center space-x-4 text-gray-500 hover:bg-brand-light hover:text-brand-green py-3 pl-8 pr-4 rounded-r-full font-medium transition-all"
+            ><i class="fa-solid fa-server w-5 text-center"></i
+            ><span>Sistem</span></a
+          >
+        </nav>
+      </div>
+      <div class="mb-8 pr-4 relative z-10 mt-auto">
+        <div class="h-px w-full bg-gray-100 mb-4"></div>
+        <button
+          onclick="window.location.href = 'index.html'"
+          class="w-full flex items-center space-x-4 text-gray-500 hover:bg-red-50 hover:text-red-500 py-3 pl-8 pr-4 rounded-r-full font-medium transition-all cursor-pointer"
+        >
+          <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center"></i
+          ><span>Keluar</span>
+        </button>
+      </div>
     </aside>
 
     <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
-        <!-- HEADER -->
-        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-30">
-            <div><h2 class="text-xl md:text-2xl font-bold text-gray-800">Pengaturan</h2></div>
-            <div class="relative w-full md:w-auto flex justify-end">
-                <button onclick="toggleDropdown()" class="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-sm focus:outline-none hover:bg-brand-light transition-colors">
-                    <div class="w-8 h-8 bg-brand-green rounded-full flex items-center justify-center text-white"><i class="fa-solid fa-user text-xs"></i></div>
-                    <div class="text-left pr-1"><p class="font-bold text-gray-800 text-xs leading-tight">User</p><p class="text-[9px] text-gray-500 hidden sm:block">Pengguna Sistem</p></div>
-                    <i class="fa-solid fa-chevron-down text-[10px] text-gray-400 pl-1"></i>
-                </button>
-                <div id="userDropdown" class="hidden absolute right-0 top-full mt-2 w-64 bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden z-50">
-                    <div class="p-2 border-b border-gray-100 bg-gray-50"><a href="index.html" class="flex items-center space-x-2 text-red-500 hover:bg-red-50 px-3 py-2 rounded-lg text-sm font-bold transition-colors"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Keluar (Logout)</span></a></div>
-                    <div class="p-4 bg-white"><p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-3 border-b border-gray-100 pb-1">Contact Service</p><div class="space-y-3"><div class="flex items-start space-x-3"><i class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"></i><div><p class="text-xs font-bold text-gray-800">Hari</p><p class="text-[11px] text-gray-500">0857-2675-0062</p><p class="text-[9px] text-gray-400">Telp/Whatsapp</p></div></div><div class="flex items-start space-x-3"><i class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"></i><div><p class="text-xs font-bold text-gray-800">Rimba</p><p class="text-[11px] text-gray-500">0896-0414-3531</p><p class="text-[9px] text-gray-400">Telp/Whatsapp</p></div></div></div></div>
-                </div>
+      <!-- HEADER -->
+      <header
+        class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-30"
+      >
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-gray-800">
+            Pengaturan
+          </h2>
+        </div>
+        <div class="relative w-full md:w-auto flex justify-end">
+          <button
+            onclick="toggleDropdown()"
+            class="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-sm focus:outline-none hover:bg-brand-light transition-colors"
+          >
+            <div
+              class="w-8 h-8 bg-brand-green rounded-full flex items-center justify-center text-white"
+            >
+              <i class="fa-solid fa-user text-xs"></i>
             </div>
-        </header>
+            <div class="text-left pr-1">
+              <p class="font-bold text-gray-800 text-xs leading-tight">User</p>
+              <p class="text-[9px] text-gray-500 hidden sm:block">
+                Pengguna Sistem
+              </p>
+            </div>
+            <i
+              class="fa-solid fa-chevron-down text-[10px] text-gray-400 pl-1"
+            ></i>
+          </button>
+          <div
+            id="userDropdown"
+            class="hidden absolute right-0 top-full mt-2 w-64 bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden z-50"
+          >
+            <div class="p-2 border-b border-gray-100 bg-gray-50">
+              <a
+                href="index.html"
+                class="flex items-center space-x-2 text-red-500 hover:bg-red-50 px-3 py-2 rounded-lg text-sm font-bold transition-colors"
+                ><i class="fa-solid fa-arrow-right-from-bracket"></i
+                ><span>Keluar (Logout)</span></a
+              >
+            </div>
+            <div class="p-4 bg-white">
+              <p
+                class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-3 border-b border-gray-100 pb-1"
+              >
+                Contact Service
+              </p>
+              <div class="space-y-3">
+                <div class="flex items-start space-x-3">
+                  <i
+                    class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
+                  ></i>
+                  <div>
+                    <p class="text-xs font-bold text-gray-800">Hari</p>
+                    <p class="text-[11px] text-gray-500">0857-2675-0062</p>
+                    <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
+                  </div>
+                </div>
+                <div class="flex items-start space-x-3">
+                  <i
+                    class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
+                  ></i>
+                  <div>
+                    <p class="text-xs font-bold text-gray-800">Rimba</p>
+                    <p class="text-[11px] text-gray-500">0896-0414-3531</p>
+                    <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
 
-        <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-6 w-full">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-gray-100 pb-4 gap-4">
-                <div>
-                    <h3 class="font-bold text-gray-800 text-sm">Parameter Sistem</h3>
-                    <p class="text-[10px] text-gray-500">Atur ambang batas dan simpan ke slot profil pilihan Anda</p>
-                </div>
-                
-                <div class="flex flex-col space-y-2 w-full md:w-auto">
-                    <div class="flex items-center space-x-2 bg-gray-50 p-2 rounded-lg border border-gray-200">
-                        <i class="fa-solid fa-layer-group text-brand-green"></i>
-                        <span class="text-xs font-bold text-gray-700">Profil:</span>
-                        <select id="preset-profil" onchange="applyPreset()" class="bg-white border border-gray-300 text-xs font-bold text-brand-green rounded p-1 focus:outline-none focus:border-brand-green w-full md:w-48 cursor-pointer">
-                            <option value="auto">Default Sistem (Auto API)</option>
-                            <option id="opt-slot1" value="slot1">Slot 1 (Custom)</option>
-                            <option id="opt-slot2" value="slot2">Slot 2 (Custom)</option>
-                            <option id="opt-slot3" value="slot3">Slot 3 (Custom)</option>
-                        </select>
-                    </div>
-                    
-                    <div id="slot-name-container" class="hidden flex items-center space-x-2 px-2">
-                        <span class="text-[10px] font-bold text-gray-500">Ubah Nama Slot:</span>
-                        <input type="text" id="slot-name" placeholder="Ketik nama slot..." class="param-input text-xs font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green bg-transparent pb-0.5 w-full">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-                <div id="card-kbawah" class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col h-28 md:h-32"><div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-2"><i class="fa-solid fa-droplet text-brand-green mr-1"></i>Kbawah</div><div class="flex items-center space-x-1"><input type="number" id="kbawah" class="param-input w-12 md:w-16 text-xl md:text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"><span class="text-gray-400 text-xs font-semibold">%</span></div></div>
-                <div id="card-katas" class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col h-28 md:h-32"><div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-2"><i class="fa-solid fa-droplet text-brand-green mr-1"></i>Katas</div><div class="flex items-center space-x-1"><input type="number" id="katas" class="param-input w-12 md:w-16 text-xl md:text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"><span class="text-gray-400 text-xs font-semibold">%</span></div></div>
-                <div id="card-kbatas" class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col h-28 md:h-32"><div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-2"><i class="fa-solid fa-droplet text-brand-green mr-1"></i>Kbatas</div><div class="flex items-center space-x-1"><input type="number" id="kbatas" class="param-input w-12 md:w-16 text-xl md:text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"><span class="text-gray-400 text-xs font-semibold">%</span></div></div>
-                <div id="card-nkering" class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col h-28 md:h-32"><div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-2 truncate"><i class="fa-solid fa-satellite-dish text-brand-green mr-1"></i>Nkering Minimum</div><div class="flex items-center space-x-1"><input type="number" id="nkering" class="param-input w-12 md:w-16 text-xl md:text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"><span class="text-gray-400 text-[10px] font-semibold">Sensor</span></div></div>
-                
-                <div id="card-interval" class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col justify-between h-28 md:h-32">
-                    <div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-1"><i class="fa-regular fa-clock text-brand-green mr-1"></i>Interval Data</div>
-                    <div class="my-auto">
-                        <select id="interval" class="param-input w-full bg-white border-b border-gray-300 text-sm font-bold text-gray-800 focus:outline-none focus:border-brand-green py-1 cursor-pointer">
-                            <option value="1 jam">1 jam</option><option value="2 jam">2 jam</option><option value="6 jam">6 jam</option>
-                        </select>
-                    </div>
-                </div>
+      <div
+        class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-6 w-full"
+      >
+        <div
+          class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-gray-100 pb-4 gap-4"
+        >
+          <div>
+            <h3 class="font-bold text-gray-800 text-sm">Parameter Sistem</h3>
+            <p class="text-[10px] text-gray-500">
+              Atur ambang batas dan simpan ke slot profil pilihan Anda
+            </p>
+          </div>
 
-                <div id="card-tunda" class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col justify-between h-28 md:h-32">
-                    <div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-1"><i class="fa-solid fa-cloud-showers-heavy text-brand-green mr-1"></i>Tunda Hujan</div>
-                    <div class="my-auto">
-                        <select id="tunda" class="param-input w-full bg-white border-b border-gray-300 text-sm font-bold text-gray-800 focus:outline-none focus:border-brand-green py-1 cursor-pointer">
-                            <option value="Aktif">Aktif</option><option value="Nonaktif">Nonaktif</option>
-                        </select>
-                    </div>
-                </div>
+          <div class="flex flex-col space-y-2 w-full md:w-auto">
+            <div
+              class="flex items-center space-x-2 bg-gray-50 p-2 rounded-lg border border-gray-200 w-full md:w-auto"
+            >
+              <i class="fa-solid fa-layer-group text-brand-green"></i>
+              <span class="text-xs font-bold text-gray-700">Profil:</span>
+              <select
+                id="preset-profil"
+                onchange="applyPreset()"
+                class="bg-white border border-gray-300 text-xs font-bold text-brand-green rounded p-1 focus:outline-none focus:border-brand-green w-full md:w-48 cursor-pointer"
+              >
+                <option value="auto">Default Sistem (Auto API)</option>
+                <option id="opt-slot1" value="slot1">Slot 1 (Custom)</option>
+                <option id="opt-slot2" value="slot2">Slot 2 (Custom)</option>
+                <option id="opt-slot3" value="slot3">Slot 3 (Custom)</option>
+              </select>
+            </div>
 
-                <div id="card-curah" class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col h-28 md:h-32">
-                    <div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-2 truncate"><i class="fa-solid fa-cloud-showers-water text-brand-green mr-1"></i>Batas Curah Hujan</div>
-                    <div class="flex items-center space-x-1">
-                        <input type="number" id="curah" class="param-input w-12 md:w-16 text-xl md:text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1">
-                        <span class="text-gray-400 text-[10px] font-semibold">mm</span>
-                    </div>
-                </div>
-                
-                <div class="bg-[#fcfdfc] p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col justify-between h-28 md:h-32 opacity-70 cursor-not-allowed select-none">
-                    <div class="flex justify-between items-center text-gray-400 text-[9px] md:text-xs font-semibold">
-                        <div><i class="fa-solid fa-server mr-1"></i>Sumber Cuaca</div><i class="fa-solid fa-lock text-[10px]"></i>
-                    </div>
-                    <div class="my-auto"><div class="text-sm font-bold text-gray-400 py-1 border-b border-gray-200">API/Firebase</div></div>
-                </div>
+            <div
+              id="slot-name-container"
+              class="hidden flex items-center space-x-2 px-2"
+            >
+              <span class="text-[10px] font-bold text-gray-500"
+                >Ubah Nama Slot:</span
+              >
+              <input
+                type="text"
+                id="slot-name"
+                placeholder="Ketik nama slot..."
+                class="param-input text-xs font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green bg-transparent pb-0.5 w-full"
+              />
             </div>
-            
-            <div id="status-msg-container" class="mt-4 flex items-center justify-between">
-                <p id="auto-msg" class="text-[10px] md:text-xs text-brand-green font-semibold italic flex items-center hidden"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Sistem mengatur parameter secara otomatis berdasarkan data cuaca OpenMeteo.</p>
-                <p id="edit-msg" class="text-[10px] md:text-xs text-orange-500 font-semibold italic flex items-center hidden"><i class="fa-solid fa-pen mr-2"></i>Mode Edit aktif. Ubah angka/nama lalu klik Simpan.</p>
-            </div>
+          </div>
         </div>
 
-        <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-6 w-full">
-            <!-- REVISI: Mengubah teks Akun Pengguna menjadi Akun Administrator -->
-            <h3 class="font-bold text-gray-800 text-sm mb-4">Akun Administrator</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div id="card-user-name" class="param-card border border-gray-200 rounded-lg p-3 flex items-center space-x-3"><div class="text-brand-green text-lg"><i class="fa-regular fa-user"></i></div><div class="w-full"><p class="text-[10px] text-gray-500 font-semibold">Username</p><input type="text" id="user-name" value="user" class="param-input w-full text-sm font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green py-1 bg-transparent"></div></div>
-                <div id="card-user-email" class="param-card border border-gray-200 rounded-lg p-3 flex items-center space-x-3"><div class="text-brand-green text-lg"><i class="fa-regular fa-envelope"></i></div><div class="w-full"><p class="text-[10px] text-gray-500 font-semibold">Email</p><input type="email" id="user-email" value="user@irigasitomat.id" class="param-input w-full text-sm font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green py-1 bg-transparent"></div></div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          <div
+            id="card-kbawah"
+            class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col h-28 md:h-32"
+          >
+            <div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-2">
+              <i class="fa-solid fa-droplet text-brand-green mr-1"></i>Kbawah
             </div>
+            <div class="flex items-center space-x-1">
+              <input
+                type="number"
+                id="kbawah"
+                class="param-input w-12 md:w-16 text-xl md:text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"
+              /><span class="text-gray-400 text-xs font-semibold">%</span>
+            </div>
+          </div>
+          <div
+            id="card-katas"
+            class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col h-28 md:h-32"
+          >
+            <div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-2">
+              <i class="fa-solid fa-droplet text-brand-green mr-1"></i>Katas
+            </div>
+            <div class="flex items-center space-x-1">
+              <input
+                type="number"
+                id="katas"
+                class="param-input w-12 md:w-16 text-xl md:text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"
+              /><span class="text-gray-400 text-xs font-semibold">%</span>
+            </div>
+          </div>
+          <div
+            id="card-kbatas"
+            class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col h-28 md:h-32"
+          >
+            <div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-2">
+              <i class="fa-solid fa-droplet text-brand-green mr-1"></i>Kbatas
+            </div>
+            <div class="flex items-center space-x-1">
+              <input
+                type="number"
+                id="kbatas"
+                class="param-input w-12 md:w-16 text-xl md:text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"
+              /><span class="text-gray-400 text-xs font-semibold">%</span>
+            </div>
+          </div>
+          <div
+            id="card-nkering"
+            class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col h-28 md:h-32"
+          >
+            <div
+              class="text-gray-500 text-[9px] md:text-xs font-semibold mb-2 truncate"
+            >
+              <i class="fa-solid fa-satellite-dish text-brand-green mr-1"></i
+              >Nkering Minimum
+            </div>
+            <div class="flex items-center space-x-1">
+              <input
+                type="number"
+                id="nkering"
+                class="param-input w-12 md:w-16 text-xl md:text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"
+              /><span class="text-gray-400 text-[10px] font-semibold"
+                >Sensor</span
+              >
+            </div>
+          </div>
+
+          <div
+            id="card-interval"
+            class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col justify-between h-28 md:h-32"
+          >
+            <div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-1">
+              <i class="fa-regular fa-clock text-brand-green mr-1"></i>Interval
+              Data
+            </div>
+            <div class="my-auto">
+              <select
+                id="interval"
+                class="param-input w-full bg-white border-b border-gray-300 text-sm font-bold text-gray-800 focus:outline-none focus:border-brand-green py-1 cursor-pointer"
+              >
+                <option value="1 jam">1 jam</option>
+                <option value="2 jam">2 jam</option>
+                <option value="6 jam">6 jam</option>
+              </select>
+            </div>
+          </div>
+
+          <div
+            id="card-tunda"
+            class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col justify-between h-28 md:h-32"
+          >
+            <div class="text-gray-500 text-[9px] md:text-xs font-semibold mb-1">
+              <i
+                class="fa-solid fa-cloud-showers-heavy text-brand-green mr-1"
+              ></i
+              >Tunda Hujan
+            </div>
+            <div class="my-auto">
+              <select
+                id="tunda"
+                class="param-input w-full bg-white border-b border-gray-300 text-sm font-bold text-gray-800 focus:outline-none focus:border-brand-green py-1 cursor-pointer"
+              >
+                <option value="Aktif">Aktif</option>
+                <option value="Nonaktif">Nonaktif</option>
+              </select>
+            </div>
+          </div>
+
+          <div
+            id="card-curah"
+            class="param-card bg-white p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col h-28 md:h-32"
+          >
+            <div
+              class="text-gray-500 text-[9px] md:text-xs font-semibold mb-2 truncate"
+            >
+              <i
+                class="fa-solid fa-cloud-showers-water text-brand-green mr-1"
+              ></i
+              >Batas Curah Hujan
+            </div>
+            <div class="flex items-center space-x-1">
+              <input
+                type="number"
+                id="curah"
+                class="param-input w-12 md:w-16 text-xl md:text-2xl font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green text-center py-1"
+              />
+              <span class="text-gray-400 text-[10px] font-semibold">mm</span>
+            </div>
+          </div>
+
+          <div
+            class="bg-[#fcfdfc] p-3 md:p-4 rounded-xl border border-gray-200 flex flex-col justify-between h-28 md:h-32 opacity-70 cursor-not-allowed select-none"
+          >
+            <div
+              class="flex justify-between items-center text-gray-400 text-[9px] md:text-xs font-semibold"
+            >
+              <div><i class="fa-solid fa-server mr-1"></i>Sumber Cuaca</div>
+              <i class="fa-solid fa-lock text-[10px]"></i>
+            </div>
+            <div class="my-auto">
+              <div
+                class="text-sm font-bold text-gray-400 py-1 border-b border-gray-200"
+              >
+                API/Firebase
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-3">
-            <button id="btn-edit" onclick="enableEdit()" class="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold py-3 px-6 rounded-lg text-sm shadow-sm transition-colors flex justify-center items-center space-x-2 w-full sm:w-auto hidden"><i class="fa-solid fa-pen-to-square"></i><span>Edit Parameter</span></button>
-            <button id="btn-simpan" onclick="saveSettings()" class="bg-brand-green hover:bg-green-800 text-white font-semibold py-3 px-6 rounded-lg text-sm shadow-sm transition-colors flex justify-center items-center space-x-2 w-full sm:w-auto"><i class="fa-solid fa-floppy-disk"></i><span>Simpan Pengaturan</span></button>
-            <button id="btn-reset" onclick="showResetModal()" class="bg-white border-2 border-red-500 text-red-500 hover:bg-red-50 font-semibold py-3 px-6 rounded-lg text-sm shadow-sm transition-colors flex justify-center items-center space-x-2 w-full sm:w-auto"><i class="fa-solid fa-trash-can"></i><span>Hapus & Reset Slot</span></button>
+        <div
+          id="status-msg-container"
+          class="mt-4 flex items-center justify-between"
+        >
+          <p
+            id="auto-msg"
+            class="text-[10px] md:text-xs text-brand-green font-semibold italic flex items-center hidden"
+          >
+            <i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Sistem mengatur
+            parameter secara otomatis berdasarkan data cuaca OpenMeteo.
+          </p>
+          <p
+            id="edit-msg"
+            class="text-[10px] md:text-xs text-orange-500 font-semibold italic flex items-center hidden"
+          >
+            <i class="fa-solid fa-pen mr-2"></i>Mode Edit aktif. Ubah angka/nama
+            lalu klik Simpan.
+          </p>
         </div>
+      </div>
+
+      <div
+        class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-6 w-full"
+      >
+        <h3 class="font-bold text-gray-800 text-sm mb-4">Akun Administrator</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div
+            id="card-user-name"
+            class="param-card border border-gray-200 rounded-lg p-3 flex items-center space-x-3"
+          >
+            <div class="text-brand-green text-lg">
+              <i class="fa-regular fa-user"></i>
+            </div>
+            <div class="w-full">
+              <p class="text-[10px] text-gray-500 font-semibold">Username</p>
+              <input
+                type="text"
+                id="user-name"
+                value="user"
+                class="param-input w-full text-sm font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green py-1 bg-transparent"
+              />
+            </div>
+          </div>
+          <div
+            id="card-user-email"
+            class="param-card border border-gray-200 rounded-lg p-3 flex items-center space-x-3"
+          >
+            <div class="text-brand-green text-lg">
+              <i class="fa-regular fa-envelope"></i>
+            </div>
+            <div class="w-full">
+              <p class="text-[10px] text-gray-500 font-semibold">Email</p>
+              <input
+                type="email"
+                id="user-email"
+                value="user@irigasitomat.id"
+                class="param-input w-full text-sm font-bold text-gray-800 border-b border-gray-300 focus:outline-none focus:border-brand-green py-1 bg-transparent"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-3"
+      >
+        <button
+          id="btn-edit"
+          onclick="enableEdit()"
+          class="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold py-3 px-6 rounded-lg text-sm shadow-sm transition-colors flex justify-center items-center space-x-2 w-full sm:w-auto hidden"
+        >
+          <i class="fa-solid fa-pen-to-square"></i><span>Edit Parameter</span>
+        </button>
+        <button
+          id="btn-simpan"
+          onclick="saveSettings()"
+          class="bg-brand-green hover:bg-green-800 text-white font-semibold py-3 px-6 rounded-lg text-sm shadow-sm transition-colors flex justify-center items-center space-x-2 w-full sm:w-auto"
+        >
+          <i class="fa-solid fa-floppy-disk"></i><span>Simpan Pengaturan</span>
+        </button>
+        <button
+          id="btn-reset"
+          onclick="showResetModal()"
+          class="bg-white border-2 border-red-500 text-red-500 hover:bg-red-50 font-semibold py-3 px-6 rounded-lg text-sm shadow-sm transition-colors flex justify-center items-center space-x-2 w-full sm:w-auto"
+        >
+          <i class="fa-solid fa-trash-can"></i><span>Hapus & Reset Slot</span>
+        </button>
+      </div>
     </main>
 
     <!-- Modal Konfirmasi Reset -->
-    <div id="modal-reset" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl text-center animate-modal">
-            <div class="w-12 h-12 bg-red-50 text-red-500 rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-triangle-exclamation"></i></div>
-            <h3 class="text-lg font-bold text-gray-800 mb-2">Konfirmasi Hapus Slot</h3>
-            <p class="text-xs text-gray-500 mb-6 leading-relaxed">Apakah Anda yakin ingin menghapus data pada slot ini dan mengembalikannya ke pengaturan default awal? Pastikan sudah konfirmasi dengan administrator.</p>
-            <div class="flex space-x-3 justify-center">
-                <button id="btn-ya-reset" onclick="confirmReset(true)" class="bg-red-500 text-white font-semibold py-2 px-6 rounded-lg text-sm transition-colors w-28 disabled:opacity-50 disabled:cursor-not-allowed">Ya</button>
-                <button onclick="confirmReset(false)" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-6 rounded-lg text-sm transition-colors w-24">Batal</button>
-            </div>
+    <div
+      id="modal-reset"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4"
+    >
+      <div
+        class="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl text-center animate-modal"
+      >
+        <div
+          class="w-12 h-12 bg-red-50 text-red-500 rounded-full flex items-center justify-center text-2xl mx-auto mb-4"
+        >
+          <i class="fa-solid fa-triangle-exclamation"></i>
         </div>
+        <h3 class="text-lg font-bold text-gray-800 mb-2">
+          Konfirmasi Hapus Slot
+        </h3>
+        <p class="text-xs text-gray-500 mb-6 leading-relaxed">
+          Apakah Anda yakin ingin menghapus data pada slot ini dan
+          mengembalikannya ke pengaturan default awal? Pastikan sudah konfirmasi
+          dengan administrator.
+        </p>
+        <div class="flex space-x-3 justify-center">
+          <button
+            id="btn-ya-reset"
+            onclick="confirmReset(true)"
+            class="bg-red-500 text-white font-semibold py-2 px-6 rounded-lg text-sm transition-colors w-28 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Ya
+          </button>
+          <button
+            onclick="confirmReset(false)"
+            class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-6 rounded-lg text-sm transition-colors w-24"
+          >
+            Batal
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- BOTTOM NAV -->
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-4 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
-        <a href="dashboard.html" class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"><i class="fa-solid fa-house text-xl mb-1"></i><span class="text-[9px] font-medium">Home</span></a>
-        <a href="monitoring.html" class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"><i class="fa-solid fa-chart-simple text-xl mb-1"></i><span class="text-[9px] font-medium">Monitor</span></a>
-        <a href="riwayat-data.html" class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"><i class="fa-solid fa-clock-rotate-left text-xl mb-1"></i><span class="text-[9px] font-medium">Riwayat</span></a>
-        <a href="kontrol-manual.html" class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"><i class="fa-solid fa-faucet-drip text-xl mb-1"></i><span class="text-[9px] font-medium">Kontrol</span></a>
-        <a href="pengaturan.html" class="flex flex-col items-center text-brand-green w-1/5"><i class="fa-solid fa-gear text-xl mb-1"></i><span class="text-[9px] font-bold">Atur</span></a>
-        <a href="sistem.html" class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"><i class="fa-solid fa-server text-xl mb-1"></i><span class="text-[9px] font-medium">Sistem</span></a>
+    <nav
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-4 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
+    >
+      <a
+        href="dashboard.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-house text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Home</span></a
+      >
+      <a
+        href="monitoring.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-chart-simple text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Monitor</span></a
+      >
+      <a
+        href="riwayat-data.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-clock-rotate-left text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Riwayat</span></a
+      >
+      <a
+        href="kontrol-manual.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-faucet-drip text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Kontrol</span></a
+      >
+      <a
+        href="pengaturan.html"
+        class="flex flex-col items-center text-brand-green w-1/5"
+        ><i class="fa-solid fa-gear text-xl mb-1"></i
+        ><span class="text-[9px] font-bold">Atur</span></a
+      >
+      <a
+        href="sistem.html"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        ><i class="fa-solid fa-server text-xl mb-1"></i
+        ><span class="text-[9px] font-medium">Sistem</span></a
+      >
     </nav>
 
     <script>
-        const defSlot1 = { name: "Slot 1 (Custom)", kbawah: 45, katas: 80, kbatas: 45, nkering: 2, interval: '1 jam', tunda: 'Aktif', curah: 5 };
-        const defSlot2 = { name: "Slot 2 (Custom)", kbawah: 45, katas: 80, kbatas: 45, nkering: 2, interval: '1 jam', tunda: 'Aktif', curah: 5 };
-        const defSlot3 = { name: "Slot 3 (Custom)", kbawah: 45, katas: 80, kbatas: 45, nkering: 2, interval: '1 jam', tunda: 'Aktif', curah: 5 };
-        
-        const paramIds = ['kbawah', 'katas', 'kbatas', 'nkering', 'interval', 'tunda', 'curah', 'slot-name'];
-        let resetTimerInterval; 
+      const defSlot1 = {
+        name: "Slot 1 (Custom)",
+        kbawah: 45,
+        katas: 80,
+        kbatas: 45,
+        nkering: 2,
+        interval: "1 jam",
+        tunda: "Aktif",
+        curah: 5,
+      };
+      const defSlot2 = {
+        name: "Slot 2 (Custom)",
+        kbawah: 45,
+        katas: 80,
+        kbatas: 45,
+        nkering: 2,
+        interval: "1 jam",
+        tunda: "Aktif",
+        curah: 5,
+      };
+      const defSlot3 = {
+        name: "Slot 3 (Custom)",
+        kbawah: 45,
+        katas: 80,
+        kbatas: 45,
+        nkering: 2,
+        interval: "1 jam",
+        tunda: "Aktif",
+        curah: 5,
+      };
 
-        function initSettings() {
-            if(!localStorage.getItem('slot1')) localStorage.setItem('slot1', JSON.stringify(defSlot1));
-            if(!localStorage.getItem('slot2')) localStorage.setItem('slot2', JSON.stringify(defSlot2));
-            if(!localStorage.getItem('slot3')) localStorage.setItem('slot3', JSON.stringify(defSlot3));
-            
-            updateDropdownNames();
-            document.getElementById('preset-profil').value = 'auto';
-            applyPreset();
+      const paramIds = [
+        "kbawah",
+        "katas",
+        "kbatas",
+        "nkering",
+        "interval",
+        "tunda",
+        "curah",
+        "slot-name",
+      ];
+      let resetTimerInterval;
+
+      function initSettings() {
+        if (!localStorage.getItem("slot1"))
+          localStorage.setItem("slot1", JSON.stringify(defSlot1));
+        if (!localStorage.getItem("slot2"))
+          localStorage.setItem("slot2", JSON.stringify(defSlot2));
+        if (!localStorage.getItem("slot3"))
+          localStorage.setItem("slot3", JSON.stringify(defSlot3));
+
+        updateDropdownNames();
+        document.getElementById("preset-profil").value = "auto";
+        applyPreset();
+      }
+
+      function updateDropdownNames() {
+        document.getElementById("opt-slot1").innerText = JSON.parse(
+          localStorage.getItem("slot1"),
+        ).name;
+        document.getElementById("opt-slot2").innerText = JSON.parse(
+          localStorage.getItem("slot2"),
+        ).name;
+        document.getElementById("opt-slot3").innerText = JSON.parse(
+          localStorage.getItem("slot3"),
+        ).name;
+      }
+
+      function applyPreset() {
+        const profil = document.getElementById("preset-profil").value;
+        const autoMsg = document.getElementById("auto-msg");
+        const editMsg = document.getElementById("edit-msg");
+        const btnSimpan = document.getElementById("btn-simpan");
+        const btnEdit = document.getElementById("btn-edit");
+        const btnReset = document.getElementById("btn-reset");
+        const nameContainer = document.getElementById("slot-name-container");
+
+        if (profil === "auto") {
+          nameContainer.classList.add("hidden");
+          btnReset.classList.add("hidden");
+
+          document.getElementById("kbawah").value = 45;
+          document.getElementById("katas").value = 80;
+          document.getElementById("kbatas").value = 45;
+          document.getElementById("nkering").value = 2;
+          document.getElementById("interval").value = "1 jam";
+          document.getElementById("tunda").value = "Aktif";
+          document.getElementById("curah").value = 5;
+
+          autoMsg.classList.remove("hidden");
+          editMsg.classList.add("hidden");
+          btnSimpan.classList.add("hidden");
+          btnEdit.classList.add("hidden");
+          lockInputs();
+        } else {
+          nameContainer.classList.remove("hidden");
+          btnReset.classList.remove("hidden");
+
+          const slotData = JSON.parse(localStorage.getItem(profil));
+          document.getElementById("kbawah").value = slotData.kbawah;
+          document.getElementById("katas").value = slotData.katas;
+          document.getElementById("kbatas").value = slotData.kbatas;
+          document.getElementById("nkering").value = slotData.nkering;
+          document.getElementById("interval").value = slotData.interval;
+          document.getElementById("tunda").value = slotData.tunda;
+          document.getElementById("curah").value = slotData.curah;
+          document.getElementById("slot-name").value = slotData.name;
+
+          autoMsg.classList.add("hidden");
+          editMsg.classList.remove("hidden");
+          btnSimpan.classList.remove("hidden");
+          btnEdit.classList.add("hidden");
+          unlockInputs();
         }
+      }
 
-        function updateDropdownNames() {
-            document.getElementById('opt-slot1').innerText = JSON.parse(localStorage.getItem('slot1')).name;
-            document.getElementById('opt-slot2').innerText = JSON.parse(localStorage.getItem('slot2')).name;
-            document.getElementById('opt-slot3').innerText = JSON.parse(localStorage.getItem('slot3')).name;
-        }
-        
-        function applyPreset() {
-            const profil = document.getElementById('preset-profil').value;
-            const autoMsg = document.getElementById('auto-msg');
-            const editMsg = document.getElementById('edit-msg');
-            const btnSimpan = document.getElementById('btn-simpan');
-            const btnEdit = document.getElementById('btn-edit');
-            const btnReset = document.getElementById('btn-reset');
-            const nameContainer = document.getElementById('slot-name-container');
-            
-            if(profil === 'auto') {
-                nameContainer.classList.add('hidden');
-                btnReset.classList.add('hidden');
-                
-                document.getElementById('kbawah').value = 45; document.getElementById('katas').value = 80; document.getElementById('kbatas').value = 45; document.getElementById('nkering').value = 2; document.getElementById('interval').value = '1 jam'; document.getElementById('tunda').value = 'Aktif'; document.getElementById('curah').value = 5;
-                
-                autoMsg.classList.remove('hidden'); editMsg.classList.add('hidden');
-                btnSimpan.classList.add('hidden'); btnEdit.classList.add('hidden');
-                lockInputs();
-            } else {
-                nameContainer.classList.remove('hidden');
-                btnReset.classList.remove('hidden');
-                
-                const slotData = JSON.parse(localStorage.getItem(profil));
-                document.getElementById('kbawah').value = slotData.kbawah;
-                document.getElementById('katas').value = slotData.katas;
-                document.getElementById('kbatas').value = slotData.kbatas;
-                document.getElementById('nkering').value = slotData.nkering;
-                document.getElementById('interval').value = slotData.interval;
-                document.getElementById('tunda').value = slotData.tunda;
-                document.getElementById('curah').value = slotData.curah;
-                document.getElementById('slot-name').value = slotData.name;
-                
-                autoMsg.classList.add('hidden'); editMsg.classList.remove('hidden');
-                btnSimpan.classList.remove('hidden'); btnEdit.classList.add('hidden');
-                unlockInputs();
-            }
-        }
+      function saveSettings() {
+        const profil = document.getElementById("preset-profil").value;
+        if (profil === "auto") return;
 
-        function saveSettings() {
-            const profil = document.getElementById('preset-profil').value;
-            if(profil === 'auto') return;
+        let newName = document.getElementById("slot-name").value;
+        if (newName.trim() === "")
+          newName = `Slot ${profil.replace("slot", "")}`;
 
-            let newName = document.getElementById('slot-name').value;
-            if (newName.trim() === '') newName = `Slot ${profil.replace('slot', '')}`;
+        const newData = {
+          name: newName,
+          kbawah: document.getElementById("kbawah").value,
+          katas: document.getElementById("katas").value,
+          kbatas: document.getElementById("kbatas").value,
+          nkering: document.getElementById("nkering").value,
+          interval: document.getElementById("interval").value,
+          tunda: document.getElementById("tunda").value,
+          curah: document.getElementById("curah").value,
+        };
 
-            const newData = {
-                name: newName, kbawah: document.getElementById('kbawah').value, katas: document.getElementById('katas').value, kbatas: document.getElementById('kbatas').value, nkering: document.getElementById('nkering').value, interval: document.getElementById('interval').value, tunda: document.getElementById('tunda').value, curah: document.getElementById('curah').value
-            };
-            
-            localStorage.setItem(profil, JSON.stringify(newData));
-            updateDropdownNames();
-            lockInputs();
-            
-            document.getElementById('edit-msg').classList.add('hidden');
-            document.getElementById('btn-simpan').classList.add('hidden');
-            document.getElementById('btn-edit').classList.remove('hidden');
-            
-            alert(`Sukses! Data telah disimpan sebagai "${newName}".`);
-        }
+        localStorage.setItem(profil, JSON.stringify(newData));
+        updateDropdownNames();
+        lockInputs();
 
-        function enableEdit() {
-            unlockInputs();
-            document.getElementById('edit-msg').classList.remove('hidden');
-            document.getElementById('btn-simpan').classList.remove('hidden');
-            document.getElementById('btn-edit').classList.add('hidden');
-        }
+        document.getElementById("edit-msg").classList.add("hidden");
+        document.getElementById("btn-simpan").classList.add("hidden");
+        document.getElementById("btn-edit").classList.remove("hidden");
 
-        function lockInputs() {
-            paramIds.concat(['user-name', 'user-email']).forEach(id => {
-                const input = document.getElementById(id);
-                input.disabled = true; input.classList.add('text-gray-400', 'cursor-not-allowed'); input.classList.remove('text-gray-800', 'text-brand-green');
-                const card = document.getElementById('card-' + id);
-                if(card) { card.classList.add('bg-gray-100', 'opacity-75'); card.classList.remove('bg-white'); }
-            });
-            document.getElementById('preset-profil').disabled = true;
-        }
+        alert(`Sukses! Data telah disimpan sebagai "${newName}".`);
+      }
 
-        function unlockInputs() {
-            paramIds.concat(['user-name', 'user-email']).forEach(id => {
-                const input = document.getElementById(id);
-                input.disabled = false; input.classList.remove('text-gray-400', 'cursor-not-allowed'); input.classList.add('text-gray-800');
-                if (id === 'slot-name') input.classList.add('text-brand-green');
-                const card = document.getElementById('card-' + id);
-                if(card) { card.classList.remove('bg-gray-100', 'opacity-75'); card.classList.add('bg-white'); }
-            });
-            document.getElementById('preset-profil').disabled = false;
-        }
+      function enableEdit() {
+        unlockInputs();
+        document.getElementById("edit-msg").classList.remove("hidden");
+        document.getElementById("btn-simpan").classList.remove("hidden");
+        document.getElementById("btn-edit").classList.add("hidden");
+      }
 
-        function showResetModal() { 
-            document.getElementById('modal-reset').classList.remove('hidden'); 
-            const btnYa = document.getElementById('btn-ya-reset');
-            btnYa.disabled = true; btnYa.classList.add('opacity-50', 'cursor-not-allowed'); btnYa.classList.remove('hover:bg-red-600');
-            
-            let timeLeft = 5;
-            btnYa.innerText = `Ya (${timeLeft}s)`;
-            
-            resetTimerInterval = setInterval(() => {
-                timeLeft--;
-                if (timeLeft <= 0) {
-                    clearInterval(resetTimerInterval);
-                    btnYa.disabled = false;
-                    btnYa.classList.remove('opacity-50', 'cursor-not-allowed'); btnYa.classList.add('hover:bg-red-600');
-                    btnYa.innerText = "Ya, Hapus";
-                } else {
-                    btnYa.innerText = `Ya (${timeLeft}s)`;
-                }
-            }, 1000);
-        }
-        
-        function confirmReset(isYes) {
-            clearInterval(resetTimerInterval);
-            document.getElementById('modal-reset').classList.add('hidden');
-            
-            if (isYes) {
-                const profil = document.getElementById('preset-profil').value;
-                if(profil !== 'auto') {
-                    let defData = (profil === 'slot1') ? defSlot1 : (profil === 'slot2' ? defSlot2 : defSlot3);
-                    localStorage.setItem(profil, JSON.stringify(defData));
-                    updateDropdownNames();
-                    applyPreset(); 
-                }
-            }
-        }
-
-        function toggleDropdown() { document.getElementById('userDropdown').classList.toggle('hidden'); }
-        window.addEventListener('click', function(e) {
-            const btn = document.querySelector('button[onclick="toggleDropdown()"]'); const drop = document.getElementById('userDropdown');
-            if (!btn.contains(e.target) && !drop.contains(e.target)) drop.classList.add('hidden');
+      // FUNGSI LOCK YANG BENAR
+      function lockInputs() {
+        paramIds.concat(["user-name", "user-email"]).forEach((id) => {
+          const input = document.getElementById(id);
+          input.disabled = true;
+          input.classList.add("text-gray-400", "cursor-not-allowed");
+          input.classList.remove("text-gray-800", "text-brand-green");
+          const card = document.getElementById("card-" + id);
+          if (card) {
+            card.classList.add("bg-gray-100", "opacity-75");
+            card.classList.remove("bg-white");
+          }
         });
+        // Tidak mengunci dropdown profil
+      }
+
+      // FUNGSI UNLOCK YANG BENAR
+      function unlockInputs() {
+        paramIds.concat(["user-name", "user-email"]).forEach((id) => {
+          const input = document.getElementById(id);
+          input.disabled = false;
+          input.classList.remove("text-gray-400", "cursor-not-allowed");
+          input.classList.add("text-gray-800");
+          if (id === "slot-name") input.classList.add("text-brand-green");
+          const card = document.getElementById("card-" + id);
+          if (card) {
+            card.classList.remove("bg-gray-100", "opacity-75");
+            card.classList.add("bg-white");
+          }
+        });
+      }
+
+      function showResetModal() {
+        document.getElementById("modal-reset").classList.remove("hidden");
+        const btnYa = document.getElementById("btn-ya-reset");
+        btnYa.disabled = true;
+        btnYa.classList.add("opacity-50", "cursor-not-allowed");
+        btnYa.classList.remove("hover:bg-red-600");
+
+        let timeLeft = 5;
+        btnYa.innerText = `Ya (${timeLeft}s)`;
+
+        resetTimerInterval = setInterval(() => {
+          timeLeft--;
+          if (timeLeft <= 0) {
+            clearInterval(resetTimerInterval);
+            btnYa.disabled = false;
+            btnYa.classList.remove("opacity-50", "cursor-not-allowed");
+            btnYa.classList.add("hover:bg-red-600");
+            btnYa.innerText = "Ya, Hapus";
+          } else {
+            btnYa.innerText = `Ya (${timeLeft}s)`;
+          }
+        }, 1000);
+      }
+
+      function confirmReset(isYes) {
+        clearInterval(resetTimerInterval);
+        document.getElementById("modal-reset").classList.add("hidden");
+
+        if (isYes) {
+          const profil = document.getElementById("preset-profil").value;
+          if (profil !== "auto") {
+            let defData =
+              profil === "slot1"
+                ? defSlot1
+                : profil === "slot2"
+                  ? defSlot2
+                  : defSlot3;
+            localStorage.setItem(profil, JSON.stringify(defData));
+            updateDropdownNames();
+            applyPreset();
+          }
+        }
+      }
+
+      function toggleDropdown() {
+        document.getElementById("userDropdown").classList.toggle("hidden");
+      }
+      window.addEventListener("click", function (e) {
+        const btn = document.querySelector(
+          'button[onclick="toggleDropdown()"]',
+        );
+        const drop = document.getElementById("userDropdown");
+        if (!btn.contains(e.target) && !drop.contains(e.target))
+          drop.classList.add("hidden");
+      });
     </script>
-</body>
+  </body>
 </html>
