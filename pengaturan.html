@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pengaturan - Irigasi Tomat</title>
+    <!-- CSS & JS Terpisah -->
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="stylesheet"
@@ -37,7 +38,7 @@
     class="bg-[#f4f7f4] flex h-screen overflow-hidden font-sans text-gray-800"
     onload="initSettings()"
   >
-    <!-- SIDEBAR -->
+    <!-- ==================== SIDEBAR ==================== -->
     <aside
       class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between flex-shrink-0 relative overflow-hidden"
     >
@@ -87,6 +88,7 @@
             ><i class="fa-solid fa-faucet-drip w-5 text-center"></i
             ><span>Kontrol Manual</span></a
           >
+          <!-- PENGATURAN AKTIF -->
           <a
             href="pengaturan.html"
             class="flex items-center space-x-4 bg-brand-green text-white py-3 pl-8 pr-4 rounded-r-full font-medium transition-all shadow-md"
@@ -113,6 +115,7 @@
       </div>
     </aside>
 
+    <!-- ==================== KONTEN UTAMA ==================== -->
     <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
       <!-- HEADER -->
       <header
@@ -202,8 +205,9 @@
           </div>
 
           <div class="flex flex-col space-y-2 w-full md:w-auto">
+            <!-- Dropdown Profil -->
             <div
-              class="flex items-center space-x-2 bg-gray-50 p-2 rounded-lg border border-gray-200 w-full md:w-auto"
+              class="flex items-center space-x-2 bg-gray-50 p-2 rounded-lg border border-gray-200"
             >
               <i class="fa-solid fa-layer-group text-brand-green"></i>
               <span class="text-xs font-bold text-gray-700">Profil:</span>
@@ -219,6 +223,7 @@
               </select>
             </div>
 
+            <!-- Input Edit Nama Slot -->
             <div
               id="slot-name-container"
               class="hidden flex items-center space-x-2 px-2"
@@ -406,6 +411,7 @@
         </div>
       </div>
 
+      <!-- AKUN ADMINISTRATOR -->
       <div
         class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-6 w-full"
       >
@@ -448,6 +454,28 @@
         </div>
       </div>
 
+      <!-- REVISI: CARD PERINGATAN PENTING DI TENGAH HALAMAN -->
+      <div
+        class="bg-yellow-50 rounded-xl border border-yellow-200 p-4 mb-6 flex items-start space-x-3 shadow-sm select-none"
+      >
+        <div
+          class="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 text-xl"
+        >
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <div>
+          <p class="text-xs font-bold text-yellow-800 mb-0.5">
+            Pemberitahuan Sistem
+          </p>
+          <!-- Kalimat Persis Sesuai Permintaan -->
+          <p class="text-xs text-yellow-700 leading-relaxed">
+            setelah memilih slot jangan lupa untuk Kembali pilih default jika di
+            rasa sudah cukup
+          </p>
+        </div>
+      </div>
+
+      <!-- TOMBOL AKSI -->
       <div
         class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-3"
       >
@@ -506,7 +534,7 @@
           </button>
           <button
             onclick="confirmReset(false)"
-            class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-6 rounded-lg text-sm transition-colors w-24"
+            class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-6 rounded-lg text-sm w-24"
           >
             Batal
           </button>
@@ -520,37 +548,37 @@
     >
       <a
         href="dashboard.html"
-        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
         ><i class="fa-solid fa-house text-xl mb-1"></i
         ><span class="text-[9px] font-medium">Home</span></a
       >
       <a
         href="monitoring.html"
-        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
         ><i class="fa-solid fa-chart-simple text-xl mb-1"></i
         ><span class="text-[9px] font-medium">Monitor</span></a
       >
       <a
         href="riwayat-data.html"
-        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
         ><i class="fa-solid fa-clock-rotate-left text-xl mb-1"></i
         ><span class="text-[9px] font-medium">Riwayat</span></a
       >
       <a
         href="kontrol-manual.html"
-        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        class="flex flex-col items-center text-gray-400 hover:text-brand-green"
         ><i class="fa-solid fa-faucet-drip text-xl mb-1"></i
         ><span class="text-[9px] font-medium">Kontrol</span></a
       >
       <a
         href="pengaturan.html"
-        class="flex flex-col items-center text-brand-green w-1/5"
+        class="flex flex-col items-center flex-1 text-brand-green"
         ><i class="fa-solid fa-gear text-xl mb-1"></i
         ><span class="text-[9px] font-bold">Atur</span></a
       >
       <a
         href="sistem.html"
-        class="flex flex-col items-center text-gray-400 hover:text-brand-green w-1/5"
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
         ><i class="fa-solid fa-server text-xl mb-1"></i
         ><span class="text-[9px] font-medium">Sistem</span></a
       >
@@ -600,6 +628,7 @@
       ];
       let resetTimerInterval;
 
+      // SINKRONISASI AKTIF: Cek memori browser saat halaman dimuat
       function initSettings() {
         if (!localStorage.getItem("slot1"))
           localStorage.setItem("slot1", JSON.stringify(defSlot1));
@@ -609,7 +638,12 @@
           localStorage.setItem("slot3", JSON.stringify(defSlot3));
 
         updateDropdownNames();
-        document.getElementById("preset-profil").value = "auto";
+
+        // REVISI: Ambil profil terakhir yang dipilih user dari memory (default ke 'auto' jika belum ada)
+        const lastActiveProfile =
+          localStorage.getItem("activeProfile") || "auto";
+        document.getElementById("preset-profil").value = lastActiveProfile;
+
         applyPreset();
       }
 
@@ -627,6 +661,10 @@
 
       function applyPreset() {
         const profil = document.getElementById("preset-profil").value;
+
+        // REVISI: Simpan profil aktif saat ini ke memory agar tidak kembali ke default saat pindah halaman
+        localStorage.setItem("activeProfile", profil);
+
         const autoMsg = document.getElementById("auto-msg");
         const editMsg = document.getElementById("edit-msg");
         const btnSimpan = document.getElementById("btn-simpan");
@@ -710,7 +748,7 @@
         document.getElementById("btn-edit").classList.add("hidden");
       }
 
-      // FUNGSI LOCK YANG BENAR
+      // PERBAIKAN: Fungsi lock tidak pernah menyentuh / mengunci dropdown profil
       function lockInputs() {
         paramIds.concat(["user-name", "user-email"]).forEach((id) => {
           const input = document.getElementById(id);
@@ -723,10 +761,9 @@
             card.classList.remove("bg-white");
           }
         });
-        // Tidak mengunci dropdown profil
       }
 
-      // FUNGSI UNLOCK YANG BENAR
+      // PERBAIKAN: Fungsi unlock tidak pernah menyentuh / membuka dropdown profil
       function unlockInputs() {
         paramIds.concat(["user-name", "user-email"]).forEach((id) => {
           const input = document.getElementById(id);
