@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kontrol Manual - Irigasi Tomat</title>
+    <!-- CSS & JS Terpisah -->
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="stylesheet"
@@ -31,7 +32,6 @@
     class="bg-[#f4f7f4] flex h-screen overflow-hidden font-sans text-gray-800"
     onload="initManualMode()"
   >
-    <!-- ==================== SIDEBAR ==================== -->
     <aside
       class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between flex-shrink-0 relative overflow-hidden"
     >
@@ -107,10 +107,10 @@
       </div>
     </aside>
 
-    <!-- ==================== KONTEN UTAMA ==================== -->
     <main
       class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8 relative"
     >
+      <!-- HEADER DENGAN DROPDOWN WHATSAPP -->
       <header
         class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-30"
       >
@@ -163,8 +163,12 @@
               >
                 Contact Service
               </p>
-              <div class="space-y-3">
-                <div class="flex items-start space-x-3">
+              <div class="space-y-1">
+                <a
+                  href="https://api.whatsapp.com/send/?phone=6285726750062&text&type=phone_number&app_absent=0&wame_ctl=1"
+                  target="_blank"
+                  class="flex items-start space-x-3 hover:bg-green-50 p-2 rounded-lg transition-colors cursor-pointer"
+                >
                   <i
                     class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
                   ></i>
@@ -173,8 +177,12 @@
                     <p class="text-[11px] text-gray-500">0857-2675-0062</p>
                     <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
                   </div>
-                </div>
-                <div class="flex items-start space-x-3">
+                </a>
+                <a
+                  href="https://api.whatsapp.com/send/?phone=6289604143531&text&type=phone_number&app_absent=0&wame_ctl=1"
+                  target="_blank"
+                  class="flex items-start space-x-3 hover:bg-green-50 p-2 rounded-lg transition-colors cursor-pointer"
+                >
                   <i
                     class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
                   ></i>
@@ -183,14 +191,13 @@
                     <p class="text-[11px] text-gray-500">0896-0414-3531</p>
                     <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
                   </div>
-                </div>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      <!-- MODE KONTROL -->
       <div
         class="bg-white rounded-xl border border-gray-200 shadow-sm p-4 mb-4 flex flex-col md:flex-row justify-between items-center gap-4"
       >
@@ -217,7 +224,6 @@
         </div>
       </div>
 
-      <!-- STATUS POMPA -->
       <div
         class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 mb-6 flex flex-col md:flex-row items-center justify-between gap-6"
       >
@@ -243,7 +249,6 @@
           </div>
         </div>
         <div class="flex space-x-3 w-full md:w-auto">
-          <!-- Tombol ON dan OFF menggunakan alur validasi wajib -->
           <button
             id="btn-pompa-on"
             onclick="eksekusiPompa('ON')"
@@ -253,7 +258,7 @@
           </button>
           <button
             id="btn-pompa-off"
-            onclick="eksekusiPompa('OFF')"
+            onclick="eksekusiPompaOFF()"
             class="flex-1 md:w-40 py-4 rounded-xl font-bold text-gray-400 bg-gray-200 cursor-not-allowed transition-all duration-300 shadow-sm flex justify-center items-center space-x-2"
           >
             <i class="fa-solid fa-stop"></i><span>Pompa OFF</span>
@@ -261,7 +266,6 @@
         </div>
       </div>
 
-      <!-- DURASI & ALASAN -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <div>
           <h3 class="font-bold text-gray-800 text-sm mb-3">
@@ -338,7 +342,6 @@
         </div>
       </div>
 
-      <!-- TABEL RIWAYAT & CATATAN KESELAMATAN (Dibuat Responsif Dengan Scroll Sumbu X) -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <div
           class="lg:col-span-2 bg-white rounded-xl border border-gray-200 shadow-sm flex flex-col overflow-hidden"
@@ -346,8 +349,6 @@
           <div class="p-5 border-b border-gray-100">
             <h3 class="font-bold text-gray-800">Riwayat Override Manual</h3>
           </div>
-
-          <!-- REVISI: Wrapper ini sekarang dijamin memunculkan scrollbar jika layar menyusut -->
           <div class="overflow-x-auto w-full">
             <table
               class="w-full text-sm text-left min-w-[600px] border-collapse"
@@ -362,12 +363,13 @@
                   <th class="py-3 px-5 font-semibold">Alasan</th>
                 </tr>
               </thead>
-              <tbody id="history-table-body" class="text-gray-600 text-xs">
-                <!-- Data akan dimuat otomatis oleh renderHistoryTable() -->
-              </tbody>
+              <tbody
+                id="history-table-body"
+                class="text-gray-600 text-xs"
+              ></tbody>
             </table>
           </div>
-          <!-- PAGINATION -->
+          <!-- Pagination -->
           <div
             class="px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center bg-gray-50 rounded-b-xl gap-4"
           >
@@ -378,24 +380,20 @@
               <button
                 class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-500 hover:bg-white transition-colors"
               >
-                <i class="fa-solid fa-chevron-left text-xs"></i>
-              </button>
-              <button
+                <i class="fa-solid fa-chevron-left text-xs"></i></button
+              ><button
                 class="w-8 h-8 flex items-center justify-center rounded border border-brand-green bg-brand-green text-white font-medium text-sm transition-colors"
               >
-                1
-              </button>
-              <button
+                1</button
+              ><button
                 class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-600 hover:bg-white transition-colors"
               >
-                2
-              </button>
-              <button
+                2</button
+              ><button
                 class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-600 hover:bg-white transition-colors"
               >
-                3
-              </button>
-              <button
+                3</button
+              ><button
                 class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-500 hover:bg-white transition-colors"
               >
                 <i class="fa-solid fa-chevron-right text-xs"></i>
@@ -403,8 +401,6 @@
             </div>
           </div>
         </div>
-
-        <!-- CATATAN KESELAMATAN -->
         <div
           class="lg:col-span-1 bg-yellow-50 rounded-xl border border-yellow-200 shadow-sm p-6 flex flex-col h-max"
         >
@@ -427,47 +423,47 @@
 
     <!-- BOTTOM NAV MOBILE -->
     <nav
-      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-4 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-2 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
     >
       <a
         href="dashboard.html"
-        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green w-1/5"
-        ><i class="fa-solid fa-house text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Home</span></a
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-house text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Home</span></a
       >
       <a
         href="monitoring.html"
-        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green w-1/5"
-        ><i class="fa-solid fa-chart-simple text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Monitor</span></a
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-chart-simple text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Monitor</span></a
       >
       <a
         href="riwayat-data.html"
-        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green w-1/5"
-        ><i class="fa-solid fa-clock-rotate-left text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Riwayat</span></a
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-clock-rotate-left text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Riwayat</span></a
       >
       <a
         href="kontrol-manual.html"
-        class="flex flex-col items-center flex-1 text-brand-green w-1/5"
-        ><i class="fa-solid fa-faucet-drip text-xl mb-1"></i
-        ><span class="text-[9px] font-bold">Kontrol</span></a
+        class="flex flex-col items-center flex-1 text-brand-green"
+        ><i class="fa-solid fa-faucet-drip text-lg mb-1"></i
+        ><span class="text-[8px] font-bold">Kontrol</span></a
       >
       <a
         href="pengaturan.html"
-        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green w-1/5"
-        ><i class="fa-solid fa-gear text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Atur</span></a
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-gear text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Atur</span></a
       >
       <a
         href="sistem.html"
-        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green w-1/5"
-        ><i class="fa-solid fa-server text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Sistem</span></a
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-server text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Sistem</span></a
       >
     </nav>
 
-    <!-- ==================== MODAL KONFIRMASI SWITCH KE MANUAL (COOLDOWN 5 DETIK) ==================== -->
+    <!-- MODAL POPUPS -->
     <div
       id="modal-switch"
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-[100] p-4"
@@ -504,8 +500,6 @@
         </div>
       </div>
     </div>
-
-    <!-- ==================== MODAL KONFIRMASI MEMATIKAN KONTROL MANUAL (RESET/STOP) ==================== -->
     <div
       id="modal-confirm-off"
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-[100] p-4"
@@ -526,7 +520,6 @@
           mode otomatis.
         </p>
         <div class="flex space-x-3 justify-center">
-          <!-- Sesuai Permintaan: Ya memicu penghentian & rekor durasi riil -->
           <button
             onclick="confirmTurnOff(true)"
             class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-lg text-sm w-24"
@@ -542,8 +535,6 @@
         </div>
       </div>
     </div>
-
-    <!-- MODAL ALERT (PERINGATAN ALUR) -->
     <div
       id="modal-alert"
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-[100] p-4"
@@ -559,9 +550,7 @@
         <h3 id="alert-title" class="text-lg font-bold text-gray-800 mb-2">
           Perhatian
         </h3>
-        <p id="alert-message" class="text-sm text-gray-600 mb-6">
-          Pesan error di sini.
-        </p>
+        <p id="alert-message" class="text-sm text-gray-600 mb-6"></p>
         <button
           onclick="
             document.getElementById('modal-alert').classList.add('hidden')
@@ -573,354 +562,8 @@
       </div>
     </div>
 
-    <!-- SCRIPT UTAMA -->
+    <!-- SCRIPT EXTERNAL (PASTIKAN main.js & kontrol.js SUDAH ADA DI FOLDER assets/js/) -->
     <script src="assets/js/main.js"></script>
-
-    <script>
-      let currentMode = "otomatis";
-      let selectedMins = 0;
-      let selectedReasonText = "";
-      let switchTimerInterval;
-
-      function initManualMode() {
-        forceSetMode("otomatis");
-        renderHistoryTable(); // Muat tabel riwayat dari memori
-      }
-
-      // --- SINKRONISASI UI (Dipanggil global dari main.js jika waktu habis) ---
-      window.refreshControlUI = function () {
-        document.getElementById("teks-status-pompa").innerText = `POMPA OFF`;
-        document.getElementById("teks-status-pompa").className =
-          "text-3xl font-bold text-red-500 mb-1";
-        document.getElementById("teks-desc-pompa").innerText =
-          "Kontrol selesai secara otomatis";
-        renderHistoryTable(); // Muat ulang tabel agar data baru berdurasi penuh tercatat
-        resetSelections();
-      };
-
-      // --- FUNGSI MODAL ALERT ---
-      function showAlertModal(title, message) {
-        document.getElementById("alert-title").innerText = title;
-        document.getElementById("alert-message").innerHTML = message;
-        document.getElementById("modal-alert").classList.remove("hidden");
-      }
-
-      // --- FUNGSI SWITCH MODE & COOLDOWN (5 DETIK) ---
-      function requestOtomatisMode() {
-        if (currentMode === "otomatis") return;
-        // Munculkan konfirmasi mematikan kontrol manual
-        document.getElementById("modal-confirm-off").classList.remove("hidden");
-      }
-
-      function confirmTurnOff(isYes) {
-        document.getElementById("modal-confirm-off").classList.add("hidden");
-        if (isYes) {
-          // Hentikan timer & simpan durasi riil berjalan
-          if (typeof window.stopActiveTimer === "function") {
-            window.stopActiveTimer(false); // Parameter false agar tidak memicu double popup
-          }
-          forceSetMode("otomatis");
-          renderHistoryTable();
-        }
-      }
-
-      function requestManualMode() {
-        if (currentMode === "manual") return;
-        document.getElementById("modal-switch").classList.remove("hidden");
-        const btnYa = document.getElementById("btn-ya-switch");
-        btnYa.disabled = true;
-        btnYa.classList.add("opacity-50", "cursor-not-allowed");
-
-        let timeLeft = 5;
-        btnYa.innerText = `Ya (${timeLeft}s)`;
-        switchTimerInterval = setInterval(() => {
-          timeLeft--;
-          if (timeLeft <= 0) {
-            clearInterval(switchTimerInterval);
-            btnYa.disabled = false;
-            btnYa.classList.remove("opacity-50", "cursor-not-allowed");
-            btnYa.innerText = "Ya, Switch";
-          } else {
-            btnYa.innerText = `Ya (${timeLeft}s)`;
-          }
-        }, 1000);
-      }
-
-      function confirmSwitch(isYes) {
-        clearInterval(switchTimerInterval);
-        document.getElementById("modal-switch").classList.add("hidden");
-        if (isYes) forceSetMode("manual");
-      }
-
-      function forceSetMode(mode) {
-        currentMode = mode;
-        const btnAuto = document.getElementById("btn-mode-otomatis");
-        const btnManual = document.getElementById("btn-mode-manual");
-        const btnPumpOn = document.getElementById("btn-pompa-on");
-        const btnPumpOff = document.getElementById("btn-pompa-off");
-        const teksDesc = document.getElementById("teks-desc-pompa");
-        const durBtns = document.querySelectorAll(".duration-btn");
-        const rsnBtns = document.querySelectorAll(".reason-btn");
-        const customInput = document.getElementById("custom-dur");
-        const customContainer = document.getElementById("dur-custom-container");
-
-        if (mode === "otomatis") {
-          btnAuto.className =
-            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-bold text-sm bg-brand-green text-white shadow-sm transition-all cursor-pointer";
-          btnManual.className =
-            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm text-gray-500 hover:bg-gray-100 transition-all cursor-pointer";
-          teksDesc.innerText = "Sistem dikendalikan otomatis";
-          btnPumpOn.className =
-            "flex-1 md:w-40 py-4 rounded-xl font-bold text-gray-400 bg-gray-200 cursor-not-allowed transition-all flex justify-center items-center space-x-2";
-          btnPumpOff.className =
-            "flex-1 md:w-40 py-4 rounded-xl font-bold text-gray-400 bg-gray-200 cursor-not-allowed transition-all flex justify-center items-center space-x-2";
-
-          customInput.disabled = true;
-          customContainer.classList.add(
-            "bg-gray-100",
-            "opacity-60",
-            "cursor-not-allowed",
-          );
-          durBtns.forEach(
-            (b) =>
-              (b.className =
-                "duration-btn bg-gray-100 border border-gray-200 text-gray-400 px-4 py-2 rounded-lg text-sm cursor-not-allowed w-[80px]"),
-          );
-          rsnBtns.forEach((b) => {
-            b.className =
-              "reason-btn flex items-center space-x-2 bg-gray-100 border border-gray-200 text-gray-400 px-3 py-2 rounded-lg text-sm cursor-not-allowed opacity-60";
-            b.querySelector("i").className = "fa-solid fa-leaf text-gray-400";
-          });
-        } else {
-          btnManual.className =
-            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-bold text-sm bg-brand-green text-white shadow-sm transition-all cursor-pointer";
-          btnAuto.className =
-            "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm text-gray-500 hover:bg-gray-100 transition-all cursor-pointer";
-          teksDesc.innerText = "Sistem dalam mode manual (Menunggu Perintah)";
-          btnPumpOn.className =
-            "flex-1 md:w-40 py-4 rounded-xl font-bold text-white bg-brand-green hover:bg-green-800 cursor-pointer shadow-sm transition-all flex justify-center items-center space-x-2";
-          btnPumpOff.className =
-            "flex-1 md:w-40 py-4 rounded-xl font-bold text-white bg-red-500 hover:bg-red-600 cursor-pointer shadow-sm transition-all flex justify-center items-center space-x-2";
-
-          customInput.disabled = false;
-          customContainer.classList.remove(
-            "bg-gray-100",
-            "opacity-60",
-            "cursor-not-allowed",
-            "border-brand-green",
-          );
-          durBtns.forEach(
-            (b) =>
-              (b.className =
-                "duration-btn bg-white border border-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm hover:border-brand-green hover:text-brand-green cursor-pointer shadow-sm transition-all w-[80px]"),
-          );
-          rsnBtns.forEach((b) => {
-            b.className =
-              "reason-btn flex items-center space-x-2 bg-white border border-gray-200 text-gray-600 px-3 py-2 rounded-lg text-sm hover:border-brand-green shadow-sm cursor-pointer transition-all";
-          });
-          resetSelections();
-        }
-      }
-
-      function resetSelections() {
-        selectedMins = 0;
-        selectedReasonText = "";
-        document.getElementById("custom-dur").value = "";
-        document
-          .getElementById("dur-custom-container")
-          .classList.remove("border-brand-green", "bg-brand-light");
-        document.querySelectorAll(".duration-btn").forEach((btn) => {
-          btn.classList.remove(
-            "border-brand-green",
-            "text-brand-green",
-            "font-bold",
-            "bg-brand-light",
-          );
-          btn.classList.add("border-gray-200", "text-gray-600");
-        });
-        document.querySelectorAll(".reason-btn").forEach((b) => {
-          b.classList.remove("border-brand-green", "bg-brand-light");
-          b.classList.add("border-gray-200", "bg-white");
-        });
-
-        document.getElementById("rsn-1").querySelector("i").className =
-          "fa-solid fa-wrench text-brand-green";
-        document.getElementById("rsn-2").querySelector("i").className =
-          "fa-solid fa-droplet text-blue-500";
-        document.getElementById("rsn-3").querySelector("i").className =
-          "fa-solid fa-leaf text-brand-green";
-      }
-
-      // --- KONTROL DURASI & REASON ---
-      function selectDuration(id, val) {
-        if (currentMode === "otomatis") return;
-        selectedMins = val;
-        document.getElementById("custom-dur").value = "";
-        document
-          .getElementById("dur-custom-container")
-          .classList.remove("border-brand-green", "bg-brand-light");
-        document.querySelectorAll(".duration-btn").forEach((btn) => {
-          btn.classList.remove(
-            "border-brand-green",
-            "text-brand-green",
-            "font-bold",
-            "bg-brand-light",
-          );
-          btn.classList.add("border-gray-200", "text-gray-600");
-        });
-        document
-          .getElementById(id)
-          .classList.add(
-            "border-brand-green",
-            "text-brand-green",
-            "font-bold",
-            "bg-brand-light",
-          );
-      }
-
-      function selectCustomDuration() {
-        if (currentMode === "otomatis") return;
-        const val = parseInt(document.getElementById("custom-dur").value);
-        selectedMins = val > 0 ? val : 0;
-        document.querySelectorAll(".duration-btn").forEach((btn) => {
-          btn.classList.remove(
-            "border-brand-green",
-            "text-brand-green",
-            "font-bold",
-            "bg-brand-light",
-          );
-          btn.classList.add("border-gray-200", "text-gray-600");
-        });
-        document
-          .getElementById("dur-custom-container")
-          .classList.add("border-brand-green", "bg-brand-light");
-      }
-
-      function selectReason(id, text) {
-        if (currentMode === "otomatis") return;
-        selectedReasonText = text;
-        document.querySelectorAll(".reason-btn").forEach((b) => {
-          b.classList.remove("border-brand-green", "bg-brand-light");
-          b.classList.add("border-gray-200", "bg-white");
-        });
-        document
-          .getElementById(id)
-          .classList.add("border-brand-green", "bg-brand-light");
-      }
-
-      // --- EKSEKUSI POMPA (WAJIB ALUR) ---
-      function eksekusiPompa(status) {
-        if (currentMode === "otomatis") return;
-
-        // Validasi Alur Wajib
-        if (selectedMins <= 0 || isNaN(selectedMins)) {
-          showAlertModal(
-            "Langkah Belum Lengkap",
-            `Silakan pilih atau ketik <b>Durasi Override</b> terlebih dahulu sebelum mengeksekusi Pompa ${status}.`,
-          );
-          return;
-        }
-        if (selectedReasonText === "") {
-          showAlertModal(
-            "Langkah Belum Lengkap",
-            `Silakan pilih <b>Alasan Override</b> terlebih dahulu sebelum mengeksekusi Pompa ${status}.`,
-          );
-          return;
-        }
-
-        // Jika ada perintah aktif sebelumnya (baik ON/OFF), stop & rekor dulu durasi riilnya
-        if (localStorage.getItem("pumpTimerStart")) {
-          if (typeof window.stopActiveTimer === "function") {
-            window.stopActiveTimer(false); // Matikan tanpa trigger auto-notification
-          }
-        }
-
-        // Jalankan Timer Baru via main.js
-        if (typeof window.startPumpTimer === "function") {
-          window.startPumpTimer(
-            selectedMins,
-            `Pompa ${status}`,
-            selectedReasonText,
-          );
-        }
-
-        document.getElementById("teks-status-pompa").innerText =
-          `POMPA ${status}`;
-        document.getElementById("teks-status-pompa").className =
-          status === "ON"
-            ? "text-3xl font-bold text-brand-green mb-1"
-            : "text-3xl font-bold text-red-500 mb-1";
-        document.getElementById("teks-desc-pompa").innerText =
-          `Meng-override status ke ${status} selama ${selectedMins} menit`;
-
-        renderHistoryTable(); // Perbarui tabel agar data pemicu baru langsung muncul
-        resetSelections();
-      }
-
-      // Dipanggil saat klik Pompa OFF (jika ingin dihentikan manual sebelum waktunya habis)
-      function eksekusiPompaOFF() {
-        if (currentMode === "otomatis") return;
-        // Munculkan konfirmasi mematikan kontrol manual
-        document.getElementById("modal-confirm-off").classList.remove("hidden");
-      }
-
-      // --- RENDER TABEL HISTORI DARI LOCAL STORAGE ---
-      function renderHistoryTable() {
-        const tbody = document.getElementById("history-table-body");
-        if (!tbody) return;
-
-        // Ambil dari memory browser agar tidak terhapus saat refresh
-        let history = JSON.parse(localStorage.getItem("manualHistory")) || [
-          {
-            waktu: "22 Mei 2026 14:10:32",
-            aksi: "Pompa ON",
-            durasi: "10 menit",
-            alasan: "Kalibrasi Debit Air",
-          },
-          {
-            waktu: "21 Mei 2026 16:22:18",
-            aksi: "Pompa OFF",
-            durasi: "5 menit",
-            alasan: "Pemupukan",
-          },
-          {
-            waktu: "20 Mei 2026 09:05:44",
-            aksi: "Pompa ON",
-            durasi: "15 menit",
-            alasan: "Siram Lahan",
-          },
-        ];
-
-        tbody.innerHTML = "";
-        history.forEach((item) => {
-          const tr = document.createElement("tr");
-          tr.className =
-            "border-b border-gray-100 hover:bg-gray-50 transition-colors";
-
-          const colorClass =
-            item.aksi === "Pompa ON" ? "text-brand-green" : "text-red-500";
-
-          tr.innerHTML = `
-                    <td class="py-3 px-5 whitespace-nowrap">${item.waktu}</td>
-                    <td class="py-3 px-5 font-bold ${colorClass}">${item.aksi}</td>
-                    <td class="py-3 px-5">${item.durasi}</td>
-                    <td class="py-3 px-5">${item.alasan}</td>
-                `;
-          tbody.appendChild(tr);
-        });
-      }
-
-      function toggleDropdown() {
-        document.getElementById("userDropdown").classList.toggle("hidden");
-      }
-      window.addEventListener("click", function (e) {
-        const btn = document.querySelector(
-          'button[onclick="toggleDropdown()"]',
-        );
-        const drop = document.getElementById("userDropdown");
-        if (!btn.contains(e.target) && !drop.contains(e.target))
-          drop.classList.add("hidden");
-      });
-    </script>
+    <script src="assets/js/kontrol.js"></script>
   </body>
 </html>

@@ -1,6 +1,3 @@
-// ==========================================
-// FUNGSI LOGIN DASAR
-// ==========================================
 function togglePassword(inputId, iconId) {
   const input = document.getElementById(inputId);
   const icon = document.getElementById(iconId);
@@ -14,6 +11,7 @@ function togglePassword(inputId, iconId) {
     icon.classList.add("fa-eye");
   }
 }
+
 function loginUser() {
   const user = document.getElementById("user-user").value;
   const pass = document.getElementById("user-pass").value;
@@ -24,35 +22,94 @@ function loginUser() {
   }
 }
 
-// ==========================================
-// FUNGSI KONTROL TIMER & REKOR RIWAYAT RIIL
-// ==========================================
 let globalTimerInterval;
-
-if ("Notification" in window) {
-  if (
-    Notification.permission !== "granted" &&
-    Notification.permission !== "denied"
-  ) {
-    Notification.requestPermission();
-  }
-}
 
 document.addEventListener("DOMContentLoaded", () => {
   checkActiveTimer();
+  loadActiveProfileName();
+  fetchWeatherData(); // Memanggil API Cuaca secara otomatis
 });
 
-// Memulai Timer
+function loadActiveProfileName() {
+  const profileEl = document.getElementById("val-active-profile");
+  if (!profileEl) return;
+
+  const activeProfile = localStorage.getItem("activeProfile") || "auto";
+  let profileName = "Default Sistem";
+
+  if (activeProfile !== "auto") {
+    const slotData = localStorage.getItem(activeProfile);
+    if (slotData) profileName = JSON.parse(slotData).name;
+  }
+  profileEl.innerText = profileName;
+}
+
+// === PENGAMBILAN API CUACA OPEN-METEO ===
+async function fetchWeatherData() {
+  const teksCuaca = document.getElementById("teks-cuaca");
+  const iconCuaca = document.getElementById("icon-cuaca");
+  const teksPeluang = document.getElementById("teks-peluang");
+
+  if (!teksCuaca || !teksPeluang) return;
+
+  const lat = -7.0851452;
+  const lon = 110.3616954;
+  const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=weather_code&daily=precipitation_probability_max&timezone=Asia%2FJakarta`;
+
+  try {
+    teksCuaca.innerText = "Loading...";
+    teksPeluang.innerText = "...";
+
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    const weatherCode = data.current.weather_code;
+    const probHujan = data.daily.precipitation_probability_max[0];
+
+    let cuacaStr = "Tidak Diketahui";
+    let iconHtml = "";
+
+    if (weatherCode === 0) {
+      cuacaStr = "Cerah";
+      iconHtml = '<i class="fa-solid fa-sun text-yellow-400"></i>';
+    } else if (weatherCode === 1 || weatherCode === 2 || weatherCode === 3) {
+      cuacaStr = "Berawan";
+      iconHtml = '<i class="fa-solid fa-cloud text-gray-400"></i>';
+    } else if (weatherCode >= 45 && weatherCode <= 48) {
+      cuacaStr = "Kabut";
+      iconHtml = '<i class="fa-solid fa-smog text-gray-400"></i>';
+    } else if (weatherCode >= 51 && weatherCode <= 67) {
+      cuacaStr = "Hujan Ringan";
+      iconHtml = '<i class="fa-solid fa-cloud-rain text-blue-400"></i>';
+    } else if (weatherCode >= 80 && weatherCode <= 82) {
+      cuacaStr = "Hujan Lebat";
+      iconHtml =
+        '<i class="fa-solid fa-cloud-showers-heavy text-blue-600"></i>';
+    } else if (weatherCode >= 95 && weatherCode <= 99) {
+      cuacaStr = "Badai Petir";
+      iconHtml = '<i class="fa-solid fa-cloud-bolt text-gray-600"></i>';
+    }
+
+    teksCuaca.innerText = cuacaStr;
+    teksCuaca.title = cuacaStr;
+    if (iconCuaca) iconCuaca.innerHTML = iconHtml;
+    teksPeluang.innerText = probHujan + "%";
+  } catch (error) {
+    console.error("Gagal cuaca:", error);
+    teksCuaca.innerText = "Error API";
+    teksPeluang.innerText = "Err";
+  }
+}
+
+// === LOGIKA TIMER ===
 window.startPumpTimer = function (durationMins, action, reason) {
   const startTime = Date.now();
   const endTime = startTime + durationMins * 60000;
-
   localStorage.setItem("pumpTimerStart", startTime.toString());
   localStorage.setItem("pumpTimerEnd", endTime.toString());
   localStorage.setItem("pumpTimerAction", action);
   localStorage.setItem("pumpTimerReason", reason);
   localStorage.setItem("pumpTimerDuration", durationMins.toString());
-
   checkActiveTimer();
 };
 
@@ -62,7 +119,7 @@ function checkActiveTimer() {
 
   const targetTime = parseInt(endTime);
   if (Date.now() >= targetTime) {
-    stopActiveTimer(true); // Otomatis selesai jika waktu habis
+    stopActiveTimer(true);
     return;
   }
 
@@ -83,7 +140,7 @@ function checkActiveTimer() {
     const distance = targetTime - now;
 
     if (distance <= 0) {
-      stopActiveTimer(true); // Selesai alami
+      stopActiveTimer(true);
     } else {
       let m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       let s = Math.floor((distance % (1000 * 60)) / 1000);
@@ -93,22 +150,18 @@ function checkActiveTimer() {
   }, 1000);
 }
 
-// Menghentikan Timer & Menghitung Durasi Riil
 window.stopActiveTimer = function (autoFinished = false) {
   if (globalTimerInterval) clearInterval(globalTimerInterval);
-
   const startTime = localStorage.getItem("pumpTimerStart");
   const action = localStorage.getItem("pumpTimerAction");
   const reason = localStorage.getItem("pumpTimerReason");
   const duration = localStorage.getItem("pumpTimerDuration");
 
-  // Jika ada timer aktif, catat ke riwayat
   if (startTime && action) {
     let durationStr = "";
     if (autoFinished) {
       durationStr = `${duration} menit`;
     } else {
-      // Hitung selisih detik riil
       const elapsedSec = Math.floor((Date.now() - parseInt(startTime)) / 1000);
       if (elapsedSec < 60) {
         durationStr = `${elapsedSec} detik`;
@@ -118,53 +171,21 @@ window.stopActiveTimer = function (autoFinished = false) {
         durationStr = `${mins} mnt ${secs} dtk`;
       }
     }
-    // Catat ke log local storage
     addHistoryToStorage(action, durationStr, reason);
   }
 
-  // Bersihkan Memory
   localStorage.removeItem("pumpTimerStart");
   localStorage.removeItem("pumpTimerEnd");
   localStorage.removeItem("pumpTimerAction");
   localStorage.removeItem("pumpTimerReason");
   localStorage.removeItem("pumpTimerDuration");
-
   const widget = document.getElementById("floating-timer-widget");
   if (widget) widget.remove();
-
-  // Segarkan UI jika berada di halaman kontrol manual
-  if (typeof refreshControlUI === "function") {
-    refreshControlUI();
-  }
-
-  if (autoFinished) {
-    showNotification();
-  }
+  if (typeof refreshControlUI === "function") refreshControlUI();
 };
 
-// Fungsi mencatat data ke Local Storage agar tidak hilang saat refresh
 function addHistoryToStorage(action, durationStr, reason) {
-  let history = JSON.parse(localStorage.getItem("manualHistory")) || [
-    {
-      waktu: "22 Mei 2026 14:10:32",
-      aksi: "Pompa ON",
-      durasi: "10 menit",
-      alasan: "Kalibrasi Debit Air",
-    },
-    {
-      waktu: "21 Mei 2026 16:22:18",
-      aksi: "Pompa OFF",
-      durasi: "5 menit",
-      alasan: "Pemupukan",
-    },
-    {
-      waktu: "20 Mei 2026 09:05:44",
-      aksi: "Pompa ON",
-      durasi: "15 menit",
-      alasan: "Siram Lahan",
-    },
-  ];
-
+  let history = JSON.parse(localStorage.getItem("manualHistory")) || [];
   const now = new Date();
   const d = now.getDate().toString().padStart(2, "0");
   const m = [
@@ -193,23 +214,6 @@ function addHistoryToStorage(action, durationStr, reason) {
     durasi: durationStr,
     alasan: reason,
   });
-
-  // Batasi histori maksimal 15 baris agar rapi
   if (history.length > 15) history.pop();
-
   localStorage.setItem("manualHistory", JSON.stringify(history));
-}
-
-function showNotification() {
-  const title = "Waktu Override Habis!";
-  const options = {
-    body: "Kontrol manual selesai. Sistem pompa irigasi kini kembali ke Mode Otomatis.",
-    icon: "https://cdn-icons-png.flaticon.com/512/1141/1141885.png",
-    vibrate: [200, 100, 200],
-  };
-  if ("Notification" in window && Notification.permission === "granted") {
-    new Notification(title, options);
-  } else {
-    alert(title + "\n\n" + options.body);
-  }
 }

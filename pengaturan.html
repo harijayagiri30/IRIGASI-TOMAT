@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pengaturan - Irigasi Tomat</title>
-    <!-- CSS & JS Terpisah -->
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="stylesheet"
@@ -38,7 +37,7 @@
     class="bg-[#f4f7f4] flex h-screen overflow-hidden font-sans text-gray-800"
     onload="initSettings()"
   >
-    <!-- ==================== SIDEBAR ==================== -->
+    <!-- SIDEBAR -->
     <aside
       class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between flex-shrink-0 relative overflow-hidden"
     >
@@ -88,7 +87,6 @@
             ><i class="fa-solid fa-faucet-drip w-5 text-center"></i
             ><span>Kontrol Manual</span></a
           >
-          <!-- PENGATURAN AKTIF -->
           <a
             href="pengaturan.html"
             class="flex items-center space-x-4 bg-brand-green text-white py-3 pl-8 pr-4 rounded-r-full font-medium transition-all shadow-md"
@@ -115,9 +113,8 @@
       </div>
     </aside>
 
-    <!-- ==================== KONTEN UTAMA ==================== -->
     <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
-      <!-- HEADER -->
+      <!-- HEADER DENGAN WHATSAPP LINKS -->
       <header
         class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-30"
       >
@@ -164,8 +161,12 @@
               >
                 Contact Service
               </p>
-              <div class="space-y-3">
-                <div class="flex items-start space-x-3">
+              <div class="space-y-1">
+                <a
+                  href="https://api.whatsapp.com/send/?phone=6285726750062&text&type=phone_number&app_absent=0&wame_ctl=1"
+                  target="_blank"
+                  class="flex items-start space-x-3 hover:bg-green-50 p-2 rounded-lg transition-colors cursor-pointer"
+                >
                   <i
                     class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
                   ></i>
@@ -174,8 +175,12 @@
                     <p class="text-[11px] text-gray-500">0857-2675-0062</p>
                     <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
                   </div>
-                </div>
-                <div class="flex items-start space-x-3">
+                </a>
+                <a
+                  href="https://api.whatsapp.com/send/?phone=6289604143531&text&type=phone_number&app_absent=0&wame_ctl=1"
+                  target="_blank"
+                  class="flex items-start space-x-3 hover:bg-green-50 p-2 rounded-lg transition-colors cursor-pointer"
+                >
                   <i
                     class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
                   ></i>
@@ -184,7 +189,7 @@
                     <p class="text-[11px] text-gray-500">0896-0414-3531</p>
                     <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
                   </div>
-                </div>
+                </a>
               </div>
             </div>
           </div>
@@ -203,14 +208,12 @@
               Atur ambang batas dan simpan ke slot profil pilihan Anda
             </p>
           </div>
-
           <div class="flex flex-col space-y-2 w-full md:w-auto">
-            <!-- Dropdown Profil -->
             <div
-              class="flex items-center space-x-2 bg-gray-50 p-2 rounded-lg border border-gray-200"
+              class="flex items-center space-x-2 bg-gray-50 p-2 rounded-lg border border-gray-200 w-full md:w-auto"
             >
-              <i class="fa-solid fa-layer-group text-brand-green"></i>
-              <span class="text-xs font-bold text-gray-700">Profil:</span>
+              <i class="fa-solid fa-layer-group text-brand-green"></i
+              ><span class="text-xs font-bold text-gray-700">Profil:</span>
               <select
                 id="preset-profil"
                 onchange="applyPreset()"
@@ -222,8 +225,6 @@
                 <option id="opt-slot3" value="slot3">Slot 3 (Custom)</option>
               </select>
             </div>
-
-            <!-- Input Edit Nama Slot -->
             <div
               id="slot-name-container"
               class="hidden flex items-center space-x-2 px-2"
@@ -411,7 +412,6 @@
         </div>
       </div>
 
-      <!-- AKUN ADMINISTRATOR -->
       <div
         class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-6 w-full"
       >
@@ -454,12 +454,11 @@
         </div>
       </div>
 
-      <!-- REVISI: CARD PERINGATAN PENTING DI TENGAH HALAMAN -->
       <div
         class="bg-yellow-50 rounded-xl border border-yellow-200 p-4 mb-6 flex items-start space-x-3 shadow-sm select-none"
       >
         <div
-          class="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center flex-shrink-0 text-xl"
+          class="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center text-2xl mx-auto mb-4"
         >
           <i class="fa-solid fa-triangle-exclamation"></i>
         </div>
@@ -467,7 +466,6 @@
           <p class="text-xs font-bold text-yellow-800 mb-0.5">
             Pemberitahuan Sistem
           </p>
-          <!-- Kalimat Persis Sesuai Permintaan -->
           <p class="text-xs text-yellow-700 leading-relaxed">
             setelah memilih slot jangan lupa untuk Kembali pilih default jika di
             rasa sudah cukup
@@ -475,7 +473,6 @@
         </div>
       </div>
 
-      <!-- TOMBOL AKSI -->
       <div
         class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-3"
       >
@@ -534,7 +531,7 @@
           </button>
           <button
             onclick="confirmReset(false)"
-            class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-6 rounded-lg text-sm w-24"
+            class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-6 rounded-lg text-sm transition-colors w-24"
           >
             Batal
           </button>
@@ -544,296 +541,49 @@
 
     <!-- BOTTOM NAV -->
     <nav
-      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-4 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-2 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
     >
       <a
         href="dashboard.html"
         class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
-        ><i class="fa-solid fa-house text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Home</span></a
+        ><i class="fa-solid fa-house text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Home</span></a
       >
       <a
         href="monitoring.html"
         class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
-        ><i class="fa-solid fa-chart-simple text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Monitor</span></a
+        ><i class="fa-solid fa-chart-simple text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Monitor</span></a
       >
       <a
         href="riwayat-data.html"
         class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
-        ><i class="fa-solid fa-clock-rotate-left text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Riwayat</span></a
+        ><i class="fa-solid fa-clock-rotate-left text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Riwayat</span></a
       >
       <a
         href="kontrol-manual.html"
-        class="flex flex-col items-center text-gray-400 hover:text-brand-green"
-        ><i class="fa-solid fa-faucet-drip text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Kontrol</span></a
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-faucet-drip text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Kontrol</span></a
       >
+      <!-- MENU AKTIF -->
       <a
         href="pengaturan.html"
         class="flex flex-col items-center flex-1 text-brand-green"
-        ><i class="fa-solid fa-gear text-xl mb-1"></i
-        ><span class="text-[9px] font-bold">Atur</span></a
+        ><i class="fa-solid fa-gear text-lg mb-1"></i
+        ><span class="text-[8px] font-bold">Atur</span></a
       >
       <a
         href="sistem.html"
         class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
-        ><i class="fa-solid fa-server text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Sistem</span></a
+        ><i class="fa-solid fa-server text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Sistem</span></a
       >
     </nav>
 
-    <script>
-      const defSlot1 = {
-        name: "Slot 1 (Custom)",
-        kbawah: 45,
-        katas: 80,
-        kbatas: 45,
-        nkering: 2,
-        interval: "1 jam",
-        tunda: "Aktif",
-        curah: 5,
-      };
-      const defSlot2 = {
-        name: "Slot 2 (Custom)",
-        kbawah: 45,
-        katas: 80,
-        kbatas: 45,
-        nkering: 2,
-        interval: "1 jam",
-        tunda: "Aktif",
-        curah: 5,
-      };
-      const defSlot3 = {
-        name: "Slot 3 (Custom)",
-        kbawah: 45,
-        katas: 80,
-        kbatas: 45,
-        nkering: 2,
-        interval: "1 jam",
-        tunda: "Aktif",
-        curah: 5,
-      };
-
-      const paramIds = [
-        "kbawah",
-        "katas",
-        "kbatas",
-        "nkering",
-        "interval",
-        "tunda",
-        "curah",
-        "slot-name",
-      ];
-      let resetTimerInterval;
-
-      // SINKRONISASI AKTIF: Cek memori browser saat halaman dimuat
-      function initSettings() {
-        if (!localStorage.getItem("slot1"))
-          localStorage.setItem("slot1", JSON.stringify(defSlot1));
-        if (!localStorage.getItem("slot2"))
-          localStorage.setItem("slot2", JSON.stringify(defSlot2));
-        if (!localStorage.getItem("slot3"))
-          localStorage.setItem("slot3", JSON.stringify(defSlot3));
-
-        updateDropdownNames();
-
-        // REVISI: Ambil profil terakhir yang dipilih user dari memory (default ke 'auto' jika belum ada)
-        const lastActiveProfile =
-          localStorage.getItem("activeProfile") || "auto";
-        document.getElementById("preset-profil").value = lastActiveProfile;
-
-        applyPreset();
-      }
-
-      function updateDropdownNames() {
-        document.getElementById("opt-slot1").innerText = JSON.parse(
-          localStorage.getItem("slot1"),
-        ).name;
-        document.getElementById("opt-slot2").innerText = JSON.parse(
-          localStorage.getItem("slot2"),
-        ).name;
-        document.getElementById("opt-slot3").innerText = JSON.parse(
-          localStorage.getItem("slot3"),
-        ).name;
-      }
-
-      function applyPreset() {
-        const profil = document.getElementById("preset-profil").value;
-
-        // REVISI: Simpan profil aktif saat ini ke memory agar tidak kembali ke default saat pindah halaman
-        localStorage.setItem("activeProfile", profil);
-
-        const autoMsg = document.getElementById("auto-msg");
-        const editMsg = document.getElementById("edit-msg");
-        const btnSimpan = document.getElementById("btn-simpan");
-        const btnEdit = document.getElementById("btn-edit");
-        const btnReset = document.getElementById("btn-reset");
-        const nameContainer = document.getElementById("slot-name-container");
-
-        if (profil === "auto") {
-          nameContainer.classList.add("hidden");
-          btnReset.classList.add("hidden");
-
-          document.getElementById("kbawah").value = 45;
-          document.getElementById("katas").value = 80;
-          document.getElementById("kbatas").value = 45;
-          document.getElementById("nkering").value = 2;
-          document.getElementById("interval").value = "1 jam";
-          document.getElementById("tunda").value = "Aktif";
-          document.getElementById("curah").value = 5;
-
-          autoMsg.classList.remove("hidden");
-          editMsg.classList.add("hidden");
-          btnSimpan.classList.add("hidden");
-          btnEdit.classList.add("hidden");
-          lockInputs();
-        } else {
-          nameContainer.classList.remove("hidden");
-          btnReset.classList.remove("hidden");
-
-          const slotData = JSON.parse(localStorage.getItem(profil));
-          document.getElementById("kbawah").value = slotData.kbawah;
-          document.getElementById("katas").value = slotData.katas;
-          document.getElementById("kbatas").value = slotData.kbatas;
-          document.getElementById("nkering").value = slotData.nkering;
-          document.getElementById("interval").value = slotData.interval;
-          document.getElementById("tunda").value = slotData.tunda;
-          document.getElementById("curah").value = slotData.curah;
-          document.getElementById("slot-name").value = slotData.name;
-
-          autoMsg.classList.add("hidden");
-          editMsg.classList.remove("hidden");
-          btnSimpan.classList.remove("hidden");
-          btnEdit.classList.add("hidden");
-          unlockInputs();
-        }
-      }
-
-      function saveSettings() {
-        const profil = document.getElementById("preset-profil").value;
-        if (profil === "auto") return;
-
-        let newName = document.getElementById("slot-name").value;
-        if (newName.trim() === "")
-          newName = `Slot ${profil.replace("slot", "")}`;
-
-        const newData = {
-          name: newName,
-          kbawah: document.getElementById("kbawah").value,
-          katas: document.getElementById("katas").value,
-          kbatas: document.getElementById("kbatas").value,
-          nkering: document.getElementById("nkering").value,
-          interval: document.getElementById("interval").value,
-          tunda: document.getElementById("tunda").value,
-          curah: document.getElementById("curah").value,
-        };
-
-        localStorage.setItem(profil, JSON.stringify(newData));
-        updateDropdownNames();
-        lockInputs();
-
-        document.getElementById("edit-msg").classList.add("hidden");
-        document.getElementById("btn-simpan").classList.add("hidden");
-        document.getElementById("btn-edit").classList.remove("hidden");
-
-        alert(`Sukses! Data telah disimpan sebagai "${newName}".`);
-      }
-
-      function enableEdit() {
-        unlockInputs();
-        document.getElementById("edit-msg").classList.remove("hidden");
-        document.getElementById("btn-simpan").classList.remove("hidden");
-        document.getElementById("btn-edit").classList.add("hidden");
-      }
-
-      // PERBAIKAN: Fungsi lock tidak pernah menyentuh / mengunci dropdown profil
-      function lockInputs() {
-        paramIds.concat(["user-name", "user-email"]).forEach((id) => {
-          const input = document.getElementById(id);
-          input.disabled = true;
-          input.classList.add("text-gray-400", "cursor-not-allowed");
-          input.classList.remove("text-gray-800", "text-brand-green");
-          const card = document.getElementById("card-" + id);
-          if (card) {
-            card.classList.add("bg-gray-100", "opacity-75");
-            card.classList.remove("bg-white");
-          }
-        });
-      }
-
-      // PERBAIKAN: Fungsi unlock tidak pernah menyentuh / membuka dropdown profil
-      function unlockInputs() {
-        paramIds.concat(["user-name", "user-email"]).forEach((id) => {
-          const input = document.getElementById(id);
-          input.disabled = false;
-          input.classList.remove("text-gray-400", "cursor-not-allowed");
-          input.classList.add("text-gray-800");
-          if (id === "slot-name") input.classList.add("text-brand-green");
-          const card = document.getElementById("card-" + id);
-          if (card) {
-            card.classList.remove("bg-gray-100", "opacity-75");
-            card.classList.add("bg-white");
-          }
-        });
-      }
-
-      function showResetModal() {
-        document.getElementById("modal-reset").classList.remove("hidden");
-        const btnYa = document.getElementById("btn-ya-reset");
-        btnYa.disabled = true;
-        btnYa.classList.add("opacity-50", "cursor-not-allowed");
-        btnYa.classList.remove("hover:bg-red-600");
-
-        let timeLeft = 5;
-        btnYa.innerText = `Ya (${timeLeft}s)`;
-
-        resetTimerInterval = setInterval(() => {
-          timeLeft--;
-          if (timeLeft <= 0) {
-            clearInterval(resetTimerInterval);
-            btnYa.disabled = false;
-            btnYa.classList.remove("opacity-50", "cursor-not-allowed");
-            btnYa.classList.add("hover:bg-red-600");
-            btnYa.innerText = "Ya, Hapus";
-          } else {
-            btnYa.innerText = `Ya (${timeLeft}s)`;
-          }
-        }, 1000);
-      }
-
-      function confirmReset(isYes) {
-        clearInterval(resetTimerInterval);
-        document.getElementById("modal-reset").classList.add("hidden");
-
-        if (isYes) {
-          const profil = document.getElementById("preset-profil").value;
-          if (profil !== "auto") {
-            let defData =
-              profil === "slot1"
-                ? defSlot1
-                : profil === "slot2"
-                  ? defSlot2
-                  : defSlot3;
-            localStorage.setItem(profil, JSON.stringify(defData));
-            updateDropdownNames();
-            applyPreset();
-          }
-        }
-      }
-
-      function toggleDropdown() {
-        document.getElementById("userDropdown").classList.toggle("hidden");
-      }
-      window.addEventListener("click", function (e) {
-        const btn = document.querySelector(
-          'button[onclick="toggleDropdown()"]',
-        );
-        const drop = document.getElementById("userDropdown");
-        if (!btn.contains(e.target) && !drop.contains(e.target))
-          drop.classList.add("hidden");
-      });
-    </script>
+    <!-- EKSTERNAL JS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/pengaturan.js"></script>
   </body>
 </html>

@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Monitoring - Irigasi Tomat</title>
-    <!-- CSS & JS Terpisah -->
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="stylesheet"
@@ -12,6 +11,7 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="assets/js/tailwind-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       .circle-progress {
         border-radius: 50%;
@@ -33,7 +33,6 @@
   <body
     class="bg-[#f4f7f4] flex h-screen overflow-hidden font-sans text-gray-800"
   >
-    <!-- SIDEBAR -->
     <aside
       class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between flex-shrink-0 relative overflow-hidden"
     >
@@ -109,9 +108,7 @@
       </div>
     </aside>
 
-    <!-- KONTEN UTAMA -->
     <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
-      <!-- HEADER -->
       <header
         class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-30"
       >
@@ -120,10 +117,17 @@
             class="text-xl md:text-2xl font-bold text-gray-800 flex items-center flex-wrap"
           >
             Monitoring Detail
-            <span class="text-gray-400 font-normal text-lg mx-2">/</span>
-            <span class="text-gray-500 font-medium text-lg">Kelembapan</span
-            ><span class="text-gray-400 font-normal text-lg mx-2">/</span>
-            <span class="text-gray-500 font-medium text-lg">Debit Air</span>
+            <span class="text-gray-400 font-normal text-sm md:text-lg mx-2"
+              >/</span
+            >
+            <span class="text-gray-500 font-medium text-sm md:text-lg"
+              >Kelembapan</span
+            ><span class="text-gray-400 font-normal text-sm md:text-lg mx-2"
+              >/</span
+            >
+            <span class="text-gray-500 font-medium text-sm md:text-lg"
+              >Debit Air</span
+            >
           </h2>
           <p
             id="fb-status"
@@ -144,7 +148,7 @@
               <i class="fa-solid fa-user text-xs"></i>
             </div>
             <div class="text-left pr-1">
-              <p class="font-bold text-gray-800 text-xs">User</p>
+              <p class="font-bold text-gray-800 text-xs leading-tight">User</p>
               <p class="text-[9px] text-gray-500 hidden sm:block">
                 Pengguna Sistem
               </p>
@@ -171,27 +175,32 @@
               >
                 Contact Service
               </p>
-              <div class="space-y-3">
-                <div class="flex items-start space-x-3">
-                  <i
+              <div class="space-y-1">
+                <a
+                  href="https://api.whatsapp.com/send/?phone=6285726750062&text=Halo%20kak%20Hari,%20saya%20ingin%20menanyakan%20tentang%20web/alat...&type=phone_number&app_absent=0&wame_ctl=1"
+                  target="_blank"
+                  class="flex items-start space-x-3 hover:bg-green-50 p-2 rounded-lg transition-colors cursor-pointer"
+                  ><i
                     class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
                   ></i>
                   <div>
                     <p class="text-xs font-bold text-gray-800">Hari</p>
                     <p class="text-[11px] text-gray-500">0857-2675-0062</p>
                     <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
-                  </div>
-                </div>
-                <div class="flex items-start space-x-3">
-                  <i
+                  </div></a
+                ><a
+                  href="https://api.whatsapp.com/send/?phone=6289604143531&text=Halo%20kak%20Rimba,%20saya%20ingin%20menanyakan%20tentang%20web/alat...&type=phone_number&app_absent=0&wame_ctl=1"
+                  target="_blank"
+                  class="flex items-start space-x-3 hover:bg-green-50 p-2 rounded-lg transition-colors cursor-pointer"
+                  ><i
                     class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
                   ></i>
                   <div>
                     <p class="text-xs font-bold text-gray-800">Rimba</p>
                     <p class="text-[11px] text-gray-500">0896-0414-3531</p>
                     <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
-                  </div>
-                </div>
+                  </div></a
+                >
               </div>
             </div>
           </div>
@@ -206,7 +215,12 @@
             >
               <i class="fa-solid fa-leaf"></i>
             </div>
-            <h3 class="font-bold text-gray-800">Zona 1</h3>
+            <h3 class="font-bold text-gray-800">
+              Zona 1
+              <span class="text-xs font-normal text-gray-500 ml-1"
+                >(Pangkal Bedeng)</span
+              >
+            </h3>
           </div>
           <div class="flex justify-between items-end">
             <div>
@@ -214,20 +228,9 @@
               <p id="val-z1" class="text-4xl font-bold text-gray-400">--.-%</p>
             </div>
             <div class="flex flex-col items-end">
-              <svg
-                class="w-16 h-8 mb-3"
-                preserveAspectRatio="none"
-                viewBox="0 0 100 100"
-              >
-                <polyline
-                  fill="none"
-                  stroke="#287930"
-                  stroke-width="3"
-                  points="0,70 20,60 40,80 60,30 80,50 100,20"
-                /></svg
-              ><span
+              <span
                 id="stat-z1"
-                class="px-3 py-1 text-[10px] font-bold text-gray-500 bg-gray-100 border border-gray-200 rounded-full"
+                class="px-3 py-1 text-[10px] font-bold text-gray-500 bg-gray-100 border border-gray-200 rounded-full mt-2"
                 >Tunggu...</span
               >
             </div>
@@ -240,7 +243,12 @@
             >
               <i class="fa-solid fa-leaf"></i>
             </div>
-            <h3 class="font-bold text-gray-800">Zona 2</h3>
+            <h3 class="font-bold text-gray-800">
+              Zona 2
+              <span class="text-xs font-normal text-gray-500 ml-1"
+                >(Tengah Bedeng)</span
+              >
+            </h3>
           </div>
           <div class="flex justify-between items-end">
             <div>
@@ -248,20 +256,9 @@
               <p id="val-z2" class="text-4xl font-bold text-gray-400">--.-%</p>
             </div>
             <div class="flex flex-col items-end">
-              <svg
-                class="w-16 h-8 mb-3"
-                preserveAspectRatio="none"
-                viewBox="0 0 100 100"
-              >
-                <polyline
-                  fill="none"
-                  stroke="#fb923c"
-                  stroke-width="3"
-                  points="0,50 20,60 40,40 60,50 80,20 100,30"
-                /></svg
-              ><span
+              <span
                 id="stat-z2"
-                class="px-3 py-1 text-[10px] font-bold text-orange-500 bg-orange-50 border border-orange-200 rounded-full"
+                class="px-3 py-1 text-[10px] font-bold text-gray-500 bg-gray-100 border border-gray-200 rounded-full mt-2"
                 >Tunggu...</span
               >
             </div>
@@ -274,7 +271,12 @@
             >
               <i class="fa-solid fa-leaf"></i>
             </div>
-            <h3 class="font-bold text-gray-800">Zona 3</h3>
+            <h3 class="font-bold text-gray-800">
+              Zona 3
+              <span class="text-xs font-normal text-gray-500 ml-1"
+                >(Ujung Bedeng)</span
+              >
+            </h3>
           </div>
           <div class="flex justify-between items-end">
             <div>
@@ -282,20 +284,9 @@
               <p id="val-z3" class="text-4xl font-bold text-gray-400">--.-%</p>
             </div>
             <div class="flex flex-col items-end">
-              <svg
-                class="w-16 h-8 mb-3"
-                preserveAspectRatio="none"
-                viewBox="0 0 100 100"
-              >
-                <polyline
-                  fill="none"
-                  stroke="#3b82f6"
-                  stroke-width="3"
-                  points="0,80 20,70 40,75 60,50 80,65 100,80"
-                /></svg
-              ><span
+              <span
                 id="stat-z3"
-                class="px-3 py-1 text-[10px] font-bold text-red-500 bg-red-50 border border-red-200 rounded-full"
+                class="px-3 py-1 text-[10px] font-bold text-gray-500 bg-gray-100 border border-gray-200 rounded-full mt-2"
                 >Tunggu...</span
               >
             </div>
@@ -313,71 +304,26 @@
             <h3 class="font-bold text-gray-800 text-sm">
               Grafik Kelembapan per Zona
             </h3>
+            <!-- REVISI: flex-wrap dan penamaan Kelembapan Zona agar tidak terpotong -->
             <div
-              class="flex space-x-2 md:space-x-4 text-[9px] md:text-[10px] font-medium text-gray-500"
+              class="flex flex-wrap gap-2 text-[9px] md:text-[10px] font-medium text-gray-500"
             >
               <span class="flex items-center"
                 ><span class="w-2 md:w-3 h-0.5 bg-brand-green mr-1"></span>
-                KZ1</span
-              ><span class="flex items-center"
+                Kelembapan Zona 1</span
+              >
+              <span class="flex items-center"
                 ><span class="w-2 md:w-3 h-0.5 bg-orange-400 mr-1"></span>
-                KZ2</span
-              ><span class="flex items-center"
+                Kelembapan Zona 2</span
+              >
+              <span class="flex items-center"
                 ><span class="w-2 md:w-3 h-0.5 bg-blue-500 mr-1"></span>
-                KZ3</span
+                Kelembapan Zona 3</span
               >
             </div>
           </div>
-          <div
-            class="flex-1 bg-white relative w-full min-h-[200px] border-l border-b border-gray-300 ml-4 md:ml-6"
-          >
-            <div
-              class="absolute w-full left-0 top-[20%] border-t border-dashed border-brand-green"
-            >
-              <span
-                class="absolute right-0 -top-4 text-[8px] md:text-[9px] text-brand-green font-bold"
-                >Batas Basah 80%</span
-              >
-            </div>
-            <div
-              class="absolute w-full left-0 top-[55%] border-t border-dashed border-red-500"
-            >
-              <span
-                class="absolute right-0 -bottom-4 text-[8px] md:text-[9px] text-red-500 font-bold"
-                >Batas Kering 45%</span
-              >
-            </div>
-            <div
-              class="absolute -left-5 md:-left-6 top-[-10px] text-[9px] md:text-[10px] text-gray-400"
-            >
-              (%)<br />100
-            </div>
-            <div
-              class="absolute -left-4 md:-left-5 top-[20%] text-[9px] md:text-[10px] text-gray-400"
-            >
-              75
-            </div>
-            <div
-              class="absolute -left-4 md:-left-5 top-[45%] text-[9px] md:text-[10px] text-gray-400"
-            >
-              50
-            </div>
-            <div
-              class="absolute -left-4 md:-left-5 top-[70%] text-[9px] md:text-[10px] text-gray-400"
-            >
-              25
-            </div>
-            <div
-              class="absolute -left-2 md:-left-3 bottom-0 text-[9px] md:text-[10px] text-gray-400"
-            >
-              0
-            </div>
-            <div
-              class="absolute left-0 -bottom-5 w-full flex justify-between text-[8px] md:text-[10px] text-gray-400"
-            >
-              <span>12:00</span><span>18:00</span><span>00:00</span
-              ><span>06:00</span><span>12:00</span>
-            </div>
+          <div class="flex-1 relative w-full min-h-[220px]">
+            <canvas id="chartKelembapanZona"></canvas>
           </div>
         </div>
 
@@ -388,10 +334,10 @@
             class="flex flex-col md:flex-row md:justify-between md:items-start mb-6 gap-2"
           >
             <h3 class="font-bold text-gray-800 text-sm">
-              Grafik Sensor S1 - S6
+              Grafik Sensor 1 - Sensor 6
             </h3>
             <div
-              class="flex flex-wrap space-x-2 md:space-x-3 text-[9px] md:text-[10px] font-medium text-gray-500"
+              class="flex flex-wrap gap-2 text-[9px] md:text-[10px] font-medium text-gray-500"
             >
               <span class="flex items-center"
                 ><span class="w-2 md:w-3 h-0.5 bg-brand-green mr-1"></span>
@@ -414,40 +360,8 @@
               >
             </div>
           </div>
-          <div
-            class="flex-1 bg-white relative w-full min-h-[200px] border-l border-b border-gray-300 ml-4 md:ml-6"
-          >
-            <div
-              class="absolute -left-5 md:-left-6 top-[-10px] text-[9px] md:text-[10px] text-gray-400"
-            >
-              (%)<br />100
-            </div>
-            <div
-              class="absolute -left-4 md:-left-5 top-[25%] text-[9px] md:text-[10px] text-gray-400"
-            >
-              75
-            </div>
-            <div
-              class="absolute -left-4 md:-left-5 top-[50%] text-[9px] md:text-[10px] text-gray-400"
-            >
-              50
-            </div>
-            <div
-              class="absolute -left-4 md:-left-5 top-[75%] text-[9px] md:text-[10px] text-gray-400"
-            >
-              25
-            </div>
-            <div
-              class="absolute -left-2 md:-left-3 bottom-0 text-[9px] md:text-[10px] text-gray-400"
-            >
-              0
-            </div>
-            <div
-              class="absolute left-0 -bottom-5 w-full flex justify-between text-[8px] md:text-[10px] text-gray-400"
-            >
-              <span>12:00</span><span>18:00</span><span>00:00</span
-              ><span>06:00</span><span>12:00</span>
-            </div>
+          <div class="flex-1 relative w-full min-h-[220px]">
+            <canvas id="chartSensor"></canvas>
           </div>
         </div>
       </div>
@@ -456,7 +370,7 @@
         class="bg-white rounded-xl border border-gray-200 shadow-sm p-4 md:p-6 flex flex-col mb-6 overflow-hidden"
       >
         <div
-          class="flex flex-col md:flex-row justify-between items-start mb-6 gap-2"
+          class="flex flex-col md:flex-row justify-between items-start mb-4 gap-2"
         >
           <div>
             <h3 class="font-bold text-gray-800 text-sm">
@@ -466,88 +380,21 @@
               Data ditarik otomatis per 3 jam
             </p>
           </div>
-          <div
-            class="flex space-x-2 md:space-x-4 text-[9px] md:text-[10px] font-medium text-gray-500"
-          >
-            <span class="flex items-center"
-              ><span class="w-3 h-0.5 bg-blue-500 mr-1"></span> Volume Debit
-              (L)</span
-            >
-          </div>
         </div>
-        <div
-          class="flex-1 bg-white relative w-full min-h-[200px] border-l border-b border-gray-300 mt-2 ml-6 md:ml-8"
-        >
-          <div
-            class="absolute -left-7 md:-left-8 top-[-10px] text-[9px] md:text-[10px] text-gray-400"
-          >
-            (Liter)<br />100
-          </div>
-          <div
-            class="absolute -left-4 md:-left-5 top-[25%] text-[9px] md:text-[10px] text-gray-400"
-          >
-            75
-          </div>
-          <div
-            class="absolute -left-4 md:-left-5 top-[50%] text-[9px] md:text-[10px] text-gray-400"
-          >
-            50
-          </div>
-          <div
-            class="absolute -left-4 md:-left-5 top-[75%] text-[9px] md:text-[10px] text-gray-400"
-          >
-            25
-          </div>
-          <div
-            class="absolute -left-2 md:-left-3 bottom-0 text-[9px] md:text-[10px] text-gray-400"
-          >
-            0
-          </div>
-          <svg
-            class="absolute w-full h-full"
-            preserveAspectRatio="none"
-            viewBox="0 0 100 100"
-          >
-            <polygon
-              fill="rgba(59, 130, 246, 0.15)"
-              stroke="none"
-              points="0,100 0,80 12.5,60 25,65 37.5,40 50,55 62.5,30 75,45 87.5,15 100,25 100,100"
-            />
-            <polyline
-              fill="none"
-              stroke="#3b82f6"
-              stroke-width="2"
-              points="0,80 12.5,60 25,65 37.5,40 50,55 62.5,30 75,45 87.5,15 100,25"
-            />
-            <circle cx="0" cy="80" r="1.5" fill="#3b82f6" />
-            <circle cx="12.5" cy="60" r="1.5" fill="#3b82f6" />
-            <circle cx="25" cy="65" r="1.5" fill="#3b82f6" />
-            <circle cx="37.5" cy="40" r="1.5" fill="#3b82f6" />
-            <circle cx="50" cy="55" r="1.5" fill="#3b82f6" />
-            <circle cx="62.5" cy="30" r="1.5" fill="#3b82f6" />
-            <circle cx="75" cy="45" r="1.5" fill="#3b82f6" />
-            <circle cx="87.5" cy="15" r="1.5" fill="#3b82f6" />
-            <circle cx="100" cy="25" r="1.5" fill="#3b82f6" />
-          </svg>
-          <div
-            class="absolute left-0 -bottom-5 w-full flex justify-between text-[8px] md:text-[10px] text-gray-400"
-          >
-            <span>00:00</span><span>06:00</span><span>12:00</span
-            ><span>18:00</span><span>24:00</span>
-          </div>
+        <div class="flex-1 relative w-full min-h-[200px]">
+          <canvas id="chartDebitAir"></canvas>
         </div>
       </div>
 
-      <!-- SENSOR DETAIL & SUMMARY (Kini S1 - S6) -->
       <div
-        class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-3 md:gap-4 mb-4"
+        class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-3 md:gap-4 mb-6"
       >
         <div
           class="bg-white p-3 md:p-4 rounded-xl border border-gray-200 shadow-sm flex flex-col items-center justify-center text-center col-span-1"
         >
           <div class="flex items-center space-x-1 mb-1">
             <i class="fa-solid fa-leaf text-brand-green text-[9px]"></i
-            ><span class="font-bold text-gray-800 text-[10px]">S1</span>
+            ><span class="font-bold text-gray-800 text-[10px]">Sensor 1</span>
           </div>
           <p id="val-s1" class="text-base font-bold text-gray-400 mb-1">--%</p>
           <span
@@ -560,7 +407,7 @@
         >
           <div class="flex items-center space-x-1 mb-1">
             <i class="fa-solid fa-leaf text-brand-green text-[9px]"></i
-            ><span class="font-bold text-gray-800 text-[10px]">S2</span>
+            ><span class="font-bold text-gray-800 text-[10px]">Sensor 2</span>
           </div>
           <p id="val-s2" class="text-base font-bold text-gray-400 mb-1">--%</p>
           <span
@@ -573,11 +420,9 @@
         >
           <div class="flex items-center space-x-1 mb-1">
             <i class="fa-solid fa-leaf text-orange-400 text-[9px]"></i
-            ><span class="font-bold text-gray-800 text-[10px]">S3</span>
+            ><span class="font-bold text-gray-800 text-[10px]">Sensor 3</span>
           </div>
-          <p id="val-s3" class="text-base font-bold text-orange-500 mb-1">
-            --%
-          </p>
+          <p id="val-s3" class="text-base font-bold text-gray-400 mb-1">--%</p>
           <span
             class="px-2 py-0.5 text-[8px] font-bold text-orange-500 bg-orange-50 border border-orange-200 rounded-full mb-1"
             >Cukup Kering</span
@@ -588,11 +433,9 @@
         >
           <div class="flex items-center space-x-1 mb-1">
             <i class="fa-solid fa-leaf text-orange-400 text-[9px]"></i
-            ><span class="font-bold text-gray-800 text-[10px]">S4</span>
+            ><span class="font-bold text-gray-800 text-[10px]">Sensor 4</span>
           </div>
-          <p id="val-s4" class="text-base font-bold text-orange-500 mb-1">
-            --%
-          </p>
+          <p id="val-s4" class="text-base font-bold text-gray-400 mb-1">--%</p>
           <span
             class="px-2 py-0.5 text-[8px] font-bold text-red-500 bg-red-50 border border-red-200 rounded-full mb-1"
             >Kering</span
@@ -603,7 +446,7 @@
         >
           <div class="flex items-center space-x-1 mb-1">
             <i class="fa-solid fa-leaf text-blue-500 text-[9px]"></i
-            ><span class="font-bold text-gray-800 text-[10px]">S5</span>
+            ><span class="font-bold text-gray-800 text-[10px]">Sensor 5</span>
           </div>
           <p id="val-s5" class="text-base font-bold text-blue-500 mb-1">--%</p>
           <span
@@ -616,18 +459,15 @@
         >
           <div class="flex items-center space-x-1 mb-1">
             <i class="fa-solid fa-leaf text-blue-500 text-[9px]"></i
-            ><span class="font-bold text-gray-800 text-[10px]">S6</span>
+            ><span class="font-bold text-gray-800 text-[10px]">Sensor 6</span>
           </div>
-          <p id="val-s6" class="text-base font-bold text-orange-500 mb-1">
-            --%
-          </p>
+          <p id="val-s6" class="text-base font-bold text-gray-400 mb-1">--%</p>
           <span
             class="px-2 py-0.5 text-[8px] font-bold text-orange-500 bg-orange-50 border border-orange-200 rounded-full mb-1"
             >Cukup Kering</span
           >
         </div>
 
-        <!-- RINGKASAN BAWAH (ID Diperbaiki agar tidak Crash dengan val-debit) -->
         <div
           class="bg-white p-4 md:p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-center col-span-2"
         >
@@ -670,179 +510,79 @@
           </div>
         </div>
       </div>
+
+      <div class="bg-[#ebf3fc] rounded-xl border border-blue-100 p-5 shadow-sm">
+        <div class="flex items-center space-x-3 mb-3">
+          <div
+            class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm"
+          >
+            <i class="fa-solid fa-circle-info"></i>
+          </div>
+          <h3 class="font-bold text-blue-800 text-sm">
+            Catatan Sistem Pemetaan Perangkat
+          </h3>
+        </div>
+        <ul
+          class="list-disc pl-11 text-xs text-blue-700 space-y-1.5 marker:text-blue-400"
+        >
+          <li>
+            <b>Zona 1 (Pangkal Bedeng)</b> ditarik dari data
+            <b>Node 1</b> (Sensor 1 dan Sensor 2).
+          </li>
+          <li>
+            <b>Zona 2 (Tengah Bedeng)</b> ditarik dari data
+            <b>Node 2</b> (Sensor 3 dan Sensor 4).
+          </li>
+          <li>
+            <b>Zona 3 (Ujung Bedeng)</b> ditarik dari data <b>Node 3</b> (Sensor
+            5 dan Sensor 6).
+          </li>
+        </ul>
+      </div>
     </main>
 
     <nav
-      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-4 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-2 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
     >
       <a
         href="dashboard.html"
         class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
-        ><i class="fa-solid fa-house text-xl mb-1"></i
+        ><i class="fa-solid fa-house text-lg mb-1"></i
         ><span class="text-[8px] font-medium">Home</span></a
       >
       <a
         href="monitoring.html"
-        class="flex flex-col items-center text-brand-green w-1/5"
-        ><i class="fa-solid fa-chart-simple text-xl mb-1"></i
-        ><span class="text-[9px] font-bold">Monitor</span></a
+        class="flex flex-col items-center flex-1 text-brand-green"
+        ><i class="fa-solid fa-chart-simple text-lg mb-1"></i
+        ><span class="text-[8px] font-bold">Monitor</span></a
       >
       <a
         href="riwayat-data.html"
-        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green w-1/5"
-        ><i class="fa-solid fa-clock-rotate-left text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Riwayat</span></a
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-clock-rotate-left text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Riwayat</span></a
       >
       <a
         href="kontrol-manual.html"
-        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green w-1/5"
-        ><i class="fa-solid fa-faucet-drip text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Kontrol</span></a
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-faucet-drip text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Kontrol</span></a
       >
       <a
         href="pengaturan.html"
-        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green w-1/5"
-        ><i class="fa-solid fa-gear text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Atur</span></a
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-gear text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Atur</span></a
       >
       <a
         href="sistem.html"
-        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green w-1/5"
-        ><i class="fa-solid fa-server text-xl mb-1"></i
-        ><span class="text-[9px] font-medium">Sistem</span></a
+        class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
+        ><i class="fa-solid fa-server text-lg mb-1"></i
+        ><span class="text-[8px] font-medium">Sistem</span></a
       >
     </nav>
 
-    <!-- SCRIPT DROPDOWN -->
-    <script>
-      function toggleDropdown() {
-        document.getElementById("userDropdown").classList.toggle("hidden");
-      }
-      window.addEventListener("click", function (e) {
-        const btn = document.querySelector(
-          'button[onclick="toggleDropdown()"]',
-        );
-        const drop = document.getElementById("userDropdown");
-        if (!btn.contains(e.target) && !drop.contains(e.target))
-          drop.classList.add("hidden");
-      });
-    </script>
-
-    <!-- FIREBASE INTEGRATION SCRIPT -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-      import {
-        getDatabase,
-        ref,
-        onValue,
-      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-      // Konfigurasi Firebase Anda
-      const firebaseConfig = {
-        apiKey: "AIzaSyCns7vvtEB5unLIPlfAWd_chUUeRWriAY0",
-        authDomain: "irigasi-tomat-web.firebaseapp.com",
-        databaseURL:
-          "https://irigasi-tomat-web-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "irigasi-tomat-web",
-        storageBucket: "irigasi-tomat-web.firebasestorage.app",
-        messagingSenderId: "164253528951",
-        appId: "1:164253528951:web:ae12dbe0a44e335a9aa772",
-      };
-
-      const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
-
-      const monitoringRef = ref(db, "monitoring");
-
-      onValue(monitoringRef, (snapshot) => {
-        const data = snapshot.val();
-
-        if (data) {
-          const fbStatus = document.getElementById("fb-status");
-          if (fbStatus) {
-            fbStatus.innerHTML =
-              '<i class="fa-solid fa-check-circle mr-1"></i> Firebase Terhubung';
-            fbStatus.className =
-              "text-[10px] md:text-xs text-brand-green mt-1 font-semibold";
-          }
-
-          // Update Zona Rata-rata
-          if (data.zona) {
-            if (data.zona.z1) {
-              document.getElementById("val-z1").innerText =
-                data.zona.z1.rata_rata + "%";
-              document.getElementById("stat-z1").innerText =
-                data.zona.z1.status;
-            }
-            if (data.zona.z2) {
-              document.getElementById("val-z2").innerText =
-                data.zona.z2.rata_rata + "%";
-              document.getElementById("stat-z2").innerText =
-                data.zona.z2.status;
-            }
-            if (data.zona.z3) {
-              document.getElementById("val-z3").innerText =
-                data.zona.z3.rata_rata + "%";
-              document.getElementById("stat-z3").innerText =
-                data.zona.z3.status;
-            }
-          }
-
-          // Update Sensor S1 - S6 & Kalkulasi Cerdas "Sensor Terendah"
-          if (data.sensor) {
-            document.getElementById("val-s1").innerText = data.sensor.s1 + "%";
-            document.getElementById("val-s2").innerText = data.sensor.s2 + "%";
-            document.getElementById("val-s3").innerText = data.sensor.s3 + "%";
-            document.getElementById("val-s4").innerText = data.sensor.s4 + "%";
-            document.getElementById("val-s5").innerText = data.sensor.s5 + "%";
-            document.getElementById("val-s6").innerText = data.sensor.s6 + "%";
-
-            document.querySelectorAll('[id^="val-s"]').forEach((el) => {
-              el.classList.remove("text-gray-400");
-              el.classList.add("text-brand-dark");
-            });
-
-            // --- LOGIKA CERDAS: MENGHITUNG OTOMATIS SENSOR TERENDAH ---
-            const sensors = {
-              S1: data.sensor.s1,
-              S2: data.sensor.s2,
-              S3: data.sensor.s3,
-              S4: data.sensor.s4,
-              S5: data.sensor.s5,
-              S6: data.sensor.s6,
-            };
-            let lowestSensor = "S1";
-            let lowestValue = sensors["S1"];
-            for (const [key, value] of Object.entries(sensors)) {
-              if (value < lowestValue) {
-                lowestValue = value;
-                lowestSensor = key;
-              }
-            }
-            document.getElementById("val-terendah").innerText =
-              `${lowestSensor} (${lowestValue}%)`;
-          }
-
-          // --- LOGIKA CERDAS: MENGHITUNG OTOMATIS ZONA PALING KERING ---
-          if (data.zona) {
-            const zones = {
-              "Zona 1": data.zona.z1.rata_rata,
-              "Zona 2": data.zona.z2.rata_rata,
-              "Zona 3": data.zona.z3.rata_rata,
-            };
-            let lowestZone = "Zona 1";
-            let lowestZoneVal = zones["Zona 1"];
-            for (const [key, value] of Object.entries(zones)) {
-              if (value < lowestZoneVal) {
-                lowestZoneVal = value;
-                lowestZone = key;
-              }
-            }
-            document.getElementById("val-terkering").innerText =
-              `${lowestZone} (${lowestZoneVal}%)`;
-          }
-        }
-      });
-    </script>
+    <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/firebase-monitor.js"></script>
   </body>
 </html>

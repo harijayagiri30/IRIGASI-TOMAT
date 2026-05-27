@@ -15,7 +15,6 @@
   <body
     class="bg-[#f4f7f4] flex h-screen overflow-hidden font-sans text-gray-800"
   >
-    <!-- ==================== SIDEBAR ==================== -->
     <aside
       class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between flex-shrink-0 relative overflow-hidden"
     >
@@ -91,15 +90,20 @@
       </div>
     </aside>
 
-    <!-- ==================== KONTEN UTAMA ==================== -->
     <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
-      <!-- HEADER DENGAN DROPDOWN USER -->
       <header
         class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-30"
       >
         <div>
-          <h2 class="text-xl md:text-2xl font-bold text-gray-800">Sistem</h2>
-          <p class="text-xs md:text-sm text-gray-500">Konfigurasi Perangkat</p>
+          <h2 class="text-xl md:text-2xl font-bold text-gray-800">
+            Sistem
+            <span class="text-gray-400 font-normal text-sm md:text-lg mx-2"
+              >/</span
+            >
+            <span class="text-gray-500 font-medium text-sm md:text-lg"
+              >Konfigurasi Perangkat</span
+            >
+          </h2>
         </div>
         <div class="relative w-full md:w-auto flex justify-end">
           <button
@@ -139,34 +143,40 @@
               >
                 Contact Service
               </p>
-              <div class="space-y-3">
-                <div class="flex items-start space-x-3">
-                  <i
+              <div class="space-y-1">
+                <a
+                  href="https://api.whatsapp.com/send/?phone=6285726750062&text=Halo%20kak%20Hari,%20saya%20ingin%20menanyakan%20tentang%20web/alat...&type=phone_number&app_absent=0&wame_ctl=1"
+                  target="_blank"
+                  class="flex items-start space-x-3 hover:bg-green-50 p-2 rounded-lg transition-colors cursor-pointer"
+                  ><i
                     class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
                   ></i>
                   <div>
                     <p class="text-xs font-bold text-gray-800">Hari</p>
                     <p class="text-[11px] text-gray-500">0857-2675-0062</p>
                     <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
-                  </div>
-                </div>
-                <div class="flex items-start space-x-3">
-                  <i
+                  </div></a
+                >
+                <a
+                  href="https://api.whatsapp.com/send/?phone=6289604143531&text=Halo%20kak%20Rimba,%20saya%20ingin%20menanyakan%20tentang%20web/alat...&type=phone_number&app_absent=0&wame_ctl=1"
+                  target="_blank"
+                  class="flex items-start space-x-3 hover:bg-green-50 p-2 rounded-lg transition-colors cursor-pointer"
+                  ><i
                     class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
                   ></i>
                   <div>
                     <p class="text-xs font-bold text-gray-800">Rimba</p>
                     <p class="text-[11px] text-gray-500">0896-0414-3531</p>
                     <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
-                  </div>
-                </div>
+                  </div></a
+                >
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      <!-- 7 KARTU PERANGKAT -->
+      <!-- REVISI: PENAMAAN NODE -->
       <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3 mb-6">
         <div
           class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex flex-col items-center text-center relative"
@@ -180,8 +190,9 @@
           <div class="text-brand-green text-2xl mb-1">
             <i class="fa-solid fa-microchip"></i>
           </div>
-          <p class="text-xs font-bold text-gray-800">Node 1</p>
-          <p class="text-[10px] text-brand-green">Online</p>
+          <p class="text-[11px] font-bold text-gray-800 leading-tight">
+            Node 1<br />Pangkal Bedeng
+          </p>
         </div>
         <div
           class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex flex-col items-center text-center relative"
@@ -195,8 +206,9 @@
           <div class="text-brand-green text-2xl mb-1">
             <i class="fa-solid fa-microchip"></i>
           </div>
-          <p class="text-xs font-bold text-gray-800">Node 2</p>
-          <p class="text-[10px] text-brand-green">Online</p>
+          <p class="text-[11px] font-bold text-gray-800 leading-tight">
+            Node 2<br />Tengah Bedeng
+          </p>
         </div>
         <div
           class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex flex-col items-center text-center relative"
@@ -210,8 +222,9 @@
           <div class="text-brand-green text-2xl mb-1">
             <i class="fa-solid fa-microchip"></i>
           </div>
-          <p class="text-xs font-bold text-gray-800">Node 3</p>
-          <p class="text-[10px] text-brand-green">Online</p>
+          <p class="text-[11px] font-bold text-gray-800 leading-tight">
+            Node 3<br />Ujung Bedeng
+          </p>
         </div>
         <div
           class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex flex-col items-center text-center relative"
@@ -225,8 +238,9 @@
           <div class="text-brand-green text-2xl mb-1">
             <i class="fa-solid fa-wifi"></i>
           </div>
-          <p class="text-xs font-bold text-gray-800">Gateway</p>
-          <p class="text-[10px] text-brand-green">Online</p>
+          <p class="text-[11px] font-bold text-gray-800 leading-tight">
+            Gateway<br />Utama
+          </p>
         </div>
         <div
           class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex flex-col items-center text-center relative"
@@ -268,9 +282,7 @@
         </div>
       </div>
 
-      <!-- AREA TENGAH: WAKTU, JARINGAN, PERANGKAT YANG TERHAPUS -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        <!-- Waktu Data Terakhir -->
         <div
           class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-center"
         >
@@ -281,8 +293,6 @@
           <p class="text-xl font-bold text-gray-800">22 Mei 2026 05:59:02</p>
           <p class="text-xs text-gray-400 mt-1">(WIB)</p>
         </div>
-
-        <!-- Informasi Jaringan -->
         <div
           class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-center"
         >
@@ -301,8 +311,6 @@
             </p>
           </div>
         </div>
-
-        <!-- Informasi Perangkat -->
         <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
           <div class="flex items-center space-x-3 mb-4">
             <i class="fa-solid fa-microchip text-xl text-gray-400"></i>
@@ -329,9 +337,7 @@
         </div>
       </div>
 
-      <!-- AREA BAWAH: TABEL GPIO & INFO YANG TERHAPUS -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <!-- Tabel Konfigurasi GPIO -->
         <div
           class="lg:col-span-2 bg-white rounded-xl border border-gray-200 shadow-sm flex flex-col"
         >
@@ -341,8 +347,10 @@
               <span class="text-xs font-normal text-gray-400">(Read-Only)</span>
             </h3>
           </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left border-collapse">
+          <div class="overflow-x-auto w-full">
+            <table
+              class="w-full text-sm text-left border-collapse min-w-[500px]"
+            >
               <thead
                 class="bg-gray-50 border-b border-gray-200 text-gray-600 text-xs"
               >
@@ -354,39 +362,40 @@
                 </tr>
               </thead>
               <tbody class="text-gray-600 text-xs">
+                <!-- REVISI: Penamaan Perangkat di Tabel -->
                 <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 px-5 font-medium">Node 1</td>
-                  <td class="py-3 px-5">Sensor S1</td>
+                  <td class="py-3 px-5 font-medium">Node 1 (Pangkal)</td>
+                  <td class="py-3 px-5">Sensor 1</td>
                   <td class="py-3 px-5 font-semibold">GPIO0</td>
                   <td class="py-3 px-5">Input ADC</td>
                 </tr>
                 <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 px-5 font-medium">Node 1</td>
-                  <td class="py-3 px-5">Sensor S2</td>
+                  <td class="py-3 px-5 font-medium">Node 1 (Pangkal)</td>
+                  <td class="py-3 px-5">Sensor 2</td>
                   <td class="py-3 px-5 font-semibold">GPIO1</td>
                   <td class="py-3 px-5">Input ADC</td>
                 </tr>
                 <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 px-5 font-medium">Node 2</td>
-                  <td class="py-3 px-5">Sensor S3</td>
+                  <td class="py-3 px-5 font-medium">Node 2 (Tengah)</td>
+                  <td class="py-3 px-5">Sensor 3</td>
                   <td class="py-3 px-5 font-semibold">GPIO0</td>
                   <td class="py-3 px-5">Input ADC</td>
                 </tr>
                 <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 px-5 font-medium">Node 2</td>
-                  <td class="py-3 px-5">Sensor S4</td>
+                  <td class="py-3 px-5 font-medium">Node 2 (Tengah)</td>
+                  <td class="py-3 px-5">Sensor 4</td>
                   <td class="py-3 px-5 font-semibold">GPIO1</td>
                   <td class="py-3 px-5">Input ADC</td>
                 </tr>
                 <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 px-5 font-medium">Node 3</td>
-                  <td class="py-3 px-5">Sensor S5</td>
+                  <td class="py-3 px-5 font-medium">Node 3 (Ujung)</td>
+                  <td class="py-3 px-5">Sensor 5</td>
                   <td class="py-3 px-5 font-semibold">GPIO0</td>
                   <td class="py-3 px-5">Input ADC</td>
                 </tr>
                 <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 px-5 font-medium">Node 3</td>
-                  <td class="py-3 px-5">Sensor S6</td>
+                  <td class="py-3 px-5 font-medium">Node 3 (Ujung)</td>
+                  <td class="py-3 px-5">Sensor 6</td>
                   <td class="py-3 px-5 font-semibold">GPIO1</td>
                   <td class="py-3 px-5">Input ADC</td>
                 </tr>
@@ -398,16 +407,14 @@
                 </tr>
                 <tr class="hover:bg-gray-50">
                   <td class="py-3 px-5 font-medium">Gateway</td>
-                  <td class="py-3 px-5">WiFi Internal ESP32-C3</td>
+                  <td class="py-3 px-5">WiFi Internal</td>
                   <td class="py-3 px-5 font-semibold">-</td>
-                  <td class="py-3 px-5">Komunikasi data</td>
+                  <td class="py-3 px-5">Komunikasi data ESP32-C3</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-
-        <!-- Informasi Read-Only -->
         <div
           class="lg:col-span-1 bg-[#ebf3fc] rounded-xl border border-blue-100 p-6 flex flex-col justify-between relative overflow-hidden h-max"
         >
@@ -434,9 +441,8 @@
       </div>
     </main>
 
-    <!-- NAVIGASI BAWAH (MOBILE) -->
     <nav
-      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-2 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-4 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
     >
       <a
         href="dashboard.html"
@@ -476,19 +482,6 @@
       >
     </nav>
 
-    <!-- SCRIPT DROPDOWN -->
-    <script>
-      function toggleDropdown() {
-        document.getElementById("userDropdown").classList.toggle("hidden");
-      }
-      window.addEventListener("click", function (e) {
-        const btn = document.querySelector(
-          'button[onclick="toggleDropdown()"]',
-        );
-        const drop = document.getElementById("userDropdown");
-        if (!btn.contains(e.target) && !drop.contains(e.target))
-          drop.classList.add("hidden");
-      });
-    </script>
+    <script src="assets/js/main.js"></script>
   </body>
 </html>
