@@ -4,19 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - Irigasi Tomat</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <!-- Ikon Favicon -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="assets/js/tailwind-config.js"></script>
+    <!-- Chart.js via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body
     class="bg-[#f4f7f4] flex h-screen overflow-hidden font-sans text-gray-800"
   >
-    <!-- SIDEBAR DESKTOP -->
+    <!-- SIDEBAR -->
     <aside
       class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between flex-shrink-0 relative overflow-hidden"
     >
@@ -92,9 +98,9 @@
       </div>
     </aside>
 
+    <!-- KONTEN UTAMA -->
     <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
-      <!-- HEADER DENGAN DROPDOWN USER (SUDAH DIPERBAIKI TOTAL) -->
-      <header class="flex justify-between items-center mb-6 relative z-50">
+      <header class="flex justify-between items-center mb-6 relative z-30">
         <div>
           <h2 class="text-xl md:text-2xl font-bold text-gray-800">
             Dashboard Utama
@@ -113,7 +119,7 @@
         <div class="relative w-full md:w-auto flex justify-end">
           <button
             onclick="toggleDropdown()"
-            class="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-sm focus:outline-none hover:bg-brand-light transition-colors cursor-pointer"
+            class="flex items-center space-x-2 bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-sm focus:outline-none hover:bg-brand-light transition-colors"
           >
             <div
               class="w-8 h-8 bg-brand-green rounded-full flex items-center justify-center text-white"
@@ -122,14 +128,14 @@
             </div>
             <div class="text-left pr-1">
               <p class="font-bold text-gray-800 text-xs leading-tight">User</p>
-              <p class="text-[9px] text-gray-500">Pengguna Sistem</p>
+              <p class="text-[9px] text-gray-500">
+                Pengguna Sistem
+              </p>
             </div>
             <i
               class="fa-solid fa-chevron-down text-[10px] text-gray-400 pl-1"
             ></i>
           </button>
-
-          <!-- DROPDOWN FIX MOBILE: top-full, w-[85vw], max-h-[60vh] dan overflow-y-auto -->
           <div
             id="userDropdown"
             class="hidden absolute right-0 top-full mt-2 w-[85vw] sm:w-64 bg-white rounded-xl border border-gray-200 shadow-2xl max-h-[60vh] overflow-y-auto z-[9999] origin-top-right"
@@ -138,10 +144,9 @@
               <a
                 href="index.html"
                 class="flex items-center space-x-2 text-red-500 hover:bg-red-50 px-3 py-2 rounded-lg text-sm font-bold transition-colors"
+                ><i class="fa-solid fa-arrow-right-from-bracket"></i
+                ><span>Keluar (Logout)</span></a
               >
-                <i class="fa-solid fa-arrow-right-from-bracket"></i
-                ><span>Keluar (Logout)</span>
-              </a>
             </div>
             <div class="p-4 bg-white">
               <p
@@ -154,37 +159,35 @@
                   href="https://api.whatsapp.com/send/?phone=6285726750062&text=Halo%20Kak%20Hari%2C%20saya%20pengguna%20Dashboard%20Irigasi%20Tomat.%20Saya%20butuh%20bantuan%20terkait%20%5BSebutkan%3A%20Sistem%20Web%20%2F%20Kondisi%20Alat%20di%20Lapangan%5D.&type=phone_number&app_absent=0&wame_ctl=1"
                   target="_blank"
                   class="flex items-start space-x-3 hover:bg-green-50 p-2 rounded-lg transition-colors cursor-pointer"
-                >
-                  <i
+                  ><i
                     class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
                   ></i>
                   <div>
                     <p class="text-xs font-bold text-gray-800">Hari</p>
                     <p class="text-[11px] text-gray-500">0857-2675-0062</p>
                     <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
-                  </div>
-                </a>
+                  </div></a
+                >
                 <a
                   href="https://api.whatsapp.com/send/?phone=6289604143531&text=Halo%20Kak%20Rimba%2C%20saya%20pengguna%20Dashboard%20Irigasi%20Tomat.%20Saya%20butuh%20bantuan%20terkait%20%5BSebutkan%3A%20Sistem%20Web%20%2F%20Kondisi%20Alat%20di%20Lapangan%5D.&type=phone_number&app_absent=0&wame_ctl=1"
                   target="_blank"
                   class="flex items-start space-x-3 hover:bg-green-50 p-2 rounded-lg transition-colors cursor-pointer"
-                >
-                  <i
+                  ><i
                     class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
                   ></i>
                   <div>
                     <p class="text-xs font-bold text-gray-800">Rimba</p>
                     <p class="text-[11px] text-gray-500">0896-0414-3531</p>
                     <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
-                  </div>
-                </a>
+                  </div></a
+                >
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      <!-- 7 KARTU METRIK -->
+      <!-- 7 KARTU METRIK UTAMA -->
       <div
         class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3 mb-6 relative z-10"
       >
@@ -211,7 +214,7 @@
           </div>
           <div class="overflow-hidden">
             <p class="text-[10px] font-semibold text-gray-500 leading-tight">
-              Kelembapan Minimum Bedeng
+              Kelembapan Min Bedeng
             </p>
             <p id="val-kmin" class="text-base font-bold text-gray-400">--.-%</p>
           </div>
@@ -272,7 +275,7 @@
             <p
               id="teks-cuaca"
               class="text-base font-bold text-brand-green truncate w-full"
-              title="Berawan"
+              title="Memuat..."
             >
               -
             </p>
@@ -321,70 +324,45 @@
         </div>
       </div>
 
-      <!-- GRAFIK SVG ASLI -->
+      <!-- AREA GRAFIK (MENGGUNAKAN CANVAS CHART.JS INTERAKTIF) -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <div
           class="lg:col-span-2 bg-white rounded-xl border border-gray-200 shadow-sm p-6 flex flex-col"
         >
-          <div class="flex justify-between items-center mb-6">
-            <h3 class="font-bold text-gray-800">Grafik Kbedeng 24 Jam</h3>
-            <div class="flex space-x-4 text-[10px] font-medium text-gray-500">
-              <span class="flex items-center"
-                ><span class="w-3 h-0.5 bg-blue-500 mr-1"></span> Kbedeng
-                (%)</span
+          <div
+            class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-2"
+          >
+            <h3 class="font-bold text-gray-800 text-sm">
+              Grafik Kelembapan Bedeng
+            </h3>
+            <div
+              class="flex bg-gray-100 p-1 rounded-lg border border-gray-200 text-[10px] font-bold text-gray-500"
+            >
+              <button
+                onclick="updateChartFilter('24h')"
+                id="btn-24h"
+                class="px-2.5 py-1 bg-white rounded text-gray-800 shadow-sm transition-all"
               >
-              <span class="flex items-center"
-                ><span
-                  class="w-3 h-0.5 border-t border-dashed border-red-500 mr-1"
-                ></span>
-                Batas Siram (45%)</span
+                24 Jam
+              </button>
+              <button
+                onclick="updateChartFilter('7d')"
+                id="btn-7d"
+                class="px-2.5 py-1 hover:text-gray-800 transition-all"
               >
-              <span class="flex items-center"
-                ><span
-                  class="w-3 h-0.5 border-t border-dashed border-brand-green mr-1"
-                ></span>
-                Batas Stop (80%)</span
+                7 Hari
+              </button>
+              <button
+                onclick="updateChartFilter('30d')"
+                id="btn-30d"
+                class="px-2.5 py-1 hover:text-gray-800 transition-all"
               >
+                30 Hari
+              </button>
             </div>
           </div>
-          <div
-            class="flex-1 bg-white relative w-full min-h-[250px] border-l border-b border-gray-300 ml-4 md:ml-6"
-          >
-            <div
-              class="absolute w-full left-0 top-[20%] border-t border-dashed border-brand-green"
-            ></div>
-            <div
-              class="absolute w-full left-0 top-[65%] border-t border-dashed border-red-500"
-            ></div>
-            <svg
-              class="absolute w-full h-full"
-              preserveAspectRatio="none"
-              viewBox="0 0 100 100"
-            >
-              <polyline
-                fill="none"
-                stroke="#3b82f6"
-                stroke-width="1.5"
-                points="0,50 10,45 20,60 30,65 40,55 50,60 60,45 70,50 80,45 90,30 100,10"
-              />
-            </svg>
-            <div class="absolute -left-6 top-0 text-[10px] text-gray-400">
-              100
-            </div>
-            <div class="absolute -left-5 top-[45%] text-[10px] text-gray-400">
-              50
-            </div>
-            <div class="absolute -left-3 bottom-0 text-[10px] text-gray-400">
-              0
-            </div>
-            <div
-              class="absolute left-0 -bottom-5 w-full flex justify-between text-[10px] text-gray-400"
-            >
-              <span>12:00</span><span>15:00</span><span>18:00</span
-              ><span>21:00</span><span>00:00</span><span>03:00</span
-              ><span>06:00</span><span>09:00</span
-              ><span class="pr-2 md:pr-0">12:00</span>
-            </div>
+          <div class="flex-1 relative w-full min-h-[250px]">
+            <canvas id="chartKelembapan"></canvas>
           </div>
         </div>
 
@@ -392,53 +370,154 @@
           <div
             class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 flex-1"
           >
-            <div class="flex justify-between items-center mb-4">
-              <h3 class="font-bold text-gray-800 text-sm">
-                Status Pompa ON/OFF
-              </h3>
-              <div class="flex space-x-2 text-[10px] font-medium text-gray-500">
-                <span class="flex items-center"
-                  ><span class="w-2 h-2 bg-brand-green rounded-sm mr-1"></span>
-                  ON</span
-                >
-                <span class="flex items-center"
-                  ><span class="w-2 h-2 bg-red-400 rounded-sm mr-1"></span>
-                  OFF</span
-                >
+            <h3 class="font-bold text-gray-800 text-sm mb-4">
+              Status Pompa ON/OFF
+            </h3>
+            <div class="relative w-full h-[150px]">
+              <canvas id="chartPompa"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AKTIVITAS TERBARU & STATUS SISTEM DIKEMBALIKAN UTUH -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <div
+          class="lg:col-span-2 bg-white rounded-xl border border-gray-200 shadow-sm p-6"
+        >
+          <h3 class="font-bold text-gray-800 mb-4">Aktivitas Terbaru</h3>
+          <div class="overflow-x-auto w-full">
+            <table class="w-full text-sm text-left min-w-[500px]">
+              <thead
+                class="bg-gray-50 border-b border-gray-200 text-gray-600 text-xs"
+              >
+                <tr>
+                  <th class="py-3 px-4 font-semibold">Waktu</th>
+                  <th class="py-3 px-4 font-semibold">Status</th>
+                  <th class="py-3 px-4 font-semibold">Keterangan</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-600 text-xs">
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-4 whitespace-nowrap">
+                    22 Mei 2026 11:45:10
+                  </td>
+                  <td class="py-3 px-4">
+                    <span
+                      class="bg-green-100 text-brand-green px-2 py-0.5 rounded font-bold tracking-wider"
+                      >INFO</span
+                    >
+                  </td>
+                  <td class="py-3 px-4">
+                    Pompa dimatikan otomatis (Kelembapan Bedeng ≥ Batas Stop
+                    80%)
+                  </td>
+                </tr>
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-4 whitespace-nowrap">
+                    22 Mei 2026 09:12:33
+                  </td>
+                  <td class="py-3 px-4">
+                    <span
+                      class="bg-blue-100 text-blue-600 px-2 py-0.5 rounded font-bold tracking-wider"
+                      >DATA</span
+                    >
+                  </td>
+                  <td class="py-3 px-4">Data sensor diterima dari Node 2</td>
+                </tr>
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-3 px-4 whitespace-nowrap">
+                    22 Mei 2026 06:05:21
+                  </td>
+                  <td class="py-3 px-4">
+                    <span
+                      class="bg-green-100 text-brand-green px-2 py-0.5 rounded font-bold tracking-wider"
+                      >INFO</span
+                    >
+                  </td>
+                  <td class="py-3 px-4">
+                    Pompa dinyalakan otomatis (Kelembapan Bedeng ≤ Batas Siram
+                    45%)
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-3 px-4 whitespace-nowrap">
+                    22 Mei 2026 05:59:02
+                  </td>
+                  <td class="py-3 px-4">
+                    <span
+                      class="bg-blue-100 text-blue-600 px-2 py-0.5 rounded font-bold tracking-wider"
+                      >DATA</span
+                    >
+                  </td>
+                  <td class="py-3 px-4">Data sensor diterima dari Node 1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div
+          class="lg:col-span-1 bg-white rounded-xl border border-gray-200 shadow-sm p-6"
+        >
+          <h3 class="font-bold text-gray-800 mb-5">Status Sistem</h3>
+          <div class="grid grid-cols-1 gap-3 text-sm">
+            <div
+              class="flex items-center justify-between border-b border-gray-100 pb-2"
+            >
+              <div class="font-semibold text-gray-700">
+                <i class="fa-solid fa-satellite-dish text-brand-green mr-2"></i>
+                Node 1 Pangkal Bedeng
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <div class="w-2 h-2 bg-brand-green rounded-full mr-2"></div>
+                Online
               </div>
             </div>
             <div
-              class="relative w-full h-[120px] border-l border-b border-gray-300 mt-4 ml-4 md:ml-6"
+              class="flex items-center justify-between border-b border-gray-100 pb-2"
             >
-              <div class="absolute -left-5 top-0 text-[10px] text-gray-400">
-                ON
+              <div class="font-semibold text-gray-700">
+                <i class="fa-solid fa-satellite-dish text-brand-green mr-2"></i>
+                Node 2 Tengah Bedeng
               </div>
-              <div class="absolute -left-6 bottom-0 text-[10px] text-gray-400">
-                OFF
+              <div class="flex items-center text-xs text-gray-500">
+                <div class="w-2 h-2 bg-brand-green rounded-full mr-2"></div>
+                Online
               </div>
-              <svg
-                class="absolute w-full h-full"
-                preserveAspectRatio="none"
-                viewBox="0 0 100 100"
-              >
-                <polyline
-                  fill="none"
-                  stroke="#287930"
-                  stroke-width="1.5"
-                  points="0,95 20,95 20,5 35,5 35,95 50,95 50,5 65,5 65,95 70,95"
-                />
-                <polyline
-                  fill="none"
-                  stroke="#f87171"
-                  stroke-width="1.5"
-                  points="70,95 75,95 75,50 80,50 80,95 100,95"
-                />
-              </svg>
-              <div
-                class="absolute left-0 -bottom-5 w-full flex justify-between text-[10px] text-gray-400"
-              >
-                <span>12:00</span><span>18:00</span><span>00:00</span
-                ><span>06:00</span><span class="pr-2 md:pr-0">12:00</span>
+            </div>
+            <div
+              class="flex items-center justify-between border-b border-gray-100 pb-2"
+            >
+              <div class="font-semibold text-gray-700">
+                <i class="fa-solid fa-satellite-dish text-brand-green mr-2"></i>
+                Node 3 Ujung Bedeng
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <div class="w-2 h-2 bg-brand-green rounded-full mr-2"></div>
+                Online
+              </div>
+            </div>
+            <div
+              class="flex items-center justify-between border-b border-gray-100 pb-2"
+            >
+              <div class="font-semibold text-gray-700">
+                <i class="fa-solid fa-wifi text-brand-green mr-2"></i> Gateway
+                Utama
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <div class="w-2 h-2 bg-brand-green rounded-full mr-2"></div>
+                Online
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-1">
+              <div class="font-semibold text-gray-700">
+                <i class="fa-solid fa-database text-yellow-500 mr-2"></i>
+                Firebase Database
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <div class="w-2 h-2 bg-brand-green rounded-full mr-2"></div>
+                Terhubung
               </div>
             </div>
           </div>
@@ -446,7 +525,7 @@
       </div>
     </main>
 
-    <!-- BOTTOM NAV MOBILE (6 TOMBOL) -->
+    <!-- NAVIGASI BAWAH -->
     <nav
       class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-2 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
     >
@@ -488,21 +567,7 @@
       >
     </nav>
 
-    <!-- SCRIPT DROPDOWN (BAWAAN) -->
     <script src="assets/js/main.js"></script>
     <script type="module" src="assets/js/firebase-dashboard.js"></script>
-    <script>
-      function toggleDropdown() {
-        document.getElementById("userDropdown").classList.toggle("hidden");
-      }
-      window.addEventListener("click", function (e) {
-        const btn = document.querySelector(
-          'button[onclick="toggleDropdown()"]',
-        );
-        const drop = document.getElementById("userDropdown");
-        if (btn && drop && !btn.contains(e.target) && !drop.contains(e.target))
-          drop.classList.add("hidden");
-      });
-    </script>
   </body>
 </html>

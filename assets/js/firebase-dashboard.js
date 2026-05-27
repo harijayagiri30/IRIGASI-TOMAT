@@ -19,6 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+// GRAFIK KELEMBAPAN (Sesuai Gambar: Garis Hijau, Titik Aktif, Batas 80 Biru, Batas 45 Merah)
 const ctxKelembapan = document.getElementById("chartKelembapan");
 let chartKelembapan;
 if (ctxKelembapan) {
@@ -39,24 +40,26 @@ if (ctxKelembapan) {
       datasets: [
         {
           label: "Kelembapan Bedeng",
-          data: [],
+          data: [48, 52, 60, 42, 55, 62, 50, 45, 52],
           borderColor: "#287930",
+          backgroundColor: "#287930",
           tension: 0.4,
           borderWidth: 2,
+          pointRadius: 4,
           fill: false,
         },
         {
-          label: "Batas Siram (45%)",
-          data: [45, 45, 45, 45, 45, 45, 45, 45, 45],
-          borderColor: "#f87171",
+          label: "Batas Basah (80%)",
+          data: [80, 80, 80, 80, 80, 80, 80, 80, 80],
+          borderColor: "#3b82f6",
           borderDash: [5, 5],
           borderWidth: 1.5,
           pointRadius: 0,
         },
         {
-          label: "Batas Stop (80%)",
-          data: [80, 80, 80, 80, 80, 80, 80, 80, 80],
-          borderColor: "#3b82f6",
+          label: "Batas Kering (45%)",
+          data: [45, 45, 45, 45, 45, 45, 45, 45, 45],
+          borderColor: "#f87171",
           borderDash: [5, 5],
           borderWidth: 1.5,
           pointRadius: 0,
@@ -72,6 +75,7 @@ if (ctxKelembapan) {
   });
 }
 
+// GRAFIK POMPA (Sumbu Y diperbaiki agar tidak muncul OFF OFF OFF)
 const ctxPompa = document.getElementById("chartPompa");
 let chartPompa;
 if (ctxPompa) {
@@ -82,11 +86,11 @@ if (ctxPompa) {
       datasets: [
         {
           label: "Status Pompa",
-          data: [],
-          borderColor: "#ef4444",
+          data: [0, 1, 0, 1, 0],
+          borderColor: "#287930",
           stepped: true,
           borderWidth: 2,
-          pointRadius: 3,
+          pointRadius: 0,
         },
       ],
     },
@@ -99,6 +103,7 @@ if (ctxPompa) {
           min: 0,
           max: 1,
           ticks: {
+            stepSize: 1,
             callback: function (val) {
               return val === 1 ? "ON" : "OFF";
             },
@@ -118,7 +123,6 @@ window.updateChartFilter = function (filter) {
     );
   document.getElementById("btn-" + filter).className =
     "px-2.5 py-1 bg-white rounded text-gray-800 shadow-sm transition-all";
-
   if (!chartKelembapan) return;
   if (filter === "24h") {
     chartKelembapan.data.labels = [
@@ -132,7 +136,6 @@ window.updateChartFilter = function (filter) {
       "09:00",
       "12:00",
     ];
-    // Ideally fetch 24h data from Firebase again here
   } else if (filter === "7d") {
     chartKelembapan.data.labels = [
       "Sen",
@@ -143,7 +146,7 @@ window.updateChartFilter = function (filter) {
       "Sab",
       "Min",
     ];
-    chartKelembapan.data.datasets[0].data = [48, 52, 60, 42, 55, 62, 50]; // Mockup 7 days
+    chartKelembapan.data.datasets[0].data = [48, 52, 60, 42, 55, 62, 50];
   } else if (filter === "30d") {
     chartKelembapan.data.labels = [
       "Minggu 1",
@@ -151,83 +154,34 @@ window.updateChartFilter = function (filter) {
       "Minggu 3",
       "Minggu 4",
     ];
-    chartKelembapan.data.datasets[0].data = [52, 48, 56, 51]; // Mockup 30 days
+    chartKelembapan.data.datasets[0].data = [52, 48, 56, 51];
   }
   chartKelembapan.update();
 };
 
-onValue(
-  ref(db, "monitoring"),
-  (snapshot) => {
-    const data = snapshot.val();
-    if (data) {
-      if (data.kelembapan_global) {
-        const kb = document.getElementById("val-kbedeng");
-        if (kb) kb.innerText = data.kelembapan_global.kbedeng + "%";
-        const km = document.getElementById("val-kmin");
-        if (km) km.innerText = data.kelembapan_global.kmin + "%";
-        const nk = document.getElementById("val-nkering");
-        if (nk) nk.innerText = data.kelembapan_global.nkering + " Sensor";
-      }
-      if (data.status_sistem) {
-        const vd = document.getElementById("val-debit");
-        if (vd) vd.innerText = data.status_sistem.debit_air_liter + " L/m";
-        const valPompa = document.getElementById("val-pompa");
-        if (valPompa) {
-          const statusPompa = data.status_sistem.pompa;
-          valPompa.innerText = statusPompa;
-          valPompa.className =
-            statusPompa === "ON"
-              ? "text-base font-bold text-brand-green"
-              : "text-base font-bold text-red-500";
-        }
-      }
-      if (data.zona) {
-        const cz1 = document.getElementById("circ-z1");
-        if (cz1) {
-          cz1.style.setProperty(
-            "--progress",
-            `${data.zona.z1.rata_rata * 3.6}deg`,
-          );
-          document.getElementById("circ-val-z1").innerText =
-            data.zona.z1.rata_rata + "%";
-        }
-        const cz2 = document.getElementById("circ-z2");
-        if (cz2) {
-          cz2.style.setProperty(
-            "--progress",
-            `${data.zona.z2.rata_rata * 3.6}deg`,
-          );
-          document.getElementById("circ-val-z2").innerText =
-            data.zona.z2.rata_rata + "%";
-        }
-        const cz3 = document.getElementById("circ-z3");
-        if (cz3) {
-          cz3.style.setProperty(
-            "--progress",
-            `${data.zona.z3.rata_rata * 3.6}deg`,
-          );
-          document.getElementById("circ-val-z3").innerText =
-            data.zona.z3.rata_rata + "%";
-        }
-      }
-    }
-  },
-  (error) => {
-    console.error(error);
-  },
-);
-
-onValue(ref(db, "grafik"), (snapshot) => {
+onValue(ref(db, "monitoring"), (snapshot) => {
   const data = snapshot.val();
   if (data) {
-    if (data.kbedeng_24j && chartKelembapan) {
-      chartKelembapan.data.datasets[0].data = data.kbedeng_24j;
-      chartKelembapan.update();
+    if (data.kelembapan_global) {
+      const kb = document.getElementById("val-kbedeng");
+      if (kb) kb.innerText = data.kelembapan_global.kbedeng + "%";
+      const km = document.getElementById("val-kmin");
+      if (km) km.innerText = data.kelembapan_global.kmin + "%";
+      const nk = document.getElementById("val-nkering");
+      if (nk) nk.innerText = data.kelembapan_global.nkering + " Sensor";
     }
-    if (data.pompa_24j && chartPompa) {
-      chartPompa.data.datasets[0].data = data.pompa_24j;
-      chartPompa.update();
+    if (data.status_sistem) {
+      const vd = document.getElementById("val-debit");
+      if (vd) vd.innerText = data.status_sistem.debit_air_liter + " L/m";
+      const valPompa = document.getElementById("val-pompa");
+      if (valPompa) {
+        const statusPompa = data.status_sistem.pompa;
+        valPompa.innerText = statusPompa;
+        valPompa.className =
+          statusPompa === "ON"
+            ? "text-base font-bold text-brand-green"
+            : "text-base font-bold text-red-500";
+      }
     }
   }
 });
