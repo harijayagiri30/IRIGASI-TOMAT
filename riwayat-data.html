@@ -4,18 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Riwayat Data - Irigasi Tomat</title>
-    <!-- CSS & JS Terpisah -->
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Ikon Favicon -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>"
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="assets/js/tailwind-config.js"></script>
   </head>
   <body
     class="bg-[#f4f7f4] flex h-screen overflow-hidden font-sans text-gray-800"
+    onload="loadRiwayat()"
   >
+    <!-- SIDEBAR -->
     <aside
       class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between flex-shrink-0 relative overflow-hidden"
     >
@@ -92,7 +98,7 @@
     </aside>
 
     <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
-      <!-- HEADER DENGAN WHATSAPP LINKS -->
+      <!-- HEADER -->
       <header
         class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-30"
       >
@@ -125,9 +131,10 @@
               class="fa-solid fa-chevron-down text-[10px] text-gray-400 pl-1"
             ></i>
           </button>
+
           <div
             id="userDropdown"
-            class="hidden absolute right-0 top-full mt-2 w-64 bg-white rounded-xl border border-gray-200 shadow-2xl max-h-[60vh] overflow-y-auto z-[9999]"
+            class="hidden absolute right-0 top-full mt-2 w-[85vw] sm:w-64 bg-white rounded-xl border border-gray-200 shadow-2xl max-h-[60vh] overflow-y-auto z-[9999] origin-top-right"
           >
             <div class="p-2 border-b border-gray-100 bg-gray-50">
               <a
@@ -145,7 +152,7 @@
               </p>
               <div class="space-y-1">
                 <a
-                  href="https://api.whatsapp.com/send/?phone=6285726750062&text&type=phone_number&app_absent=0&wame_ctl=1"
+                  href="https://api.whatsapp.com/send/?phone=6285726750062&text=Halo%20Kak%20Hari%2C%20saya%20pengguna%20Dashboard%20Irigasi%20Tomat.%20Saya%20butuh%20bantuan%20terkait%20%5BSebutkan%3A%20Sistem%20Web%20%2F%20Kondisi%20Alat%20di%20Lapangan%5D.&type=phone_number&app_absent=0&wame_ctl=1"
                   target="_blank"
                   class="flex items-start space-x-3 hover:bg-green-50 p-2 rounded-lg transition-colors cursor-pointer"
                 >
@@ -159,7 +166,7 @@
                   </div>
                 </a>
                 <a
-                  href="https://api.whatsapp.com/send/?phone=6289604143531&text&type=phone_number&app_absent=0&wame_ctl=1"
+                  href="https://api.whatsapp.com/send/?phone=6289604143531&text=Halo%20Kak%20Rimba%2C%20saya%20pengguna%20Dashboard%20Irigasi%20Tomat.%20Saya%20butuh%20bantuan%20terkait%20%5BSebutkan%3A%20Sistem%20Web%20%2F%20Kondisi%20Alat%20di%20Lapangan%5D.&type=phone_number&app_absent=0&wame_ctl=1"
                   target="_blank"
                   class="flex items-start space-x-3 hover:bg-green-50 p-2 rounded-lg transition-colors cursor-pointer"
                 >
@@ -178,18 +185,37 @@
         </div>
       </header>
 
+      <!-- FITUR FILTER INTERAKTIF (BARU) -->
       <div class="flex flex-wrap gap-2 md:gap-4 mb-6">
         <div
           class="bg-white border border-gray-200 px-3 md:px-4 py-2 rounded-lg flex items-center space-x-2 text-xs md:text-sm text-gray-600 shadow-sm"
         >
-          <i class="fa-regular fa-calendar text-gray-400"></i
-          ><span class="font-medium">24 Jam Terakhir</span>
+          <i class="fa-regular fa-calendar text-gray-400"></i>
+          <select
+            id="filter-waktu"
+            onchange="applyTableFilter()"
+            class="outline-none bg-transparent font-medium cursor-pointer"
+          >
+            <option value="all">Semua Waktu</option>
+            <option value="24h" selected>24 Jam Terakhir</option>
+            <option value="7d">7 Hari Terakhir</option>
+          </select>
         </div>
         <div
           class="bg-white border border-gray-200 px-3 md:px-4 py-2 rounded-lg flex items-center space-x-2 text-xs md:text-sm text-gray-600 shadow-sm"
         >
-          <i class="fa-solid fa-droplet text-brand-green"></i
-          ><span class="font-medium">Semua Status</span>
+          <i class="fa-solid fa-filter text-brand-green"></i>
+          <select
+            id="filter-status"
+            onchange="applyTableFilter()"
+            class="outline-none bg-transparent font-medium cursor-pointer"
+          >
+            <option value="all" selected>Semua Status</option>
+            <option value="ON">Pompa ON</option>
+            <option value="OFF">Pompa OFF</option>
+            <option value="INFO">Hanya INFO</option>
+            <option value="DATA">Hanya DATA</option>
+          </select>
         </div>
       </div>
 
@@ -204,7 +230,7 @@
           </div>
           <div>
             <p class="text-[10px] text-gray-500 font-medium">Total Data</p>
-            <p class="text-lg font-bold text-gray-800">24</p>
+            <p id="sum-total" class="text-lg font-bold text-gray-800">0</p>
           </div>
         </div>
         <div
@@ -217,7 +243,7 @@
           </div>
           <div>
             <p class="text-[10px] text-gray-500 font-medium">Pompa ON</p>
-            <p class="text-lg font-bold text-gray-800">3 Kali</p>
+            <p id="sum-on" class="text-lg font-bold text-gray-800">0 Kali</p>
           </div>
         </div>
         <div
@@ -230,7 +256,7 @@
           </div>
           <div>
             <p class="text-[10px] text-gray-500 font-medium">Pompa OFF</p>
-            <p class="text-lg font-bold text-gray-800">3 Kali</p>
+            <p id="sum-off" class="text-lg font-bold text-gray-800">0 Kali</p>
           </div>
         </div>
         <div
@@ -243,7 +269,7 @@
           </div>
           <div>
             <p class="text-[10px] text-gray-500 font-medium">Total Debit</p>
-            <p class="text-lg font-bold text-blue-600">125.5 L</p>
+            <p id="sum-debit" class="text-lg font-bold text-blue-600">0 L</p>
           </div>
         </div>
       </div>
@@ -260,170 +286,40 @@
                 class="bg-gray-50 border-b border-gray-200 text-gray-600 text-xs"
               >
                 <tr>
-                  <th class="py-3 px-4 font-semibold whitespace-nowrap">
+                  <th class="py-4 px-6 font-semibold whitespace-nowrap">
                     Waktu
                   </th>
-                  <th class="py-3 px-4 font-semibold whitespace-nowrap">
+                  <th class="py-4 px-6 font-semibold whitespace-nowrap">
                     Kbedeng
                   </th>
-                  <th class="py-3 px-4 font-semibold whitespace-nowrap">
+                  <th class="py-4 px-6 font-semibold whitespace-nowrap">
                     Kmin
                   </th>
                   <th
-                    class="py-3 px-4 font-semibold text-blue-600 whitespace-nowrap"
+                    class="py-4 px-6 font-semibold text-blue-600 whitespace-nowrap"
                   >
                     Debit (L)
                   </th>
-                  <th class="py-3 px-4 font-semibold whitespace-nowrap">
-                    Cuaca
-                  </th>
-                  <th class="py-3 px-4 font-semibold whitespace-nowrap">
+                  <th class="py-4 px-6 font-semibold whitespace-nowrap">
                     Status
                   </th>
-                  <th class="py-3 px-4 font-semibold whitespace-nowrap">
+                  <th class="py-4 px-6 font-semibold whitespace-nowrap">
                     Alasan
                   </th>
                 </tr>
               </thead>
-              <tbody class="text-gray-600 text-xs">
-                <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 px-4 whitespace-nowrap">22 Mei 11:45</td>
-                  <td class="py-3 px-4 font-medium">52.4</td>
-                  <td class="py-3 px-4">43.7</td>
-                  <td class="py-3 px-4 font-semibold text-gray-800">1.2</td>
-                  <td class="py-3 px-4 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-cloud text-gray-400 mr-2"></i>Berawan
-                  </td>
-                  <td class="py-3 px-4">
-                    <span
-                      class="bg-green-100 text-brand-green px-2 py-1 rounded font-bold"
-                      >ON</span
-                    >
-                  </td>
-                  <td class="py-3 px-4">Kbedeng &lt; 45%</td>
-                </tr>
-                <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 px-4 whitespace-nowrap">22 Mei 10:30</td>
-                  <td class="py-3 px-4 font-medium">41.2</td>
-                  <td class="py-3 px-4">42.1</td>
-                  <td class="py-3 px-4 font-semibold text-gray-800">1.5</td>
-                  <td class="py-3 px-4 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-cloud-rain text-blue-400 mr-2"></i
-                    >Hujan Ringan
-                  </td>
-                  <td class="py-3 px-4">
-                    <span
-                      class="bg-green-100 text-brand-green px-2 py-1 rounded font-bold"
-                      >ON</span
-                    >
-                  </td>
-                  <td class="py-3 px-4">Kbedeng &lt; 45%</td>
-                </tr>
-                <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 px-4 whitespace-nowrap">22 Mei 09:15</td>
-                  <td class="py-3 px-4 font-medium">46.8</td>
-                  <td class="py-3 px-4">45.0</td>
-                  <td class="py-3 px-4 font-semibold text-gray-800">0.0</td>
-                  <td class="py-3 px-4 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-cloud text-gray-400 mr-2"></i>Berawan
-                  </td>
-                  <td class="py-3 px-4">
-                    <span
-                      class="bg-red-50 text-red-500 px-2 py-1 rounded font-bold"
-                      >OFF</span
-                    >
-                  </td>
-                  <td class="py-3 px-4">Kbedeng ≥ 45%</td>
-                </tr>
-                <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 px-4 whitespace-nowrap">22 Mei 08:00</td>
-                  <td class="py-3 px-4 font-medium">72.1</td>
-                  <td class="py-3 px-4">46.3</td>
-                  <td class="py-3 px-4 font-semibold text-gray-800">0.0</td>
-                  <td class="py-3 px-4 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-sun text-yellow-400 mr-2"></i>Cerah
-                  </td>
-                  <td class="py-3 px-4">
-                    <span
-                      class="bg-red-50 text-red-500 px-2 py-1 rounded font-bold"
-                      >OFF</span
-                    >
-                  </td>
-                  <td class="py-3 px-4">Kbedeng ≥ 45%</td>
-                </tr>
-                <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 px-4 whitespace-nowrap">22 Mei 06:45</td>
-                  <td class="py-3 px-4 font-medium">83.6</td>
-                  <td class="py-3 px-4">47.2</td>
-                  <td class="py-3 px-4 font-semibold text-gray-800">0.0</td>
-                  <td class="py-3 px-4 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-sun text-yellow-400 mr-2"></i>Cerah
-                  </td>
-                  <td class="py-3 px-4">
-                    <span
-                      class="bg-red-50 text-red-500 px-2 py-1 rounded font-bold"
-                      >OFF</span
-                    >
-                  </td>
-                  <td class="py-3 px-4">Kbedeng ≥ 80%</td>
-                </tr>
-                <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 px-4 whitespace-nowrap">22 Mei 05:30</td>
-                  <td class="py-3 px-4 font-medium">38.9</td>
-                  <td class="py-3 px-4">44.0</td>
-                  <td class="py-3 px-4 font-semibold text-gray-800">1.8</td>
-                  <td class="py-3 px-4 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-cloud-rain text-blue-400 mr-2"></i
-                    >Hujan Ringan
-                  </td>
-                  <td class="py-3 px-4">
-                    <span
-                      class="bg-green-100 text-brand-green px-2 py-1 rounded font-bold"
-                      >ON</span
-                    >
-                  </td>
-                  <td class="py-3 px-4">Kbedeng &lt; 45%</td>
-                </tr>
-                <tr class="border-b border-gray-100 hover:bg-gray-50">
-                  <td class="py-3 px-4 whitespace-nowrap">22 Mei 04:15</td>
-                  <td class="py-3 px-4 font-medium">44.6</td>
-                  <td class="py-3 px-4">43.8</td>
-                  <td class="py-3 px-4 font-semibold text-gray-800">1.1</td>
-                  <td class="py-3 px-4 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-cloud text-gray-400 mr-2"></i>Berawan
-                  </td>
-                  <td class="py-3 px-4">
-                    <span
-                      class="bg-green-100 text-brand-green px-2 py-1 rounded font-bold"
-                      >ON</span
-                    >
-                  </td>
-                  <td class="py-3 px-4">Kbedeng &lt; 45%</td>
-                </tr>
-                <tr class="hover:bg-gray-50">
-                  <td class="py-3 px-4 whitespace-nowrap">22 Mei 03:00</td>
-                  <td class="py-3 px-4 font-medium">67.5</td>
-                  <td class="py-3 px-4">45.1</td>
-                  <td class="py-3 px-4 font-semibold text-gray-800">0.0</td>
-                  <td class="py-3 px-4 text-xs whitespace-nowrap">
-                    <i class="fa-solid fa-cloud text-gray-400 mr-2"></i>Berawan
-                  </td>
-                  <td class="py-3 px-4">
-                    <span
-                      class="bg-red-50 text-red-500 px-2 py-1 rounded font-bold"
-                      >OFF</span
-                    >
-                  </td>
-                  <td class="py-3 px-4">Kbedeng ≥ 45%</td>
-                </tr>
+              <!-- ID DITAMBAHKAN UNTUK JAVASCRIPT -->
+              <tbody id="riwayat-table-body" class="text-gray-600 text-xs">
+                <!-- Data akan dimuat oleh riwayat.js -->
               </tbody>
             </table>
           </div>
+          <!-- Pagination -->
           <div
             class="px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center bg-gray-50 rounded-b-xl gap-4"
           >
-            <span class="text-xs text-gray-500"
-              >Menampilkan 1 - 8 dari 24 data</span
+            <span id="tabel-info" class="text-xs text-gray-500"
+              >Menampilkan data...</span
             >
             <div class="flex items-center space-x-1">
               <button
@@ -435,16 +331,6 @@
                 class="w-8 h-8 flex items-center justify-center rounded border border-brand-green bg-brand-green text-white font-medium text-sm transition-colors"
               >
                 1
-              </button>
-              <button
-                class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-600 hover:bg-white transition-colors"
-              >
-                2
-              </button>
-              <button
-                class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-600 hover:bg-white transition-colors"
-              >
-                3
               </button>
               <button
                 class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-500 hover:bg-white transition-colors"
@@ -461,14 +347,15 @@
         >
           <h3 class="font-bold text-gray-800 text-lg mb-1">Ringkasan Harian</h3>
           <p
+            id="hari-ini-label"
             class="text-[10px] text-gray-500 mb-6 pb-4 border-b border-gray-100"
           >
-            22 Mei 2026
+            Hari Ini
           </p>
           <div class="space-y-6">
             <div class="flex items-start space-x-4">
               <div
-                class="w-10 h-10 rounded-full bg-green-50 text-brand-green flex items-center justify-center flex-shrink-0"
+                class="w-10 h-10 rounded-full bg-green-50 text-brand-green flex items-center justify-center flex-shrink-0 text-brand-green"
               >
                 <i class="fa-regular fa-clock"></i>
               </div>
@@ -477,36 +364,21 @@
                   Total Durasi Penyiraman
                 </p>
                 <p class="text-xl font-bold text-brand-green mb-0.5">3j 05m</p>
-                <p class="text-[11px] text-gray-400">3 Kali ON</p>
+                <p class="text-[11px] text-gray-400">Akumulasi hari ini</p>
               </div>
             </div>
             <div class="w-full h-px bg-gray-100"></div>
             <div class="flex items-start space-x-4">
               <div
-                class="w-10 h-10 rounded-full bg-gray-50 text-gray-500 flex items-center justify-center flex-shrink-0"
+                class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center flex-shrink-0 text-gray-500"
               >
                 <i class="fa-regular fa-clock"></i>
               </div>
               <div>
-                <p class="text-xs text-gray-500 font-medium mb-0.5">
+                <p class="text-xs font-medium text-gray-500 mb-0.5">
                   Total Durasi OFF
                 </p>
                 <p class="text-xl font-bold text-gray-800 mb-0.5">4j 55m</p>
-                <p class="text-[11px] text-gray-400">3 Kali OFF</p>
-              </div>
-            </div>
-            <div class="w-full h-px bg-gray-100"></div>
-            <div class="flex items-start space-x-4">
-              <div
-                class="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center flex-shrink-0"
-              >
-                <i class="fa-solid fa-water"></i>
-              </div>
-              <div>
-                <p class="text-xs text-gray-500 font-medium mb-0.5">
-                  Total Debit Air
-                </p>
-                <p class="text-xl font-bold text-blue-600 mb-0.5">125.5 L</p>
                 <p class="text-[11px] text-gray-400">Akumulasi hari ini</p>
               </div>
             </div>
@@ -515,7 +387,6 @@
       </div>
     </main>
 
-    <!-- BOTTOM NAV -->
     <nav
       class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-between items-center px-2 h-16 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
     >
@@ -557,7 +428,8 @@
       >
     </nav>
 
-    <!-- PANGGIL JS EXTERNAL -->
+    <!-- SCRIPT UTAMA & LOGIKA RIWAYAT -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/riwayat.js"></script>
   </body>
 </html>
