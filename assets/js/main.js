@@ -217,3 +217,16 @@ function addHistoryToStorage(action, durationStr, reason) {
   if (history.length > 15) history.pop();
   localStorage.setItem("manualHistory", JSON.stringify(history));
 }
+// --- KODE PEMBUKA DROPDOWN (DIKEMBALIKAN) ---
+window.toggleDropdown = function () {
+  const drop = document.getElementById("userDropdown");
+  if (drop) drop.classList.toggle("hidden");
+};
+
+window.addEventListener("click", function (e) {
+  const btn = document.querySelector('button[onclick="toggleDropdown()"]');
+  const drop = document.getElementById("userDropdown");
+  if (btn && drop && !btn.contains(e.target) && !drop.contains(e.target)) {
+    drop.classList.add("hidden");
+  }
+});
