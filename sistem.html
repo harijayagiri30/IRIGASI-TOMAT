@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistem - Irigasi Tomat</title>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>"
-    />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>"
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="assets/js/tailwind-config.js"></script>
@@ -121,7 +121,9 @@
             </div>
             <div class="text-left pr-1">
               <p class="font-bold text-gray-800 text-xs leading-tight">User</p>
-              <p class="text-[9px] text-gray-500">Pengguna Sistem</p>
+              <p class="text-[9px] text-gray-500 hidden sm:block">
+                Pengguna Sistem
+              </p>
             </div>
             <i
               class="fa-solid fa-chevron-down text-[10px] text-gray-400 pl-1"
@@ -129,7 +131,7 @@
           </button>
           <div
             id="userDropdown"
-            class="hidden absolute right-0 top-full mt-2 w-64 bg-white rounded-xl border border-gray-200 shadow-2xl max-h-[60vh] overflow-y-auto z-[9999]"
+            class="hidden absolute right-0 top-full mt-2 w-[85vw] sm:w-64 bg-white rounded-xl border border-gray-200 shadow-2xl max-h-[60vh] overflow-y-auto z-[9999] origin-top-right"
           >
             <div class="p-2 border-b border-gray-100 bg-gray-50">
               <a
@@ -146,44 +148,38 @@
                 Contact Service
               </p>
               <div class="space-y-1">
-                <!-- TEMPLATE WHATSAPP HARI -->
                 <a
                   href="https://api.whatsapp.com/send/?phone=6285726750062&text=Halo%20Kak%20Hari%2C%20saya%20pengguna%20Dashboard%20Irigasi%20Tomat.%20Saya%20butuh%20bantuan%20terkait%20%5BSebutkan%3A%20Sistem%20Web%20%2F%20Kondisi%20Alat%20di%20Lapangan%5D.&type=phone_number&app_absent=0&wame_ctl=1"
                   target="_blank"
                   class="flex items-start space-x-3 hover:bg-green-50 p-2 rounded-lg transition-colors cursor-pointer"
-                >
-                  <i
+                  ><i
                     class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
                   ></i>
                   <div>
                     <p class="text-xs font-bold text-gray-800">Hari</p>
                     <p class="text-[11px] text-gray-500">0857-2675-0062</p>
                     <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
-                  </div>
-                </a>
-
-                <!-- TEMPLATE WHATSAPP RIMBA -->
+                  </div></a
+                >
                 <a
                   href="https://api.whatsapp.com/send/?phone=6289604143531&text=Halo%20Kak%20Rimba%2C%20saya%20pengguna%20Dashboard%20Irigasi%20Tomat.%20Saya%20butuh%20bantuan%20terkait%20%5BSebutkan%3A%20Sistem%20Web%20%2F%20Kondisi%20Alat%20di%20Lapangan%5D.&type=phone_number&app_absent=0&wame_ctl=1"
                   target="_blank"
                   class="flex items-start space-x-3 hover:bg-green-50 p-2 rounded-lg transition-colors cursor-pointer"
-                >
-                  <i
+                  ><i
                     class="fa-brands fa-whatsapp text-green-500 text-lg mt-0.5"
                   ></i>
                   <div>
                     <p class="text-xs font-bold text-gray-800">Rimba</p>
                     <p class="text-[11px] text-gray-500">0896-0414-3531</p>
                     <p class="text-[9px] text-gray-400">Telp/Whatsapp</p>
-                  </div>
-                </a>
+                  </div></a
+                >
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      <!-- REVISI: PENAMAAN NODE -->
       <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3 mb-6">
         <div
           class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex flex-col items-center text-center relative"
@@ -275,17 +271,21 @@
           </p>
           <p class="text-[10px] text-brand-green">Terhubung</p>
         </div>
+
+        <!-- UPDATE ID KARTU POMPA AGAR DIBACA JAVASCRIPT -->
         <div
           class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm flex flex-col items-center text-center relative"
         >
           <span class="absolute top-2 right-2 flex h-2 w-2"
             ><span class="relative h-2 w-2 rounded-full bg-red-500"></span
           ></span>
-          <div class="text-red-500 text-2xl mb-1">
+          <div id="sistem-icon-pompa" class="text-red-500 text-2xl mb-1">
             <i class="fa-solid fa-faucet-drip"></i>
           </div>
           <p class="text-xs font-bold text-gray-800">Pompa</p>
-          <p class="text-[10px] text-red-500">Mati</p>
+          <p id="sistem-val-pompa" class="text-[10px] text-red-500 font-bold">
+            Mati
+          </p>
         </div>
       </div>
 
@@ -369,7 +369,6 @@
                 </tr>
               </thead>
               <tbody class="text-gray-600 text-xs">
-                <!-- REVISI: Penamaan Perangkat di Tabel -->
                 <tr class="border-b border-gray-100 hover:bg-gray-50">
                   <td class="py-3 px-5 font-medium">Node 1 (Pangkal)</td>
                   <td class="py-3 px-5">Sensor 1</td>
@@ -454,41 +453,43 @@
       <a
         href="dashboard.html"
         class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
-        ><i class="fa-solid fa-house text-lg mb-1"></i
+        ><i class="fa-solid fa-house text-xl mb-1"></i
         ><span class="text-[8px] font-medium">Home</span></a
       >
       <a
         href="monitoring.html"
         class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
-        ><i class="fa-solid fa-chart-simple text-lg mb-1"></i
+        ><i class="fa-solid fa-chart-simple text-xl mb-1"></i
         ><span class="text-[8px] font-medium">Monitor</span></a
       >
       <a
         href="riwayat-data.html"
         class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
-        ><i class="fa-solid fa-clock-rotate-left text-lg mb-1"></i
+        ><i class="fa-solid fa-clock-rotate-left text-xl mb-1"></i
         ><span class="text-[8px] font-medium">Riwayat</span></a
       >
       <a
         href="kontrol-manual.html"
         class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
-        ><i class="fa-solid fa-faucet-drip text-lg mb-1"></i
+        ><i class="fa-solid fa-faucet-drip text-xl mb-1"></i
         ><span class="text-[8px] font-medium">Kontrol</span></a
       >
       <a
         href="pengaturan.html"
         class="flex flex-col items-center flex-1 text-gray-400 hover:text-brand-green"
-        ><i class="fa-solid fa-gear text-lg mb-1"></i
+        ><i class="fa-solid fa-gear text-xl mb-1"></i
         ><span class="text-[8px] font-medium">Atur</span></a
       >
       <a
         href="sistem.html"
         class="flex flex-col items-center flex-1 text-brand-green"
-        ><i class="fa-solid fa-server text-lg mb-1"></i
+        ><i class="fa-solid fa-server text-xl mb-1"></i
         ><span class="text-[8px] font-bold">Sistem</span></a
       >
     </nav>
 
+    <!-- UPDATE SCRIPT PEMANGGILAN -->
     <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/firebase-kontrol-sistem.js"></script>
   </body>
 </html>
