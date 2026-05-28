@@ -3,35 +3,53 @@ let selectedMins = 0;
 let selectedReasonText = "";
 let switchTimerInterval;
 
-function initManualMode() {
-  forceSetMode("otomatis");
-  renderHistoryTable();
-}
+// PERBAIKAN: Mengecek memori saat halaman Kontrol dimuat
+window.initManualMode = function () {
+  const activeTimer = localStorage.getItem("pumpTimerEnd");
+  const activeAction = localStorage.getItem("pumpTimerAction");
 
-function refreshControlUI() {
+  if (activeTimer && parseInt(activeTimer) > Date.now()) {
+    // Resume mode manual jika ada timer
+    forceSetMode("manual");
+    const status = activeAction.replace("Pompa ", "");
+    document.getElementById("teks-status-pompa").innerText = activeAction;
+    document.getElementById("teks-status-pompa").className =
+      status === "ON"
+        ? "text-3xl font-bold text-brand-green mb-1"
+        : "text-3xl font-bold text-red-500 mb-1";
+    document.getElementById("teks-desc-pompa").innerText =
+      `Sedang override ke ${status}`;
+  } else {
+    forceSetMode("otomatis");
+  }
+  renderHistoryTable();
+};
+
+window.refreshControlUI = function () {
   const statPompa = document.getElementById("teks-status-pompa");
   if (statPompa) {
     statPompa.innerText = `POMPA OFF`;
     statPompa.className = "text-3xl font-bold text-red-500 mb-1";
     document.getElementById("teks-desc-pompa").innerText =
-      "Kontrol selesai secara otomatis";
+      "Kontrol dikembalikan ke otomatis";
   }
+  forceSetMode("otomatis");
   renderHistoryTable();
   resetSelections();
-}
+};
 
-function showAlertModal(title, message) {
+window.showAlertModal = function (title, message) {
   document.getElementById("alert-title").innerText = title;
   document.getElementById("alert-message").innerHTML = message;
   document.getElementById("modal-alert").classList.remove("hidden");
-}
+};
 
-function requestOtomatisMode() {
+window.requestOtomatisMode = function () {
   if (currentMode === "otomatis") return;
   document.getElementById("modal-confirm-off").classList.remove("hidden");
-}
+};
 
-function confirmTurnOff(isYes) {
+window.confirmTurnOff = function (isYes) {
   document.getElementById("modal-confirm-off").classList.add("hidden");
   if (isYes) {
     if (typeof window.stopActiveTimer === "function")
@@ -39,9 +57,9 @@ function confirmTurnOff(isYes) {
     forceSetMode("otomatis");
     renderHistoryTable();
   }
-}
+};
 
-function requestManualMode() {
+window.requestManualMode = function () {
   if (currentMode === "manual") return;
   document.getElementById("modal-switch").classList.remove("hidden");
   const btnYa = document.getElementById("btn-ya-switch");
@@ -61,13 +79,13 @@ function requestManualMode() {
       btnYa.innerText = `Ya (${timeLeft}s)`;
     }
   }, 1000);
-}
+};
 
-function confirmSwitch(isYes) {
+window.confirmSwitch = function (isYes) {
   clearInterval(switchTimerInterval);
   document.getElementById("modal-switch").classList.add("hidden");
   if (isYes) forceSetMode("manual");
-}
+};
 
 function forceSetMode(mode) {
   currentMode = mode;
@@ -86,7 +104,7 @@ function forceSetMode(mode) {
       "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-bold text-sm bg-brand-green text-white shadow-sm transition-all cursor-pointer";
     btnManual.className =
       "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm text-gray-500 hover:bg-gray-100 transition-all cursor-pointer";
-    teksDesc.innerText = "Sistem dikendalikan otomatis";
+    if (teksDesc) teksDesc.innerText = "Sistem dikendalikan otomatis";
     btnPumpOn.className =
       "flex-1 md:w-40 py-4 rounded-xl font-bold text-gray-400 bg-gray-200 cursor-not-allowed transition-all flex justify-center items-center space-x-2";
     btnPumpOff.className =
@@ -112,7 +130,8 @@ function forceSetMode(mode) {
       "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-bold text-sm bg-brand-green text-white shadow-sm transition-all cursor-pointer";
     btnAuto.className =
       "flex-1 md:w-40 flex items-center justify-center space-x-2 py-2 rounded-md font-medium text-sm text-gray-500 hover:bg-gray-100 transition-all cursor-pointer";
-    teksDesc.innerText = "Sistem dalam mode manual (Menunggu Perintah)";
+    if (teksDesc && !localStorage.getItem("pumpTimerEnd"))
+      teksDesc.innerText = "Sistem dalam mode manual (Menunggu Perintah)";
     btnPumpOn.className =
       "flex-1 md:w-40 py-4 rounded-xl font-bold text-white bg-brand-green hover:bg-green-800 cursor-pointer shadow-sm transition-all flex justify-center items-center space-x-2";
     btnPumpOff.className =
@@ -165,7 +184,7 @@ function resetSelections() {
     "fa-solid fa-leaf text-brand-green";
 }
 
-function selectDuration(id, val) {
+window.selectDuration = function (id, val) {
   if (currentMode === "otomatis") return;
   selectedMins = val;
   document.getElementById("custom-dur").value = "";
@@ -189,9 +208,9 @@ function selectDuration(id, val) {
       "font-bold",
       "bg-brand-light",
     );
-}
+};
 
-function selectCustomDuration() {
+window.selectCustomDuration = function () {
   if (currentMode === "otomatis") return;
   const val = parseInt(document.getElementById("custom-dur").value);
   selectedMins = val > 0 ? val : 0;
@@ -207,9 +226,9 @@ function selectCustomDuration() {
   document
     .getElementById("dur-custom-container")
     .classList.add("border-brand-green", "bg-brand-light");
-}
+};
 
-function selectReason(id, text) {
+window.selectReason = function (id, text) {
   if (currentMode === "otomatis") return;
   selectedReasonText = text;
   document.querySelectorAll(".reason-btn").forEach((b) => {
@@ -219,24 +238,25 @@ function selectReason(id, text) {
   document
     .getElementById(id)
     .classList.add("border-brand-green", "bg-brand-light");
-}
+};
 
-function eksekusiPompa(status) {
+window.eksekusiPompa = function (status) {
   if (currentMode === "otomatis") return;
   if (selectedMins <= 0 || isNaN(selectedMins)) {
     showAlertModal(
       "Langkah Belum Lengkap",
-      `Silakan pilih <b>Durasi Override</b>.`,
+      `Silakan pilih <b>Durasi Override</b> terlebih dahulu.`,
     );
     return;
   }
   if (selectedReasonText === "") {
     showAlertModal(
       "Langkah Belum Lengkap",
-      `Silakan pilih <b>Alasan Override</b>.`,
+      `Silakan pilih <b>Alasan Override</b> terlebih dahulu.`,
     );
     return;
   }
+
   if (localStorage.getItem("pumpTimerStart")) {
     if (typeof window.stopActiveTimer === "function")
       window.stopActiveTimer(false);
@@ -250,19 +270,19 @@ function eksekusiPompa(status) {
       ? "text-3xl font-bold text-brand-green mb-1"
       : "text-3xl font-bold text-red-500 mb-1";
   document.getElementById("teks-desc-pompa").innerText =
-    `Meng-override status ke ${status} selama ${selectedMins} menit`;
+    `Sedang override ke ${status}`;
   renderHistoryTable();
   resetSelections();
-}
+};
 
-function eksekusiPompaOFF() {
+window.eksekusiPompaOFF = function () {
   if (currentMode === "otomatis") return;
   if (localStorage.getItem("pumpTimerStart")) {
     document.getElementById("modal-confirm-off").classList.remove("hidden");
   } else {
     eksekusiPompa("OFF");
   }
-}
+};
 
 function renderHistoryTable() {
   const tbody = document.getElementById("history-table-body");

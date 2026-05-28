@@ -19,7 +19,45 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// GRAFIK KELEMBAPAN (Sesuai Gambar: Garis Hijau, Titik Aktif, Batas 80 Biru, Batas 45 Merah)
+window.loadActiveProfileName = function () {
+  const activeProfile = localStorage.getItem("activeProfile") || "auto";
+  let profileName = "Default Sistem";
+  if (activeProfile !== "auto") {
+    const sd = localStorage.getItem(activeProfile);
+    if (sd) profileName = JSON.parse(sd).name;
+  }
+  const elProfile = document.getElementById("val-active-profile");
+  if (elProfile) elProfile.innerText = profileName;
+};
+window.loadActiveProfileName();
+
+// Variabel untuk menyimpan status asli Firebase
+window.lastFirebasePumpStatus = "OFF";
+
+// Fungsi merender Card Pompa (Prioritaskan Manual Override)
+window.updatePumpCardUI = function () {
+  const valPompa = document.getElementById("val-pompa");
+  if (!valPompa) return;
+
+  let statusPompa = window.lastFirebasePumpStatus;
+
+  // CEK INTERVENSI MANUAL (Apakah ada timer berjalan?)
+  const activeTimer = localStorage.getItem("pumpTimerEnd");
+  const activeAction = localStorage.getItem("pumpTimerAction");
+
+  if (activeTimer && parseInt(activeTimer) > Date.now() && activeAction) {
+    // Timpa data Firebase dengan perintah lokal
+    statusPompa = activeAction.replace("Pompa ", "");
+  }
+
+  valPompa.innerText = statusPompa;
+  valPompa.className =
+    statusPompa === "ON"
+      ? "text-base font-bold text-brand-green"
+      : "text-base font-bold text-red-500";
+};
+
+// ... Inisiasi Chart.js (Sama persis seperti sebelumnya) ...
 const ctxKelembapan = document.getElementById("chartKelembapan");
 let chartKelembapan;
 if (ctxKelembapan) {
@@ -40,26 +78,24 @@ if (ctxKelembapan) {
       datasets: [
         {
           label: "Kelembapan Bedeng",
-          data: [48, 52, 60, 42, 55, 62, 50, 45, 52],
-          borderColor: "#287930",
-          backgroundColor: "#287930",
+          data: [50, 58, 48, 38, 42, 38, 44, 48, 52],
+          borderColor: "#3b82f6",
           tension: 0.4,
           borderWidth: 2,
-          pointRadius: 4,
           fill: false,
         },
         {
-          label: "Batas Basah (80%)",
-          data: [80, 80, 80, 80, 80, 80, 80, 80, 80],
-          borderColor: "#3b82f6",
+          label: "Batas Siram (45%)",
+          data: [45, 45, 45, 45, 45, 45, 45, 45, 45],
+          borderColor: "#f87171",
           borderDash: [5, 5],
           borderWidth: 1.5,
           pointRadius: 0,
         },
         {
-          label: "Batas Kering (45%)",
-          data: [45, 45, 45, 45, 45, 45, 45, 45, 45],
-          borderColor: "#f87171",
+          label: "Batas Stop (80%)",
+          data: [80, 80, 80, 80, 80, 80, 80, 80, 80],
+          borderColor: "#3b82f6",
           borderDash: [5, 5],
           borderWidth: 1.5,
           pointRadius: 0,
@@ -74,8 +110,6 @@ if (ctxKelembapan) {
     },
   });
 }
-
-// GRAFIK POMPA (Sumbu Y diperbaiki agar tidak muncul OFF OFF OFF)
 const ctxPompa = document.getElementById("chartPompa");
 let chartPompa;
 if (ctxPompa) {
@@ -86,11 +120,11 @@ if (ctxPompa) {
       datasets: [
         {
           label: "Status Pompa",
-          data: [0, 1, 0, 1, 0],
+          data: [0, 1, 1, 0, 0],
           borderColor: "#287930",
           stepped: true,
           borderWidth: 2,
-          pointRadius: 0,
+          pointRadius: 3,
         },
       ],
     },
@@ -103,7 +137,6 @@ if (ctxPompa) {
           min: 0,
           max: 1,
           ticks: {
-            stepSize: 1,
             callback: function (val) {
               return val === 1 ? "ON" : "OFF";
             },
@@ -113,7 +146,6 @@ if (ctxPompa) {
     },
   });
 }
-
 window.updateChartFilter = function (filter) {
   document
     .querySelectorAll('[id^="btn-"]')
@@ -135,6 +167,9 @@ window.updateChartFilter = function (filter) {
       "06:00",
       "09:00",
       "12:00",
+    ];
+    chartKelembapan.data.datasets[0].data = [
+      50, 58, 48, 38, 42, 38, 44, 48, 52,
     ];
   } else if (filter === "7d") {
     chartKelembapan.data.labels = [
@@ -173,15 +208,26 @@ onValue(ref(db, "monitoring"), (snapshot) => {
     if (data.status_sistem) {
       const vd = document.getElementById("val-debit");
       if (vd) vd.innerText = data.status_sistem.debit_air_liter + " L/m";
-      const valPompa = document.getElementById("val-pompa");
-      if (valPompa) {
-        const statusPompa = data.status_sistem.pompa;
-        valPompa.innerText = statusPompa;
-        valPompa.className =
-          statusPompa === "ON"
-            ? "text-base font-bold text-brand-green"
-            : "text-base font-bold text-red-500";
-      }
+
+      // Simpan status asli Firebase ke variabel global
+      window.lastFirebasePumpStatus = data.status_sistem.pompa;
+
+      // Render UI menggunakan fungsi pintar
+      window.updatePumpCardUI();
+    }
+  }
+});
+
+onValue(ref(db, "grafik"), (snapshot) => {
+  const data = snapshot.val();
+  if (data) {
+    if (data.kbedeng_24j && chartKelembapan) {
+      chartKelembapan.data.datasets[0].data = data.kbedeng_24j;
+      chartKelembapan.update();
+    }
+    if (data.pompa_24j && chartPompa) {
+      chartPompa.data.datasets[0].data = data.pompa_24j;
+      chartPompa.update();
     }
   }
 });
