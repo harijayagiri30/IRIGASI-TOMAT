@@ -5,6 +5,7 @@ import {
   onValue,
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
 
+// KONFIGURASI FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyCns7vvtEB5unLIPlfAWd_chUUeRWriAY0",
   authDomain: "irigasi-tomat-web.firebaseapp.com",
@@ -19,17 +20,28 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+// SINKRONISASI STATUS POMPA DARI FIREBASE KE KONTROL MANUAL & SISTEM
 onValue(ref(db, "monitoring/status_sistem"), (snapshot) => {
   const data = snapshot.val();
   if (data) {
-    const realFirebasePumpStatus = data.pompa;
+    // 1. Ambil status mentah dari Firebase
+    let statusPompaFinal = data.pompa;
 
-    // UPDATE DI HALAMAN SISTEM
+    // 2. CEK INTERVENSI MANUAL (Apakah ada Timer Kontrol Manual yang jalan?)
+    const activeTimer = localStorage.getItem("pumpTimerEnd");
+    const activeAction = localStorage.getItem("pumpTimerAction");
+
+    // Jika ada timer manual yang aktif, timpa status Firebase dengan status manual
+    if (activeTimer && parseInt(activeTimer) > Date.now() && activeAction) {
+      statusPompaFinal = activeAction.replace("Pompa ", ""); // Hasilnya: "ON" atau "OFF"
+    }
+
+    // 3. UPDATE UI DI HALAMAN SISTEM (Sudah tersinkronisasi)
     const sistemValPompa = document.getElementById("sistem-val-pompa");
     const sistemIconPompa = document.getElementById("sistem-icon-pompa");
     if (sistemValPompa) {
-      sistemValPompa.innerText = realFirebasePumpStatus;
-      if (realFirebasePumpStatus === "ON") {
+      sistemValPompa.innerText = statusPompaFinal;
+      if (statusPompaFinal === "ON") {
         sistemValPompa.className = "text-[10px] text-brand-green font-bold";
         if (sistemIconPompa)
           sistemIconPompa.className = "text-brand-green text-2xl mb-1";
@@ -40,14 +52,14 @@ onValue(ref(db, "monitoring/status_sistem"), (snapshot) => {
       }
     }
 
-    // UPDATE DI HALAMAN KONTROL MANUAL (Hanya jika mode otomatis & tidak ada timer)
+    // 4. UPDATE UI DI HALAMAN KONTROL MANUAL
     const kontrolValPompa = document.getElementById("teks-status-pompa");
     if (kontrolValPompa) {
-      const activeTimer = localStorage.getItem("pumpTimerEnd");
+      // Hanya update jika tidak ada timer lokal yang berjalan
       if (!activeTimer || parseInt(activeTimer) <= Date.now()) {
-        kontrolValPompa.innerText = `POMPA ${realFirebasePumpStatus}`;
+        kontrolValPompa.innerText = `POMPA ${statusPompaFinal}`;
         kontrolValPompa.className =
-          realFirebasePumpStatus === "ON"
+          statusPompaFinal === "ON"
             ? "text-3xl font-bold text-brand-green mb-1"
             : "text-3xl font-bold text-red-500 mb-1";
       }
